@@ -176,7 +176,6 @@ Configure::write('Session', array(
     'defaults' => 'database',
 ));
 Configure::write('Session.handler.model','GilasSession');
-Configure::write('Session.timeout','15');
 /**
  * The level of CakePHP security.
  */
