@@ -8,9 +8,9 @@ App::uses('AppController', 'Controller');
  * @property ContentCategory $ContentCategory
  */
 class ContentCategoriesController extends AppController {
-    
+
     public $publicActions = array('getList');
-    
+
     public function admin_add() {
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'افزودن مجموعه مطالب');
@@ -21,7 +21,7 @@ class ContentCategoriesController extends AppController {
                 $path = $this->ContentCategory->getPath();
                 // levels starts with 0
                 $this->ContentCategory->saveField('level', count($path) - 1);
-                
+
                 $this->Session->setFlash('مجموعه با موفقیت ذخیره شد.', 'message', array('type' => 'success'));
                 $this->redirect(array('action' => 'index', 'admin' => TRUE));
             } else {
@@ -33,11 +33,11 @@ class ContentCategoriesController extends AppController {
     public function admin_index() {
         $this->set('title_for_layout', 'مدیریت مجموعه مطالب');
         $contentCategories = $this->paginate('ContentCategory');
-        
+
         for ($i = 0; $i < count($contentCategories); $i++) {
             $contentCategories[$i]['ContentCategory']['contentCount'] = $this->_haveContent($contentCategories[$i]['ContentCategory']['id']);
         }
-        
+
         // add this helper for using FilterHelper in Filter Form
         $this->helpers[] = 'AdminForm';
         $this->set(compact('contentCategories'));
@@ -47,15 +47,17 @@ class ContentCategoriesController extends AppController {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException(SettingsController::read('Error.Code-12'));
         }
-        
+
         $id = $this->request->data['id']; // we recieve id via posted data
         $count = count($id);
         if ($count == 1) {
             $id = current($id);
             $this->ContentCategory->id = $id;
 
-            if ($this->_haveContent($id) || $this->ContentCategory->childCount($id) ) {
+            if ($this->_haveContent($id) || $this->ContentCategory->childCount($id)) {
                 $this->Session->setFlash(SettingsController::read('Error.Code-15'), 'message', array('type' => 'error'));
+            } elseif ($this->ContentCategory->id == 1) {
+                $this->Session->setFlash(SettingsController::read('Error.Code-18'), 'message', array('type' => 'error'));
             } elseif ($this->ContentCategory->delete()) {
                 $this->Session->setFlash('مجموعه با موفقیت حذف شد.', 'message', array('type' => 'success'));
             } else {
@@ -71,7 +73,7 @@ class ContentCategoriesController extends AppController {
                 if ($this->ContentCategory->childCount($i)) {
                     continue;
                 }
-                
+
                 if ($this->ContentCategory->delete()) {
                     $countAffected++;
                 }
@@ -96,13 +98,16 @@ class ContentCategoriesController extends AppController {
                 $this->ContentCategory->saveField('level', count($path) - 1);
                 // Update level of childrens
                 $this->ContentCategory->updateChildrenLevel();
-                
+
                 $this->Session->setFlash('مجموعه با موفقیت ویرایش شد', 'message', array('type' => 'success'));
                 $this->redirect(array('action' => 'index', 'admin' => TRUE));
             } else {
                 $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
             }
         } else {
+            if ($this->ContentCategory->id == 1) {
+                $this->Session->setFlash(SettingsController::read('Error.Code-18'), 'message', array('type' => 'error'));
+            }
             $this->set('parents', $this->ContentCategory->generateTreeList());
             $this->request->data = $this->ContentCategory->read();
         }
@@ -111,7 +116,7 @@ class ContentCategoriesController extends AppController {
     private function _haveContent($id) {
         return $this->ContentCategory->Content->find('count', array('conditions' => array('content_category_id' => $id)));
     }
-    
+
     public function admin_publish() {
         $this->_changeStatus('ContentCategory', 'published', 1, 'مجموعه مطلب با موفقیت منتشر شد.');
         $this->redirect($this->referer());
@@ -121,25 +126,25 @@ class ContentCategoriesController extends AppController {
         $this->_changeStatus('ContentCategory', 'published', 0, 'مجموعه مطلب با موفقیت از حالت انتشار خارج شد.');
         $this->redirect($this->referer());
     }
-    
-    public function admin_getLinkItem(){
+
+    public function admin_getLinkItem() {
         $conditions = array('ContentCategory.published' => true);
-        if(!empty($this->request->query['q'])){
+        if (!empty($this->request->query['q'])) {
             $conditions['ContentCategory.name LIKE'] = "%{$this->request->query['q']}%";
         }
         $this->paginate['conditions'] = $conditions;
         $this->paginate['limit'] = 10;
         $this->paginate['recursive'] = -1;
-        $this->set('categories',$this->paginate());
+        $this->set('categories', $this->paginate());
     }
-    
+
     /**
      * Return all categories in array
      * 
      * @return
      */
-    public function getList(){
-        $categories = $this->ContentCategory->find('all',array('conditions' => array('published' => true),'contain' => false));
+    public function getList() {
+        $categories = $this->ContentCategory->find('all', array('conditions' => array('published' => true), 'contain' => false));
         return $categories;
     }
 
