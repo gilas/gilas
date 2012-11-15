@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.4.11.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 11, 2012 at 08:14 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Nov 15, 2012 at 11:12 AM
+-- Server version: 5.1.65
+-- PHP Version: 5.2.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `gilas`
+-- Database: `mhau_site`
 --
 
 -- --------------------------------------------------------
@@ -502,14 +502,7 @@ CREATE TABLE IF NOT EXISTS `gl_content_categories` (
   `rght` int(11) DEFAULT NULL,
   `level` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `gl_content_categories`
---
-
-INSERT INTO `gl_content_categories` (`id`, `parent_id`, `name`, `descriptions`, `published`, `lft`, `rght`, `level`) VALUES
-(1, NULL, '--- مطالب استاتیک ---', '<p>این مجموعه برای ارسال مطالب استاتیک سایت نظیر صفحات درباره ما، توضیحات کوتاه و... ایجاد شده است.</p>\r\n<p>شما این مجموعه را نمی توانید حذف و یا ویرایش نمایید.</p>', 1, 1, 2, 0);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -568,13 +561,6 @@ CREATE TABLE IF NOT EXISTS `gl_gilas_sessions` (
   `path` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `gl_gilas_sessions`
---
-
-INSERT INTO `gl_gilas_sessions` (`id`, `data`, `expires`, `ip`, `user_id`, `path`) VALUES
-('qs1sr9skpl7katnn01t55fb1m5', 'Config|a:3:{s:9:"userAgent";s:32:"797228adaefb561aa620c0afd5c2c2da";s:4:"time";i:1352706340;s:9:"countdown";i:10;}Message|a:0:{}Auth|a:1:{s:4:"User";a:10:{s:2:"id";s:1:"1";s:8:"username";s:5:"admin";s:4:"name";s:17:"جمال طوسی";s:5:"email";s:19:"jamal4533@yahoo.com";s:6:"active";s:1:"1";s:7:"role_id";s:1:"1";s:15:"registered_date";s:19:"0000-00-00 00:00:00";s:14:"last_logged_in";s:19:"0000-00-00 00:00:00";s:17:"last_ip_logged_in";s:0:"";s:4:"Role";a:6:{s:2:"id";s:1:"1";s:4:"name";s:5:"Admin";s:5:"title";s:12:"مدیریت";s:3:"lft";s:1:"1";s:4:"rght";s:1:"2";s:9:"parent_id";N;}}}', 1352706340, '127.0.0.1', 1, '/admin/content_categories');
 
 -- --------------------------------------------------------
 
