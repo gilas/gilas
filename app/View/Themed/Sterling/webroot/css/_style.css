@@ -44,10 +44,9 @@ padding:0;
 }
 
 body,
-html {background:#FFF;direction: rtl;}
+html {direction: rtl;}
 
 body {
-font-family:"HelveticaNeue-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
 color:#636B75;
 line-height:1;
 margin:0;
@@ -361,7 +360,7 @@ h5,
 h6,
 .page-banner-heading {
 font-weight:400;
-font-family:"HelveticaNeue-Regular","Helvetica Neue",Helvetica,arial,sans-serif;
+/*font-family:"HelveticaNeue-Regular","Helvetica Neue",Helvetica,arial,sans-serif;*/
 }
 
 .companyIdentity {
@@ -587,8 +586,9 @@ text-decoration:none;
 
 p {
 margin-bottom:18px;
-font-size:13px;
-line-height:1.6em;
+font-size:15px;
+line-height:23px;
+text-align: justify;
 }
 
 .callout-text p {
@@ -770,6 +770,7 @@ text-decoration:underline;
 
 footer a {
 color:#FFF;
+line-height: 25px;
 }
 
 header nav a,
@@ -964,7 +965,7 @@ vertical-align:middle;
 font-size:100%;
 font-size:13px;
 resize:none;
-font-family:Lucida Grande,Lucida Sans Unicode,sans-serif;
+/*font-family:Lucida Grande,Lucida Sans Unicode,sans-serif;*/
 }
 
 input,textarea {
@@ -1028,7 +1029,7 @@ color:#555;
 }
 
 label span{
-font-family:Georgia, "Times New Roman", Times, serif;
+/*font-family:Georgia, "Times New Roman", Times, serif;*/
 font-style:italic;
 color:#ACACAC;
 font-weight:normal;
@@ -1049,7 +1050,7 @@ border: 1px solid #D5D5D5;
 border-radius: 3px 3px 3px 3px;
 box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 cursor: pointer;
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+/*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
 font-size: 13px;
 font-weight: bold;
 line-height: 18px;
@@ -1334,7 +1335,7 @@ width:960px;
 .slides_container div {
 display:block;
 z-index:525;
-overflow:hidden;
+/*overflow:hidden;*/
 }
 
 .slides_control .home-slider-post p:last-child {
@@ -1691,7 +1692,7 @@ margin-bottom:100px;
 }
 
 .blog-main-preview {
-margin-bottom:150px !important;
+margin-bottom:20px !important;
 }
 
 .articles_preview .tabs_type_2 {
@@ -1708,7 +1709,7 @@ display:none;
 
 .post-details {
 border-top:1px solid #E5E5E5;
-margin-top:30px;
+margin-top:60px;
 width:100%;
 padding:10px 0 0;
 }
@@ -2202,7 +2203,7 @@ padding-bottom:150px;
 }
 
 .construction-heading {
-font-family:Georgia, "Times New Roman", Times, serif;
+/*font-family:Georgia, "Times New Roman", Times, serif;*/
 font-style:italic;
 font-size:25px;
 color:#666;
@@ -2260,7 +2261,7 @@ margin-left:30px;
 #mins_text,
 #secs_text {
 font-weight:500;
-font-family:"Myriad Pro", Arial, Helvetica, sans-serif;
+/*font-family:"Myriad Pro", Arial, Helvetica, sans-serif;*/
 font-size:32px;
 width:81px;
 text-align:center;
@@ -2515,7 +2516,7 @@ padding:0;
 }
 
 .member-title {
-font-family:Georgia, "Times New Roman", Times, serif;
+/*font-family:Georgia, "Times New Roman", Times, serif;*/
 font-style:italic;
 color:#999;
 }
@@ -2695,12 +2696,11 @@ float:right;
 .construction-default-two {
 width:18.75%;
 float:right;
-margin-right:6.25%;
 }
 
 .footer-default-three,
 .construction-default-three {
-width:26.04%;
+width:30.04%;
 float:left;
 }
 
@@ -2752,6 +2752,7 @@ color:#FFF;
 
 .foot-copy {
 float:left;
+font-weight: bold
 }
 
 .footer-nav {
@@ -3313,7 +3314,7 @@ width:65.2%;
 
 /* ----- Icons ----- */
 .tt-icon {
-padding:4px 55px 20px 0;
+padding:4px 55px 10px 0;
 display:inline-block;
 font-size:13px;
 line-height:1.5em;
@@ -3595,7 +3596,7 @@ border: 1px solid;
 border-bottom-width: 2px;
 color: #4f4f4f;
 display: block;
-font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+/*font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;*/
 font-size: 11px;
 line-height: 19px;
 margin-bottom: 20px;
@@ -3769,7 +3770,7 @@ margin-right:14px;
 .large-callout p {
 font-size:15px;
 /* font-weight:300; */
-font-family:Helvetica, Arial, sans-serif;
+/*font-family:Helvetica, Arial, sans-serif;*/
 }
 
 
@@ -3915,7 +3916,7 @@ border: 1px solid #D5D5D5;
 border-radius: 3px 3px 3px 3px;
 box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 cursor: pointer;
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+/*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
 font-size: 12px;
 font-weight: bold;
 height: 28px;
@@ -4301,9 +4302,8 @@ zoom:1; */
 /* ------ WP-Pagenavi ------ */
 .wp-pagenavi {
 clear: both;
-font-size: 9px;
-height: 110px;
-letter-spacing: 1.6px;
+font-size: 13px;
+height: 10px;
 padding-top: 10px;
 text-align: right;
 text-transform: uppercase;
@@ -4386,7 +4386,7 @@ margin-right:15px;
 }
 
 .tz_tweet_widget ul {
-font-family: Georgia,"Times New Roman",Times,serif;
+/*font-family: Georgia,"Times New Roman",Times,serif;*/
 font-style: italic;
 list-style-type: none;
 padding: 15px;
@@ -4457,7 +4457,7 @@ border:1px solid #e6e6e6 !important;
 -moz-border-radius:14px !important; 
 -webkit-border-radius:14px !important; 
 border-radius:14px; behavior: url(js/PIE.html) !important; 
-font-family:Tahoma; font-size:11px; color:#808080 !important; 
+/*font-family:Tahoma; font-size:11px; color:#808080 !important; */
 text-align:center !important; 
 text-shadow:1px 1px #ffffff !important;
 cursor:pointer;
@@ -4607,7 +4607,7 @@ div.pp_default a.pp_arrow_previous,div.pp_default a.pp_arrow_next{background:url
 div.pp_default a.pp_arrow_next{background-position:-82px -3px;left:52px}
 div.pp_default .pp_content_container .pp_details{margin-top:5px}
 div.pp_default .pp_nav{clear:none;height:30px;position:relative;width:110px}
-div.pp_default .pp_nav .currentTextHolder{color:#999;font-family:Georgia;font-size:11px;font-style:italic;left:75px;line-height:25px;margin:0;padding:0 0 0 10px;position:absolute;top:2px}
+div.pp_default .pp_nav .currentTextHolder{color:#999;/*font-family:Georgia;*/font-size:11px;font-style:italic;left:75px;line-height:25px;margin:0;padding:0 0 0 10px;position:absolute;top:2px}
 div.pp_default .pp_close:hover,div.pp_default .pp_nav .pp_play:hover,div.pp_default .pp_nav .pp_pause:hover,div.pp_default .pp_arrow_next:hover,div.pp_default .pp_arrow_previous:hover{opacity:0.7}
 div.pp_default .pp_description{font-size:11px;font-weight:700;line-height:14px;margin:5px 50px 5px 0}
 div.pp_default .pp_bottom .pp_left{background:url(../img/prettyPhoto/default/sprite.png) -78px -127px no-repeat}
@@ -4720,12 +4720,7 @@ header {padding:32px 0;}
     margin: 0 20px 10px 0;
 }
 h1, h2, h3, h4, h5, h6, .page-banner-heading, footer .foot-heading, .footer-callout-content p {
-    font-family: 'PT Sans',Arial,sans-serif;
-}
-body, html {
-    background-image: url("http://themes.truethemes.net/Sterling/wp-content/themes/Sterling/images/body-backgrounds/null.png") !important;
-    background-position: left top !important;
-    background-repeat: repeat !important;
+/*    font-family: 'PT Sans',Arial,sans-serif;*/
 }
 #tt-boxed-layout {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);

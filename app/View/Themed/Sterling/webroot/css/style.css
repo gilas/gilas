@@ -1,0 +1,62 @@
+/* 
+    Document   : style
+    Created on : Nov 11, 2012, 11:04:15 AM
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face {
+    font-family: "BJalal";
+    src: url("../fonts/BJalal.eot?#") format("eot"), url("../fonts/BJalal.woff") format("woff"), url("../fonts/BJalal.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "BNazanin";
+    src: url("../fonts/BNazanin.eot?#") format("eot"), url("../fonts/BNazanin.woff") format("woff"), url("../fonts/BNazanin.ttf") format("truetype");
+}
+
+h1,h2,h3,h4,h5,h6,ul.menu li, .head-title, a.button, .wp-pagenavi{
+    font-family: "BJalal" !important;
+    font-weight: 700px !important;
+}
+
+body,html{
+    background-image: url('../img/global/tiny_grid.png');
+    background-repeat: repeat;
+    font-family: "BNazanin" !important;
+}
+
+#respond label{
+    display: block !important;
+}
+
+.preview blog-main-preview{
+    text-align: justify !important;
+}
+
+.footer-default-two table td{
+    padding: 5px;
+}
+
+.one_half img{
+    border: 7px solid #FFFFFF;
+    border-radius: 5px;
+}
+
+.weblinks tr{
+    line-height: 30px;
+    border-bottom: 1px dashed #cccccc;
+}
+
+.weblinks tr:first-child{
+    border-bottom: 2px solid #cccccc;
+    font-family: 'BJalal';
+    font-size: 21px;
+    line-height: 30px;
+    padding: 0;
+}
+
+.weblinks tr:last-child{
+    border-bottom: none !important;
+}

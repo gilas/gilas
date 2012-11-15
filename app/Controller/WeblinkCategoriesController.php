@@ -9,6 +9,8 @@ App::uses('AppController', 'Controller');
  */
 class WeblinkCategoriesController extends AppController {
 
+    public $publicActions = array('view');
+
     public function admin_index() {
         $this->set('title_for_layout', 'مدیریت مجموعه های وب لینک');
         $weblinkCategories = $this->paginate();
@@ -85,23 +87,35 @@ class WeblinkCategoriesController extends AppController {
 
     private function _haveLink($id) {
         return $this->WeblinkCategory->Weblink->find('count', array(
-                'conditions' => array(
-                    'weblink_category_id' => $id
-                )
-            )
+                    'conditions' => array(
+                        'weblink_category_id' => $id
+                    )
+                        )
         );
     }
-    
-    public function admin_getLinkItem(){
-        
+
+    public function admin_getLinkItem() {
+
         $conditions = array();
-        if(!empty($this->request->query['q'])){
+        if (!empty($this->request->query['q'])) {
             $conditions['WeblinkCategory.name LIKE'] = "%{$this->request->query['q']}%";
         }
         $this->paginate['conditions'] = $conditions;
         $this->paginate['limit'] = 10;
         $this->paginate['recursive'] = -1;
-        $this->set('weblinkCategories',$this->paginate());
+        $this->set('weblinkCategories', $this->paginate());
+    }
+
+    public function view($catId = NULL) {
+        $this->set('title_for_layout', 'مشاهده لینک ها');
+        $weblinks = $this->WeblinkCategory->Weblink->find('all', array(
+            'conditions' => array(
+                'Weblink.weblink_category_id' => $catId,
+                'Weblink.published' => 1
+            )
+                )
+        );
+        $this->set('weblinks', $weblinks);
     }
 
 }

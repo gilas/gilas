@@ -108,6 +108,6 @@ class WeblinksController extends AppController {
         $link = $this->Weblink->read(null,$id);
         // update hit
         $this->Weblink->updateAll(array('Weblink.hits' => 'Weblink.hits + 1'),array('Weblink.id' => $id));
-        $this->redirect($link['Weblink']['link']);
+        $this->redirect($link['Weblink']['address']);
     }
 }

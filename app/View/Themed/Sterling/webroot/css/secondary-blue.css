@@ -69,6 +69,6 @@ border-bottom:1px dotted #0070B3;
 /*-------------------------------------------------------------------------*/
 .sidebar .subnav .current_subpage a,
 .sidebar .subnav .current_subpage a:hover{
-background: url(../images/skins/submenu-active-blue.png) left top no-repeat;
+background: url(../img/skins/submenu-active-blue.png) left top no-repeat;
 margin-left: -12px;
 }
