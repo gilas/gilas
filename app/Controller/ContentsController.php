@@ -49,8 +49,9 @@ class ContentsController extends AppController {
     public function admin_add() {
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'افزودن مطلب');
-        $this->set('contentCategories', $this->Content->ContentCategory->
-                        generateTreeList());
+        $contentCategories = $this->Content->ContentCategory->generateTreeList();
+        $contentCategories [0] = '--- بدون مجموعه ---';
+        $this->set('contentCategories', $contentCategories);
         if ($this->request->is('post')) {
 
             $full_content = explode($this->__readMore, $this->request->data['Content']['intro']);
