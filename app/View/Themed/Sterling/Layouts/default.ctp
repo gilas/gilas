@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="keywords" content="<?php echo SettingsController::read('Site.Keywords') ?>" />
+        <meta name="description" content="<?php echo SettingsController::read('Site.Description') ?>" />
+        <meta name="generator" content="Gilas CMS - By Mohammad Razzaghi & Hamid Mamdoohi" />
+        <meta name="designer" content="Mohammad Razzaghi : 1razzaghi@gmail.com" />
         <?php
         echo $this->fetch('meta');
         echo $this->Html->css(array('style', '_style', '_mobile', 'primary-blue'));
