@@ -586,8 +586,8 @@ text-decoration:none;
 
 p {
 margin-bottom:18px;
-font-size:15px;
-line-height:23px;
+font-size:17px;
+line-height:30px;
 text-align: justify;
 }
 
@@ -2752,7 +2752,6 @@ color:#FFF;
 
 .foot-copy {
 float:left;
-font-weight: bold
 }
 
 .footer-nav {
@@ -2767,7 +2766,7 @@ margin:0;
 
 .footer-copyright p,
 .footer-copyright ul {
-font-size:11px;
+font-size:15px;
 }
 
 .footer-logo {
@@ -4150,7 +4149,7 @@ color:#FFF;
 font-weight:bold;
 float:right;
 background:url(../img/global/bg-top-link.png) 100% 50% no-repeat;
-margin:5px  0 0 30px;
+margin:-5px  0 0 30px;
 padding-right:15px;
 }
 

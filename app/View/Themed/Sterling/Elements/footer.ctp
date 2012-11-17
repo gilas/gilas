@@ -79,14 +79,14 @@
     </div>
     <!-- END footer-content -->
 </div>
-<div class="footer-copyright clearfix">
+<div class="footer-copyright clearfix foot-note">
     <div class="center-wrap clearfix">
         <div class="foot-copy">
             <p><a href="mailto:1razzaghi@gmail.com">Powered By Gilas CMS</a></p>
         </div>
         <!-- END foot-copy -->
         <a class="link-top" id="scroll_to_top" href="#">پرش به بالا</a>
-        <?php echo SettingsController::read('Site.FootNote') ?>
+        <p style="text-align: center"><?php echo SettingsController::read('Site.FootNote') ?></p>
     </div>
     <!-- END center-wrap -->
 </div>
