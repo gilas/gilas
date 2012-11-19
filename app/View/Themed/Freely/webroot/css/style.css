@@ -2,8 +2,8 @@
 /*  RESET						  */
 /*--------------------------------*/
 @font-face {
-    font-family: "BJalal";
-    src: url("../fonts/BJalal.eot?#") format("eot"), url("../fonts/BJalal.woff") format("woff"), url("../fonts/BJalal.ttf") format("truetype");
+    font-family: "BBCNassim";
+    src: url("../fonts/BBCNassim.eot?#") format("eot"), url("../fonts/BBCNassim.woff") format("woff"), url("../fonts/BBCNassim.ttf") format("truetype");
 }
 html{
     direction: rtl;
@@ -119,7 +119,8 @@ body.text-4 {font-family: Calibri;}
 p {
 	margin:0 0 1.5em 0;
 	padding: 0;
-	line-height:1.5em;
+	line-height:25px;
+        text-align: justify;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -130,7 +131,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 .h-style-1 h1, .h-style-1 h2, .h-style-1 h3, .h-style-1 h4, .h-style-1 h5, .h-style-1 h6,
 .h-style-1 h1 a, .h-style-1 h2 a, .h-style-1 h3 a, .h-style-1 h4 a, .h-style-1 h5 a, .h-style-1 h6 a{
-	font-family: BJalal, tahoma;
+	font-family: BBCNassim, tahoma;
 }
 
 .h-style-2 h1, .h-style-2 h2, .h-style-2 h3, .h-style-2 h4, .h-style-2 h5, .h-style-2 h6,
@@ -890,7 +891,7 @@ header {color: #fff;}
 
 header .logo {
 	float: right;
-	padding-top: 55px;
+	padding-top: 14px;
 } 
 
 header .info-call {
@@ -1639,7 +1640,7 @@ footer .one_third_last {width: 230px; margin-bottom: 0;}
     color: #101010;
     cursor: pointer;
     float: left;
-    font-family: BJalal, tahoma;
+    font-family: BBCNassim, tahoma;
     font-size: 20px;
     padding: 1.2em 1em 0.4em;
     text-align: center;
@@ -2393,7 +2394,7 @@ table.feature-table thead tr {
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f0f0f0));
 	background: -moz-linear-gradient(top,  #fff,  #f0f0f0);
   	background: -o-linear-gradient(rgb(255,255,255),rgb(240,240,240));
-    font-family: BJalal, tahoma;
+    font-family: BBCNassim, tahoma;
 }
 
 table.feature-table thead tr th:first-child {border-right: none;}
@@ -3725,7 +3726,7 @@ footer .social_widget .social_icon3 { background-position: -64px 0;}
 	position: relative;
 	color: #fff;
 	line-height: 34px;
-    font-family: BJalal, tahoma;
+    font-family: BBCNassim, tahoma;
 }
 
 .ie8 .categories_widget .widget-title {
@@ -4644,4 +4645,8 @@ ul.gallery img{
 
 #gallery_item img{
 	height: 500px
+}
+
+.sites img{
+    padding-right: 5px;
 }
