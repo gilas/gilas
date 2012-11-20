@@ -51,6 +51,7 @@ class ContentsController extends AppController {
         $this->set('title_for_layout', 'افزودن مطلب');
         $contentCategories = $this->Content->ContentCategory->generateTreeList();
         $contentCategories [0] = '--- بدون مجموعه ---';
+        ksort($contentCategories);
         $this->set('contentCategories', $contentCategories);
         if ($this->request->is('post')) {
 
@@ -115,8 +116,10 @@ class ContentsController extends AppController {
     public function admin_edit($id = null) {
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'ویرایش مطلب');
-        $this->set('contentCategories', $this->Content->ContentCategory->
-                        generateTreeList());
+        $contentCategories = $this->Content->ContentCategory->generateTreeList();
+        $contentCategories [0] = '--- بدون مجموعه ---';
+        ksort($contentCategories);
+        $this->set('contentCategories', $contentCategories);
         $this->Content->id = $id;
         if (!$this->Content->exists()) {
             throw new NotFoundException(SettingsController::read('Error.Code-14'));
