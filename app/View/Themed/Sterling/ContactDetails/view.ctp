@@ -2,7 +2,6 @@
 $this->set('title_for_layout', $contactDetail['ContactDetail']['title']);
 $this->Html->addCrumb($contactDetail['ContactDetail']['title']);
 ?>
-<span><?php echo $contactDetail['ContactDetail']['title']; ?></span>
 <div class="information">
     <label>مدیریت :</label>
     <span><?php echo $contactDetail['ContactDetail']['manager']; ?></span>
@@ -28,12 +27,11 @@ $this->Html->addCrumb($contactDetail['ContactDetail']['title']);
     <span><?php echo $contactDetail['ContactDetail']['sms_center']; ?></span>
 </div>
 <div id="contactform">
-    <h5 class="caption">ارسال پیام</h5>
     <?php
     echo $this->Form->create('ContactDetail');
     echo $this->Form->input('name',array('label'=>'نام'));
     echo $this->Form->input('email',array('label'=>'پست الکترونیک'));
     echo $this->Form->input('content',array('label'=>'متن','cols'=>'30','rows'=>'15'));
-    echo $this->Form->end('ارسال');
     ?>
+    <p class="contact-submit"><?php echo $this->Form->end('ارسال'); ?></p>
 </div>

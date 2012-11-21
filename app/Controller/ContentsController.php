@@ -355,7 +355,8 @@ class ContentsController extends AppController {
                 'Content.lft DESC'),
             'limit' => '5',
             'conditions' => array(
-                'Content.published' => '1'
+                'Content.published' => '1',
+                'Content.content_category_id >' => '0'
             )
                 ));
         $this->set('contents', $contents);
