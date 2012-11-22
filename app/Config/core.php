@@ -173,9 +173,8 @@ define('LOG_ERROR', LOG_ERR);
  *
  */
 Configure::write('Session', array(
-    'defaults' => 'database',
+    'defaults' => 'cake',
 ));
-Configure::write('Session.handler.model','GilasSession');
 /**
  * The level of CakePHP security.
  */
