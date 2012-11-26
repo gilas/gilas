@@ -14,4 +14,7 @@
     <tr>
         <td><?php echo $this->Html->link($this->Html->image('sites/hemayat.png'), 'http://www.cppo.ir/pages/frontEnd/main.aspx', array('escape' => false)); ?></td>
     </tr>
+    <tr>
+        <td><?php echo $this->Html->link($this->Html->image('sites/maliat.png'), 'http://www.tax.gov.ir/Default.aspx', array('escape' => false)); ?></td>
+    </tr>
 </table>
