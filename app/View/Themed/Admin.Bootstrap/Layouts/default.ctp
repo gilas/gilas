@@ -12,8 +12,8 @@
         <?php
         echo $this->Html->meta('icon');
 
-        echo $this->Html->css('bootstrap-rtl.min');
-        echo $this->Html->css('bootstrap-responsive-rtl.min');
+        echo $this->Html->css('bootstrap.min');
+        echo $this->Html->css('bootstrap-responsive.min');
         echo $this->Html->css('template');
         echo $this->Html->css('box');
         echo $this->Html->script('jquery');
@@ -27,7 +27,7 @@
         ?>
     </head>
     <body>
-        <div class="navbar navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <?php echo $this->Html->link($this->Html->image('logo-small.png'), array('controller' => 'dashboards','plugin' => false, 'action' => 'index', 'admin' => TRUE), array('class' => 'brand', 'escape' => false)); ?>
@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                    <div class="nav-collapse">
+                    <div class="nav-collapse collapse">
                         <?php echo $this->element('menu'); ?>
                     </div><!--/.nav-collapse -->
                     <div class="user-info">
