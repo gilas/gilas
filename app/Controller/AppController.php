@@ -40,6 +40,7 @@ class AppController extends Controller {
         ),
         'Session',
         'GilasAcl',
+        'DebugKit.Toolbar'
         //TODO: we have an error in ajax forms and some forms e: UsersController::admin_add
         //'Security',
     );

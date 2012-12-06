@@ -52,4 +52,13 @@
         </ul>
     </li>
     <li><?php echo $this->Html->link('اسلایدر', array('controller' => 'SliderItems','plugin' => false, 'action' => 'index', 'admin' => TRUE)); ?></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">یاقوت
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><?php echo $this->Html->link('اماکن', array('controller' => 'places','plugin' => false, 'action' => 'index', 'admin' => TRUE)); ?></li>
+            <li><?php echo $this->Html->link('مدیریت مجموعه گالری تصاویر', array('controller' => 'gallery_categories','plugin' => false, 'action' => 'index', 'admin' => TRUE), array('class' => 'active')); ?></li>
+        </ul>
+    </li>
 </ul>

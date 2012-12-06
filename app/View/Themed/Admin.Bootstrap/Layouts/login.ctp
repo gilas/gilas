@@ -8,8 +8,8 @@
         <?php
         echo $this->Html->meta('icon');
 
-        echo $this->Html->css('bootstrap-rtl.min');
-        echo $this->Html->css('bootstrap-responsive-rtl.min');
+        echo $this->Html->css('bootstrap.min');
+        echo $this->Html->css('bootstrap-responsive.min');
         echo $this->Html->css('login');
         echo $this->Html->script('jquery');
         echo $this->Html->script('bootstrap');
