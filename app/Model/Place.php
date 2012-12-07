@@ -8,6 +8,18 @@
 class Place extends AppModel {
 
     public $tablePrefix = 'yg_';
+    public $validate = array(
+        'name' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'ورود عنوان مطلب الزامی است',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            )
+        )
+    );
 
 }
 
