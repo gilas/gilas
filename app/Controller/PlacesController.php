@@ -24,6 +24,7 @@ class PlacesController extends AppController {
                 $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
             }
         }
+        $this->helpers[]='Validator';
     }
 
     public function admin_edit($id = NULL) {
