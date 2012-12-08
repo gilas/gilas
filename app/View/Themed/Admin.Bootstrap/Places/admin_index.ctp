@@ -22,11 +22,17 @@ if (!empty($places)) {
             <tr>
                 <td id="grid-align"><?php echo $this->AdminForm->checkbox($place['Place']['id']); ?></td>
                 <td id="grid-align"><?php echo ++$index; ?></td>
-                <td id="grid-align"><?php echo $place['Place']['name']; ?></td>
+                <td><?php echo $this->Html->link($place['Place']['name'], array('action' => 'edit', $place['Place']['id'])); ?></td>
+                <td></td>
             </tr>
         <?php endforeach; ?>
     </table>
     <?php
     echo $this->AdminForm->endFormTag();
 }
+?>
+
+<?php 
+// show paginatation to user
+echo $this->Filter->limitAndPaginate(); 
 ?>

@@ -5,7 +5,7 @@ echo $this->Form->create('Place', array(
     'inputDefaults' => array(
         'error' => array(
             'attributes' => array(
-                'class' => 'alert alert-error',
+                'class' => 'alert-input-error',
                 'id' => 'msg'
             )
         )
@@ -28,6 +28,6 @@ echo $this->Form->create('Place', array(
     </ul>
 </div>
 <?php
-echo $this->form->input('name', array('label' => 'نام مکان'));
+echo $this->Form->input('name', array('label' => 'نام مکان'));
 echo $this->Form->end();
 ?>
