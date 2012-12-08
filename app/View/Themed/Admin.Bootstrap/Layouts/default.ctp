@@ -30,7 +30,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
-                    <?php echo $this->Html->link($this->Html->image('logo-small.png'), array('controller' => 'dashboards','plugin' => false, 'action' => 'index', 'admin' => TRUE), array('class' => 'brand', 'escape' => false)); ?>
+                    <?php echo $this->element('core-menu'); ?>
                     <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
