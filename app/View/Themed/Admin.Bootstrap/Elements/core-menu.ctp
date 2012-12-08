@@ -5,6 +5,8 @@
             <?php echo $this->Html->image('logo-small.png'); ?>
         </a>
         <ul class="dropdown-menu">
+            <li><?php echo $this->Html->link('داشبورد', array('controller' => 'dashboards','plugin' => false, 'action' => 'index', 'admin' => TRUE)); ?></li>
+            <li class="divider"></li>
             <li><?php echo $this->Html->link('تنظیمات', array('controller' => 'settings', 'action' => 'index', 'admin' => TRUE)); ?></li>
             <li class="divider"></li>
             <li><?php echo $this->Html->link('مدیریت مطالب', array('controller' => 'contents','plugin' => false, 'action' => 'index', 'admin' => TRUE)); ?></li>
