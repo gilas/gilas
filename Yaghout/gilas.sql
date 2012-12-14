@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2012 at 05:04 PM
+-- Generation Time: Dec 14, 2012 at 08:02 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -36,14 +36,14 @@ CREATE TABLE IF NOT EXISTS `gl_acos` (
   `lft` int(11) DEFAULT NULL,
   `rght` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=170 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=185 ;
 
 --
 -- Dumping data for table `gl_acos`
 --
 
 INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'controllers', 1, 326),
+(1, NULL, NULL, NULL, 'controllers', 1, 356),
 (2, 1, NULL, NULL, 'Comments', 2, 23),
 (3, 2, NULL, NULL, 'admin_index', 3, 4),
 (5, 2, NULL, NULL, 'admin_view', 7, 8),
@@ -162,14 +162,29 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (140, 137, NULL, NULL, 'admin_sync', 305, 306),
 (141, 137, NULL, NULL, 'admin_dispatch', 307, 308),
 (161, 29, NULL, NULL, 'index', 113, 114),
-(162, 1, NULL, NULL, 'Places', 310, 315),
+(162, 1, NULL, NULL, 'Places', 310, 321),
 (163, 162, NULL, NULL, 'admin_index', 311, 312),
 (164, 162, NULL, NULL, 'admin_dispatch', 313, 314),
-(165, 1, NULL, NULL, 'DebugKit', 316, 325),
-(166, 165, NULL, NULL, 'ToolbarAccess', 317, 324),
-(167, 166, NULL, NULL, 'history_state', 318, 319),
-(168, 166, NULL, NULL, 'sql_explain', 320, 321),
-(169, 166, NULL, NULL, 'admin_dispatch', 322, 323);
+(165, 1, NULL, NULL, 'DebugKit', 322, 331),
+(166, 165, NULL, NULL, 'ToolbarAccess', 323, 330),
+(167, 166, NULL, NULL, 'history_state', 324, 325),
+(168, 166, NULL, NULL, 'sql_explain', 326, 327),
+(169, 166, NULL, NULL, 'admin_dispatch', 328, 329),
+(170, 162, NULL, NULL, 'admin_add', 315, 316),
+(171, 162, NULL, NULL, 'admin_edit', 317, 318),
+(172, 162, NULL, NULL, 'admin_delete', 319, 320),
+(173, 1, NULL, NULL, 'Rastes', 332, 343),
+(174, 173, NULL, NULL, 'admin_index', 333, 334),
+(175, 173, NULL, NULL, 'admin_add', 335, 336),
+(176, 173, NULL, NULL, 'admin_edit', 337, 338),
+(177, 173, NULL, NULL, 'admin_delete', 339, 340),
+(178, 173, NULL, NULL, 'admin_dispatch', 341, 342),
+(179, 1, NULL, NULL, 'Degrees', 344, 355),
+(180, 179, NULL, NULL, 'admin_index', 345, 346),
+(181, 179, NULL, NULL, 'admin_add', 347, 348),
+(182, 179, NULL, NULL, 'admin_edit', 349, 350),
+(183, 179, NULL, NULL, 'admin_delete', 351, 352),
+(184, 179, NULL, NULL, 'admin_dispatch', 353, 354);
 
 -- --------------------------------------------------------
 
@@ -216,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `gl_aros_acos` (
   PRIMARY KEY (`id`),
   KEY `aco_id` (`aco_id`),
   KEY `aro_id` (`aro_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=202 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=215 ;
 
 --
 -- Dumping data for table `gl_aros_acos`
@@ -423,7 +438,20 @@ INSERT INTO `gl_aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_upda
 (198, 3, 141, '1', '1', '1', '1'),
 (199, 2, 93, '1', '1', '1', '1'),
 (200, 3, 163, '1', '1', '1', '1'),
-(201, 3, 164, '1', '1', '1', '1');
+(201, 3, 164, '1', '1', '1', '1'),
+(202, 3, 170, '1', '1', '1', '1'),
+(203, 3, 171, '1', '1', '1', '1'),
+(204, 3, 172, '1', '1', '1', '1'),
+(205, 3, 174, '1', '1', '1', '1'),
+(206, 3, 175, '1', '1', '1', '1'),
+(207, 3, 176, '1', '1', '1', '1'),
+(208, 3, 177, '1', '1', '1', '1'),
+(209, 3, 178, '1', '1', '1', '1'),
+(210, 3, 180, '1', '1', '1', '1'),
+(211, 3, 181, '1', '1', '1', '1'),
+(212, 3, 182, '1', '1', '1', '1'),
+(213, 3, 183, '1', '1', '1', '1'),
+(214, 3, 184, '1', '1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -512,7 +540,14 @@ CREATE TABLE IF NOT EXISTS `gl_content_categories` (
   `rght` int(11) DEFAULT NULL,
   `level` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `gl_content_categories`
+--
+
+INSERT INTO `gl_content_categories` (`id`, `parent_id`, `name`, `descriptions`, `published`, `lft`, `rght`, `level`) VALUES
+(1, NULL, 'test', '', 0, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -523,14 +558,21 @@ CREATE TABLE IF NOT EXISTS `gl_content_categories` (
 DROP TABLE IF EXISTS `gl_gallery_categories`;
 CREATE TABLE IF NOT EXISTS `gl_gallery_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'category parent id  By default all category added to the app is parent while the admin did ''nt  select a parent for its',
+  `parent_id` int(11) DEFAULT '0' COMMENT 'category parent id  By default all category added to the app is parent while the admin did ''nt  select a parent for its',
   `name` varchar(30) COLLATE utf8_persian_ci NOT NULL,
   `folder_name` varchar(50) COLLATE utf8_persian_ci NOT NULL COMMENT 'category folder name for inserting images! for example image category folder is stored to : app/webroot/images/gallery \r\n and category name is MyFreinds so the images which added to this category will stored into :  app/webroot/images/gallery/MyFreinds',
   `published` int(11) DEFAULT NULL,
   `lft` tinyint(4) NOT NULL,
   `rght` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `gl_gallery_categories`
+--
+
+INSERT INTO `gl_gallery_categories` (`id`, `parent_id`, `name`, `folder_name`, `published`, `lft`, `rght`) VALUES
+(1, NULL, 'd', 'd', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -796,28 +838,22 @@ CREATE TABLE IF NOT EXISTS `gl_weblink_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `yg_classes`
---
-
-DROP TABLE IF EXISTS `yg_classes`;
-CREATE TABLE IF NOT EXISTS `yg_classes` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `yg_degrees`
 --
 
 DROP TABLE IF EXISTS `yg_degrees`;
 CREATE TABLE IF NOT EXISTS `yg_degrees` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `yg_degrees`
+--
+
+INSERT INTO `yg_degrees` (`id`, `name`) VALUES
+(2, 'درجه یک');
 
 -- --------------------------------------------------------
 
@@ -827,10 +863,30 @@ CREATE TABLE IF NOT EXISTS `yg_degrees` (
 
 DROP TABLE IF EXISTS `yg_places`;
 CREATE TABLE IF NOT EXISTS `yg_places` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) DEFAULT NULL COMMENT 'name of place : for example shandiz',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT 'name of place : for example shandiz',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `yg_places`
+--
+
+INSERT INTO `yg_places` (`id`, `name`) VALUES
+(1, 'شاندیز');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `yg_rastes`
+--
+
+DROP TABLE IF EXISTS `yg_rastes`;
+CREATE TABLE IF NOT EXISTS `yg_rastes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -842,43 +898,43 @@ DROP TABLE IF EXISTS `yg_user_informations`;
 CREATE TABLE IF NOT EXISTS `yg_user_informations` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT 'this field determine the user id of registered user but by default have 0 value. when the request has been submitted then a user record will be create for this user and that user id completed with this',
-  `first_name` varchar(50) DEFAULT NULL COMMENT 'users first name',
-  `last_name` varchar(50) DEFAULT NULL COMMENT 'users last name',
+  `first_name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT 'users first name',
+  `last_name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT 'users last name',
   `place_id` int(11) NOT NULL COMMENT 'id of place which user added request for that',
   `class_id` int(11) NOT NULL COMMENT 'user paper class id ',
   `degree_id` int(11) NOT NULL COMMENT 'users degree id which will complete By System Administrator',
-  `father_name` varchar(50) DEFAULT NULL COMMENT 'users father name',
-  `alias_name` varchar(50) DEFAULT NULL,
+  `father_name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT 'users father name',
+  `alias_name` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `gender` tinyint(4) DEFAULT NULL COMMENT 'users gender',
   `code_melli` varchar(10) NOT NULL,
   `shenasnameh_number` varchar(10) NOT NULL,
   `mahale_sodoor` varchar(50) DEFAULT NULL,
   `birth_day` varchar(10) DEFAULT NULL,
-  `din` varchar(50) DEFAULT NULL,
-  `mazhab` varchar(50) DEFAULT NULL,
+  `din` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `mazhab` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `vazifeh_omoomi` tinyint(4) DEFAULT NULL,
   `madrak_tahsili` tinyint(4) DEFAULT NULL,
   `taahol` tinyint(4) DEFAULT NULL,
   `sarparsat` tinyint(4) DEFAULT NULL,
   `afrad_tahte_takafol` tinyint(4) DEFAULT NULL COMMENT 'number of people who is takafol him :)',
   `isargari` tinyint(4) DEFAULT NULL,
-  `gov_employment` varchar(50) DEFAULT NULL COMMENT '0 means not',
-  `reg_other_union` varchar(50) DEFAULT NULL COMMENT '0 means not',
-  `parvaneh_other_union` varchar(50) DEFAULT NULL COMMENT '0 means not',
-  `latest_employment` varchar(200) DEFAULT NULL COMMENT '0 means not other employments',
+  `gov_employment` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '0 means not',
+  `reg_other_union` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '0 means not',
+  `parvaneh_other_union` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '0 means not',
+  `latest_employment` varchar(200) CHARACTER SET utf8 DEFAULT NULL COMMENT '0 means not other employments',
   `history_duration` tinyint(4) DEFAULT NULL COMMENT '0 means not',
   `postal_code` varchar(10) DEFAULT NULL,
   `telephone` varchar(12) DEFAULT NULL COMMENT '0511-8519648',
-  `home_address` text,
-  `market_name` varchar(100) DEFAULT NULL,
-  `market_sign` varchar(100) DEFAULT NULL,
-  `market_address` text,
+  `home_address` text CHARACTER SET utf8,
+  `market_name` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `market_sign` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `market_address` text CHARACTER SET utf8,
   `market_telephone` varchar(12) DEFAULT NULL,
   `market_fax` varchar(12) DEFAULT NULL,
   `market_postal_code` varchar(10) DEFAULT NULL,
   `mantagheh_shahrdari` tinyint(4) DEFAULT NULL,
   `nahiye_shahrdari` tinyint(4) DEFAULT NULL,
-  `hozeh_kalantari` varchar(50) DEFAULT NULL,
+  `hozeh_kalantari` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `vazeyat_joghrafiaee` tinyint(4) DEFAULT NULL,
   `mahale_esteghrar` tinyint(4) DEFAULT NULL,
   `vazeyat_malekiat` tinyint(4) DEFAULT NULL,

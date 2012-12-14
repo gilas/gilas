@@ -5,14 +5,14 @@
  * and open the template in the editor.
  */
 
-class Place extends AppModel {
+class Degree extends AppModel {
 
     public $tablePrefix = 'yg_';
     public $validate = array(
         'name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-                'message' => 'ورود نام برای مکان الزامی است',
+                'message' => 'ورود نام برای درجه الزامی است',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
