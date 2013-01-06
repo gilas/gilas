@@ -1,0 +1,157 @@
+body {
+    color: #000000;
+}
+.form-list .half{
+	float: right;
+    margin-bottom: 15px;
+    margin-left: 18px;
+    width: 49%;
+}
+.form-list .half > label{
+	min-width:110px
+}
+.form-list .one-third{
+	float: right;
+    margin-bottom: 15px;
+    margin-left: 18px;
+    width: 30%;
+}
+.form-list .two-third{
+	float: right;
+    margin-bottom: 15px;
+    margin-left: 18px;
+    width: 60%;
+}
+.form-list .one-third label{
+	min-width:50px;
+}
+.form-list .one-third label:first-child{
+	min-width:110px;
+	display: block;
+}
+.form-list .two-third input[type=text],.form-list .two-third  select{
+	width:436px;
+}
+.form-list .input.error{
+	padding:0;
+	margin:0;
+	margin-bottom: 15px;
+    margin-left: 18px;
+}
+.form-row{
+	clear:both;
+}
+.form-error{
+	border:solid 1px #E88B8B;
+}
+/********************************************************/
+/*                     22. Tooltips                     */
+/********************************************************/
+
+/* Root elements */
+#tooltips, #tooltips-over {
+	position: absolute;
+	top: 0;
+	left: 0;
+	}
+	#tooltips {
+		z-index: 999100;
+	}
+	#tooltips-over {
+		z-index: 999500;
+	}
+	#tooltips .message,
+	#tooltips-over .message {
+		position: absolute;
+		white-space: nowrap;
+		max-width: 300px;
+	}
+
+/* Tooltips inserted inside some elements */
+.message.inner-tooltip {
+	position: absolute;
+	display: block;
+	left: 50%;
+	bottom: 100%;
+	text-align: center;
+	margin: 0 0 10px 0;
+	min-width: 16px;
+	max-width: 250px;
+	z-index: 89;
+	pointer-events: none;
+	white-space: nowrap;
+	}
+	.message.inner-tooltip.right {
+		left: 100%;
+		top: 50%;
+		bottom: auto;
+		margin: -15px 0 0 10px;
+	}
+	.message.inner-tooltip.bottom {
+		top: 100%;
+		bottom: auto;
+		margin: 10px 0 0 0;
+	}
+	.message.inner-tooltip.left {
+		left: auto;
+		right: 100%;
+		top: 50%;
+		bottom: auto;
+		margin: -15px 10px 0 0;
+	}
+	.message.inner-tooltip.right.compact,
+	.message.inner-tooltip.left.compact {
+		margin-top: -10px;
+	}
+
+/****************  Select , Inputs *************/
+select{
+    font-size: 12px;
+}
+optgroup{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: tahoma;
+    background-color: #444;
+    color: #FFF;
+}
+optgroup option{
+    background-color: #FFF;
+    color: #000;
+}
+
+.info, .warning, .error, .success, label, input, button, select, textarea,form .error-message{
+    font-size: 14px;
+}
+.alert.warning {
+    background-color: #FDAF40;
+    color: #925700;
+}
+/******* Fix Bootstrap ********/
+.btn{
+    line-height: 11px;
+}
+#toolbar{
+    margin: 0 25px 10px 0;
+}
+.alert{
+    text-shadow: none;
+}
+.menu .sub-menu{
+    font-size: 12px;
+}
+.label-information{
+    margin-bottom: 22px;
+    color:#840000;
+}
+span.information {
+    margin: 0;
+}
+.three-third{
+    float: none;
+    clear:both;
+    margin-bottom: 15px;
+    margin-left: 18px;
+    width: 100%;
+}

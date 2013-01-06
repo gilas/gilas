@@ -5,9 +5,16 @@
             <meta charset="UTF-8" />
             <?php
             echo $this->fetch('meta');
+            echo $this->Html->css('bootstrap.min');
+            echo $this->Html->css('bootstrap-responsive.min');
+            echo $this->Html->css('template');
             echo $this->Html->css('style');
+            echo $this->Html->css('freely-template');
             echo $this->fetch('css');
             echo $this->Html->script(array('modernizr', 'jquery', 'jquery-ui',));
+            echo $this->Html->script('bootstrap');
+            echo $this->Html->script('init');
+            echo $this->Html->script('box');
             ?>
             <!--[if lt IE 9]><?php echo $this->Html->script(array('IE8', 'ie')); ?><![endif]-->
             <?php
@@ -28,6 +35,7 @@
                         <div class="content-wrapper">
                             <?php echo $this->element('slider'); ?>
                             <?php echo $this->element('breadcrumb'); ?>
+                            <?php echo $this->Session->flash('auth'); ?>
                             <?php echo $this->Session->flash(); ?>
                             <?php echo $this->fetch('content'); ?>
                             <div class="clear"></div>

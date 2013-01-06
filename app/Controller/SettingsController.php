@@ -27,6 +27,8 @@ class SettingsController extends AppController {
                 $this->Setting->id = $id;
                 $this->Setting->saveField('value',$value);
             }
+			$this->Session->setFlash('تنظیمات با موفقیت ویرایش گردید.', 'message', array('type' => 'success'));
+            $this->redirect(array('action' => 'index', 'admin' => true));
         }
         $this->set('title_for_layout', 'ویرایش تنظیمات سیستم');
         $sections = array('Site');

@@ -40,7 +40,7 @@ class AppController extends Controller {
         ),
         'Session',
         'GilasAcl',
-        'DebugKit.Toolbar'
+        //'DebugKit.Toolbar'
         //TODO: we have an error in ajax forms and some forms e: UsersController::admin_add
         //'Security',
     );
@@ -95,10 +95,7 @@ class AppController extends Controller {
         parent::beforeRender();
         $this->theme = SettingsController::read('Site.Template');
         if ($this->request['prefix']) {
-            // read count of online users for admin
-            $this->loadModel('GilasSession');
-            $this->set('onlineUsersCount', $this->GilasSession->onlineUsers());
-            $this->theme = 'Admin.Bootstrap';
+            $this->theme = null;
         }
         if ($this->request->is('ajax')) {
             $this->layout = 'ajax';
@@ -182,8 +179,12 @@ class AppController extends Controller {
         }
         $action = $this->request->data['action'];
         unset($this->request->data['action']);
-        //with prefix
-        $this->setAction('admin_' . $action);
+        if($this->GilasAcl->hasPermission(array('action' => $action))){
+            //with prefix
+            return $this->setAction('admin_' . $action);
+        }
+        $this->Auth->flash($this->Auth->authError);
+        $this->redirect($this->referer());
     }
 
     /**

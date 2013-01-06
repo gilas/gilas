@@ -115,8 +115,10 @@ class ContentsController extends AppController {
     public function admin_edit($id = null) {
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'ویرایش مطلب');
-        $this->set('contentCategories', $this->Content->ContentCategory->
-                        generateTreeList());
+		$contentCategories = $this->Content->ContentCategory->generateTreeList();
+		$contentCategories[0] = '--- بدون مجموعه ---';
+        $this->set('contentCategories', $contentCategories);
+		
         $this->Content->id = $id;
         if (!$this->Content->exists()) {
             throw new NotFoundException(SettingsController::read('Error.Code-14'));
@@ -210,6 +212,7 @@ class ContentsController extends AppController {
     public function search($q = null) {
         $q = (isset($this->request->query['q'])) ? $this->request->query['q'] : $q;
         $conditions = array('conditions' => array('OR' => array(
+                    "Content.intro LIKE" => "%$q%",
                     "Content.content LIKE" => "%$q%",
                     "Content.title LIKE" => "%$q%",
                     "ContentCategory.name LIKE" => "%$q%",

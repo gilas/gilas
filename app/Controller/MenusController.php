@@ -54,7 +54,7 @@ class MenusController extends AppController {
         $this->helpers[] = 'Validator';
         if ($this->request->is('post')) {
             $linkType = $this->Menu->LinkType->read('path',$this->request->data['Menu']['link_type_id']);
-            if (empty($linkType['LinkType']['path'])) {
+            if ($linkType['LinkType']['check_path'] ) {
                 if (strpos($this->request->data['Menu']['link'], 'http://') === false) {
                     $this->request->data['Menu']['link'] = 'http://' . $this->request->data['Menu']['link'];
                 }
@@ -93,7 +93,7 @@ class MenusController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             $linkType = $this->Menu->LinkType->read('path',$this->request->data['Menu']['link_type_id']);
-            if (empty($linkType['LinkType']['path'])) {
+            if ($linkType['LinkType']['check_path']) {
                 if (strpos($this->request->data['Menu']['link'], 'http://') === false) {
                     $this->request->data['Menu']['link'] = 'http://' . $this->request->data['Menu']['link'];
                 }

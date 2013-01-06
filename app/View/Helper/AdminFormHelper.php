@@ -140,7 +140,7 @@ class AdminFormHelper extends AppHelper{
  * @return 'checkbox' tag 
  */
     public function selectAll(){
-        return $this->Html->useTag('input',null,array('type' => 'checkbox', 'id' => 'selectAll'));
+        return $this->Html->useTag('input',null,array('type' => 'checkbox', 'class' => 'selectAll'));
     }
     
 /**

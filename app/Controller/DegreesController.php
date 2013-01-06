@@ -67,8 +67,7 @@ class DegreesController extends AppController {
             $this->Degree->id = $id;
 
             if ($this->Degree->delete()) {
-                $this->Session->setFlash('درجه با موفقیت حذف شد.', 'message', array('type' =>
-                    'success'));
+                $this->Session->setFlash('درجه با موفقیت حذف شد.', 'message', array('type' =>'success'));
             } else {
                 $this->Session->setFlash(SettingsController::read('Error.Code-16'), 'message', array('type' => 'error'));
             }

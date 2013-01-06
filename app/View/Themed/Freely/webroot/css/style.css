@@ -64,7 +64,6 @@ a {color: #7A9F17;}
 body {
 	background-color: #ededed;
 	color: #787878;
-	font: 75%/1.5em Arial, sans-serif;
 	-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 	-webkit-text-size-adjust: 100%;
 }
@@ -1960,7 +1959,7 @@ ul.type-16 li {
 } 
 
 .alert.success {background-color: #96be2a;}
-.alert.error {background-color: #D91D1D ;}
+.alert.error {background-color: #A31818 ;}
 .alert.info {background-color: #65cbe5 ;}
 .alert.warning {background-color: #fdaf40 ;}
 /*
@@ -3131,8 +3130,8 @@ table.feature-table.light-orange thead tr th.rightL { border-left: 1px solid #de
 	font-size: 1.1em;
 }
 label, input, button, select, textarea {
-    font-family: tahoma,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 13px;
+    /*font-family: tahoma,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-size: 11px;
     font-weight: normal;
     line-height: 18px;
 }
@@ -3149,6 +3148,7 @@ form .error-message{
     display: inline-block;
     color:#D91D1D;
     margin-right: 10px;
+    font-size: 10px;
 }
 input, textarea, select, .uneditable-input {
     border: 1px solid #CCCCCC;
@@ -3987,7 +3987,7 @@ footer .social_widget .social_icon3 { background-position: -64px 0;}
 
 .tabs-1 ul.tabs li a {
 	position: relative;
-	font-size:1.25em;
+	font-size:13px;
 	padding:0 20px;
 	text-decoration: none;
 	color: #000;
