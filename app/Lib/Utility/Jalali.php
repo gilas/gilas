@@ -283,22 +283,33 @@ class Jalali {
  * @return string Described, relative date string
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/time.html#formatting
  */
-	public static function niceShort($dateString = null, $userOffset = null) {
-		$date = $dateString ? self::fromString($dateString, $userOffset) : time();
+    public static function niceShort($dateString, $showTime = true){
+        $date = $dateString ? self::fromString($dateString) : time();
 
-		$y = self::isThisYear($date) ? '' : ' %Y';
-
-		if (self::isToday($dateString, $userOffset)) {
-			$ret = __d('cake', 'امروز، %s', self::_strftime("%H:%M", $date));
-		} elseif (self::wasYesterday($dateString, $userOffset)) {
-			$ret = __d('cake', 'دیروز، %s', self::_strftime("%H:%M", $date));
+		$y = self::isThisYear($date) ? '' : 'Y';
+		if (self::isToday($dateString)) {
+             if($showTime){
+		          $ret =  sprintf('امروز، %s', self::date("H:i", $date));
+		      }else{
+		          $ret = 'امروز';
+		      }
+		} elseif (self::wasYesterday($dateString)) {
+		      if($showTime){
+		          $ret =  sprintf('دیروز، %s', self::date("H:i", $date));
+		      }else{
+		          $ret = 'دیروز';
+		      }
 		} else {
-			$format = self::convertSpecifiers("%e %b{$y} ، %H:%M", $date);
-			$ret = self::_strftime($format, $date);
+		      if($showTime){
+		          $format = "d F $y H:i";
+		      }else{
+		          $format = "d F $y";
+		      }
+			$ret = self::date($format, $date);
 		}
 
 		return $ret;
-	}
+    }
 
 /**
  * Returns a partial SQL string to search for all records between two dates.

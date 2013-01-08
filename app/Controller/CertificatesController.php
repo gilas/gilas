@@ -265,16 +265,16 @@ class CertificatesController extends AppController{
         }
         return $formattedOptions;
     }
-    public function view($code = null){
-        if(! $code){
-            throw new MethodNotAllowedException(SettingsController::read('Error.Code-12'));
+    public function view(){
+        if($this->request->isPost()){
+            $code = $this->request->data('UserInformation.code');
+            $request = $this->_getRequestByCode($code);
+            if($request){
+                $this->set(compact('request'));
+            }else{
+                $this->Session->setFlash('چنین درخواستی یافت نشد', 'message', array('type' => 'error'));
+            }
         }
-        $request = $this->_getRequestByCode($code);
-        if(! $request){
-            throw new MethodNotAllowedException('چنین درخواستی یافت نشد.');
-        }
-        $this->set(compact('request'));
-        
     }
     
     public function admin_changeWarden(){

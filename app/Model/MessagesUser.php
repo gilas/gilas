@@ -1,6 +1,7 @@
 <?php
 class MessagesUser extends AppModel
 {
+    public $actsAs = array('Tree');
     public $tablePrefix = 'yg_';
 	public $name = "MessagesUser";
     public $belongsTo = array(
@@ -12,7 +13,14 @@ class MessagesUser extends AppModel
         'Message' => array(
             'className' => 'Message',
             'foreignKey' => 'message_id',
-        )
+        ),
+        'SenderInfo' => array(
+            'className' => 'User',
+            'foreignKey' => 'user_id',
+            'fields' => array('SenderInfo.id', 'SenderInfo.username', 'SenderInfo.name','SenderInfo.role_id')
+        ),
+        
     );
+    
  }
 ?>

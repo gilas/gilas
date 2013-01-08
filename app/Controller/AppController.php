@@ -118,18 +118,30 @@ class AppController extends Controller {
         }
         // we won't use this fields
         unset($query['page'], $query['limit']);
-        if ($query) {
-            $keys = array();
-            // get paginateConditions and format it
-            foreach ($this->paginateConditions as $i => $keyName) {
-                $options = array();
-                if (!is_int($i)) {
-                    $options = (array) $keyName;
-                    $keyName = $i;
-                }
-                $keys[$keyName] = $options;
+        $keys = array();
+        // get paginateConditions and format it
+        foreach ($this->paginateConditions as $i => $keyName) {
+            $options = array();
+            if (!is_int($i)) {
+                $options = (array) $keyName;
+                $keyName = $i;
             }
-
+            $keys[$keyName] = $options;
+            // Set default value, if it is set
+            if(isset($options['default'])){
+                if(empty($query[$keyName])){
+                    $query[$keyName] = $options['default'];
+                    // add default to request for another 
+                    if (@$this->paginate['paramType'] == 'querystring') {
+                       $this->request->query[$keyName] = $options['default'];
+                    } else {
+                        $this->request->params['named'][$keyName] = $options['default'];
+                        
+                    }
+                }
+            }
+        }
+        if($query){
             foreach ($query as $key => $value) {
                 $field = $key;
                 if (!empty($keys[$key]['field'])) {
@@ -152,10 +164,24 @@ class AppController extends Controller {
 
                 // no option for this key
                 if (empty($keys[$key]['type'])) {
-                    $this->paginate['conditions'][$field] = $value;
+                    // field is array, so we must OR between their
+                    if(is_array($field)){
+                        foreach($field as $f){
+                            $this->paginate['conditions']['OR'][$f] = $value;
+                        }
+                    }else{
+                        $this->paginate['conditions'][$field] = $value;
+                    }
                     continue;
                 } elseif (strtoupper(@$keys[$key]['type']) == 'LIKE') {
-                    $this->paginate['conditions'][$field . ' LIKE'] = '%' . $value . '%';
+                    // field is array, so we must OR between their
+                    if(is_array($field)){
+                        foreach($field as $f){
+                            $this->paginate['conditions']['OR'][$f . ' LIKE'] = '%' . $value . '%';
+                        }
+                    }else{
+                        $this->paginate['conditions'][$field . ' LIKE'] = '%' . $value . '%';
+                    }
                     continue;
                 }
             }

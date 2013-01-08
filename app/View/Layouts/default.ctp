@@ -54,7 +54,7 @@
                 <div id="flash_message"><?php echo $this->Session->flash('flash', array('element' => 'message')); ?></div>
             </div>
             <div id="content"><?php echo $this->fetch('content'); ?></div>
-           <!-- <div id="footer"><pre><?php echo $this->element('sql_dump'); ?></pre></div> -->
+           <div id="footer"><?php //echo $this->element('sql_dump'); ?></div>
         </div>
     </body>
 </html>

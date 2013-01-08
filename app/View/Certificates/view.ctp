@@ -1,3 +1,14 @@
+<?php
+if(! isset($request)){
+    echo $this->Form->create();
+    echo $this->Form->input('code', array(
+        'label' => 'کد پیگیری',
+        'after' => $this->Form->submit('ارسال', array('div' => false , 'style' => 'vertical-align: super')),
+    ));
+    echo $this->Form->end();
+    return;
+}
+?>
 <div class="row" id="toolbar-menu">
     <div class="title">اطلاعات درخواست <?php echo $request['UserInformation']['formattedStatus']; ?></div>
 </div>

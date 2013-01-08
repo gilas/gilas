@@ -32,7 +32,7 @@ Router::connect('/' . SettingsController::read('Site.AdminAddress'), array('cont
 
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-Router::connect('/contents/view/:id-:slug', 
+Router::connect('/Contents/view/:id-:slug', 
     array('controller' => 'contents', 'action' => 'view'),
     array(
         'pass' => array('id'),
@@ -40,13 +40,24 @@ Router::connect('/contents/view/:id-:slug',
     )
 );
 
-Router::connect('/contents/category/:id-:slug', 
+Router::connect('/Contents/category/:id-:slug', 
     array('controller' => 'contents', 'action' => 'category'),
     array(
         'pass' => array('id'),
         'id' => '[0-9]+'
     )
 );
+/**
+ * show profile of any user
+ */
+Router::connect('/~:username', 
+	array('controller' => 'Profile', 'action' => 'view'),
+	array(
+        'pass' => array('username'),
+        'username' => '[a-z|A-Z|0-9]+'
+    )
+);
+
 Router::parseExtensions('rss');
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 

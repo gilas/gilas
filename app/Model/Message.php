@@ -1,18 +1,20 @@
 <?php
 class Message extends AppModel
 {
+    
     public $tablePrefix = 'yg_';
     
-    // Every pm is belongs to one sender
-	public $belongsTo = array(
-        'Sender' => array(
-            'className' => 'User',
-            'foreignKey' => 'user_id',
-            'fields' => array(
-                'Sender.id', 
-                'Sender.username',
-                'Sender.name',
-                'Sender.role_id',
+    public $validate = array(
+        'subject' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'تکمیل این فیلد ضروری است',
+            ),
+        ),
+        'message' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'تکمیل این فیلد ضروری است',
             ),
         ),
     );
@@ -23,6 +25,11 @@ class Message extends AppModel
             'foreignKey' => 'message_id',
             'className' => 'MessagesUser',
         ),
+        'Sender' =>array(
+            'foreignKey' => 'message_id',
+            'className' => 'MessagesUser',
+            'conditions' => array('Sender.is_sender' => true),
+        )
     );
     
     // Every pm has many recipient, recipients can detect by his folder
@@ -31,8 +38,7 @@ class Message extends AppModel
         'Recipients' =>array(
             'foreignKey' => 'message_id',
             'className' => 'MessagesUser',
-            'conditions' => array('Recipients.folder <>' => 2),
-            
+            'conditions' => array('Recipients.is_sender' => false),
         )
     );
     
@@ -46,14 +52,5 @@ class Message extends AppModel
         'draft' => '3',
         'trash' => '4',
     );
-	
-	public function countNewMessages($userId)
-    {
-		$count = $this->find('count', array(
-				'contain' => array('Reader'),
-				'conditions'=>array('Reader.user_id'=>$userId, 'Reader.new' => 1, 'Reader.folder' => $this->folder['inbox'])
-		));
-		return $count;
-	}
 }
 ?>
