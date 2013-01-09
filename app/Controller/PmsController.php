@@ -22,10 +22,6 @@ class PmsController extends AppController{
 	public $uses = array('Message');
     
     public $paginateConditions = array(
-        'folder' => array(
-            'field' => 'Reader.folder',
-            'default' => 1,
-        ),
         'content' => array(
             'field' => array(
                 'Message.subject',
@@ -49,7 +45,15 @@ class PmsController extends AppController{
         
         // remove owner
         unset($users[$this->Auth->user('id')]);
-        return $users;
+        $return = array();
+        foreach($users as $user_key => $user_name){
+            $return[] = array(
+                    'user_id' =>   $user_key,
+                    'user_name' => $user_name,
+                    'parent_id' => 0,
+                );
+        }
+        return $return;
     }
     
 /**
@@ -120,6 +124,43 @@ class PmsController extends AppController{
         return $message;
     }
     
+    function _readerId($folder){
+        // Fetch all rows for current folder
+       $readerRows = $this->Message->Reader->find('all',array(
+            'contain' => false,
+            'fields' =>  array('Reader.id','Reader.parent_id','Reader.new'),
+            'conditions'=>array(
+                'Reader.user_id'=>$this->Auth->user('id'), 
+                'Reader.folder' => $folder,
+            ),
+            'order' => 'Reader.id DESC',
+       ));
+       $finalIDs = array();
+       if($readerRows){
+            $givedParents = array();
+            foreach($readerRows as $row){
+                $parent_id = $row['Reader']['parent_id'];
+                if($parent_id != 0){
+                    if(! in_array($parent_id, $givedParents)){
+                        $parent = $this->Message->Reader->find('first',array(
+                            'contain' => false,
+                            'fields' =>  array('Reader.id','Reader.parent_id','Reader.new'),
+                            'conditions'=>array(
+                                'Reader.user_id'=>$this->Auth->user('id'), 
+                                'Reader.id'=> $parent_id, 
+                            ),
+                       ));
+                       $givedParents[] = $parent_id;
+                       $finalIDs[] = $parent;
+                   }
+                }else{
+                    $finalIDs[] = $row;
+                }
+            }
+       }
+       return Set::combine($finalIDs, '{n}.Reader.id', '{n}.Reader.id');
+    }
+    
 /**
  * Create new message
  * 
@@ -157,7 +198,6 @@ class PmsController extends AppController{
             $msg = $this->_readMessage($msg_id);
             $this->request->data['message'] = $msg['Message'];
         }
-        $this->render('add');
     }
 
 /**
@@ -167,20 +207,26 @@ class PmsController extends AppController{
  */
     public function admin_index() {
         $this->set('title_for_layout', 'لیست پیام ها');
+        $folder = 1;
+        if(isset($this->request->named['folder'])){
+            $folder = $this->request->named['folder'];
+        }else{
+            $this->request->params['named']['folder'] = $folder;
+        }
         // Only message for current user must be listed
         $this->paginate['contain'] = array( 'Message.Sender.SenderInfo', 'Message.Recipients.Recipient');
-        $this->paginate['conditions']['Reader.user_id'] = $this->Auth->user('id');
-        $this->paginate['conditions']['Reader.parent_id'] = 0;
-        $this->paginate['order'] = 'Message.created DESC';
+        $this->paginate['conditions']['Reader.id'] = $this->_readerId($folder);
+        $this->paginate['order'] = 'Reader.id DESC';
         $pms = $this->paginate('Reader');
         if($pms){
             foreach($pms as &$pm){
-                $pm['Message'] = $this->_lastConversation($pm);
-                $pm['Message']['childCount'] = $this->_countConversation($pm['Reader']['id']);
+                $reader_id = $pm['Reader']['id'];
+                $pm = $this->_lastConversation($pm);
+                $pm['Message']['childCount'] = $this->_countConversation($reader_id);
                 
             }
         }
-        $selectedFolder = $this->Message->folders[$this->request->named['folder']];
+        $selectedFolder = $this->Message->folders[$folder];
         // add this helper for using FilterHelper in Filter Form
         $this->helpers[] = 'AdminForm';
         $this->set(compact('pms', 'selectedFolder'));
@@ -212,9 +258,9 @@ class PmsController extends AppController{
             ), 
         ));
         if($reader){
-            return $reader['Message'];    
+            return $reader;    
         }
-        return $parent['Message'];
+        return $parent;
     }
     
 /**
@@ -290,28 +336,7 @@ class PmsController extends AppController{
             $this->Session->setFlash('چنین پیامی یافت نشد.', 'message', array('type' => 'error'));
             $this->redirect(array('action' => 'index'));
        }
-       if($this->request->isPost()){
-            // if user want save message
-			if($this->request->data['Message']['method'] == 'save'){
-    			 // Save it
-    		     if($this->_save($this->request->data['Message'])){
-    		         $this->Session->setFlash('پیام با موفقیت ذخیره شد.', 'message', array('type' => 'success'));
-                     $this->redirect(array('action' => 'index', 'folder' => $this->Message->folders['draft']));
-    		     }else{
-    		          $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
-                     return;
-    		     }
-			}else{// if user want send message
-    			 if($this->_send($this->request->data['Message'])){
-                    $this->Session->setFlash('پیام با موفقیت ارسال گردید.', 'message', array('type' => 'success'));
-                    $this->redirect(array('action' => 'index', 'folder' => $this->Message->folders['outbox']));
-    		     }else{
-    		          $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
-                     return;
-    		     }
-			}
-       }
-       $message = $this->_getConversation($message['Reader']['id']);
+              $message = $this->_getConversation($message['Reader']['id']);
        // set origin
        $origin = $message[0];
        unset($message[0]);
@@ -339,6 +364,27 @@ class PmsController extends AppController{
        }
        // Get recipients for sending message
        $this->set('users',$replyUsers);
+       if($this->request->isPost()){
+            // if user want save message
+			if($this->request->data['Message']['method'] == 'save'){
+    			 // Save it
+    		     if($this->_save($this->request->data['Message'])){
+    		         $this->Session->setFlash('پیام با موفقیت ذخیره شد.', 'message', array('type' => 'success'));
+                     $this->redirect(array('action' => 'index', 'folder' => $this->Message->folders['draft']));
+    		     }else{
+    		          $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
+                     return;
+    		     }
+			}else{// if user want send message
+    			 if($this->_send($this->request->data['Message'])){
+                    $this->Session->setFlash('پیام با موفقیت ارسال گردید.', 'message', array('type' => 'success'));
+                    $this->redirect(array('action' => 'index', 'folder' => $this->Message->folders['outbox']));
+    		     }else{
+    		          $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
+                     return;
+    		     }
+			}
+       }
 	}
 
 /**
@@ -355,7 +401,16 @@ class PmsController extends AppController{
        if($message['Reader']['parent_id'] != 0){
             return $this->_getConversation($message['Reader']['parent_id']);
        }else{
-            return $this->_readMessageByReaderID($this->_getReaderPath($message['Reader']['id']));
+            $id = $this->_getReaderPath($message['Reader']['id']);
+            // Update Fields
+            foreach($id as $i){
+                $this->Message->Reader->id = $i;
+                $this->Message->Reader->save(array(
+                    'read_date' => Jalali::dateTime(),
+                    'new' => 0,
+                ));
+            }
+            return $this->_readMessageByReaderID($id);
        }
 	}
     
@@ -422,7 +477,6 @@ class PmsController extends AppController{
             $recipients[$i]['parent_id'] = (isset($recipient['parent_id']))?$recipient['parent_id']:0;
             $i++;
        }
-        
         //Save message, sender data
         $this->Message->saveAll($data);
         //Save recipients data

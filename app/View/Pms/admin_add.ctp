@@ -37,17 +37,17 @@ echo $this->Form->create('Message', array(
     <label for="MessageRecipients">گیرنده</label>
     <?php
     if(count($users) == 1){
-        echo current($users);
-        echo $this->Form->hidden('Message.Recipients.0',array('value'=>key($users)));
+        echo $users[0]['user_name'];
+        echo $this->Form->hidden('Message.Recipients.0.user',array('value'=>$users[0]['user_id']));
+        echo $this->Form->hidden('Message.Recipients.0.parent_id',array('value'=>$users[0]['parent_id']));
         
     }else{
         $options = '';
-        foreach($users as $user_key => $user_name){
-            if(@in_array($user_key,$message['Recipients'])){
-                $options .= $this->Html->tag('option',$user_name,array('value' => $user_key,'selected' => true));
-            }else{
-            $options .= $this->Html->tag('option',$user_name,array('value' => $user_key));
-            }
+        $i = 0;
+        foreach($users as $user){
+            $options .= $this->Html->tag('option',$user['user_name'],array('value' => $user['user_id']));
+            echo $this->Form->hidden('Message.Recipients.'.$i.'.parent_id',array('value'=>$user['parent_id']));
+            $i ++;
         }
         echo $this->Html->tag('select',$options,array('name' => 'data[Message][Recipients][]','multiple'=>true,'style' => 'width:500px'));
     }
