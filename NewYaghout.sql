@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 09, 2013 at 10:17 AM
+-- Generation Time: Jan 09, 2013 at 10:33 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -917,17 +917,7 @@ CREATE TABLE IF NOT EXISTS `yg_messages` (
   `created` char(20) DEFAULT NULL,
   `files` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `yg_messages`
---
-
-INSERT INTO `yg_messages` (`id`, `user_id`, `subject`, `message`, `created`, `files`) VALUES
-(1, 1, 'از جمال به حمید', '<p>یبل</p>', '1391-10-20 12:34:51', NULL),
-(2, 2, 'پاسخ : از حمید به جمال', '<p>یب</p>', '1391-10-20 12:35:41', NULL),
-(3, 1, 'از جمال به حمید 2', '<p>یبل</p>', '1391-10-20 12:36:44', NULL),
-(4, 1, 'پاسخ : از جمال به حمید', '<p>زرزر</p>', '1391-10-20 12:37:17', NULL);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -947,23 +937,7 @@ CREATE TABLE IF NOT EXISTS `yg_messages_users` (
   `lft` int(11) NOT NULL,
   `rght` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- Dumping data for table `yg_messages_users`
---
-
-INSERT INTO `yg_messages_users` (`id`, `message_id`, `user_id`, `read_date`, `new`, `folder`, `is_sender`, `parent_id`, `lft`, `rght`) VALUES
-(1, 1, 1, '1391-10-20 12:46:16', 0, 2, 1, 0, 1, 6),
-(2, 1, 2, '1391-10-20 12:35:24', 0, 1, 0, 0, 7, 16),
-(3, 2, 2, '0', 0, 2, 1, 2, 8, 9),
-(4, 2, 1, '1391-10-20 12:46:16', 0, 1, 0, 1, 2, 3),
-(5, 3, 1, '0', 0, 2, 1, 0, 17, 18),
-(6, 3, 2, '0', 1, 1, 0, 0, 19, 20),
-(7, 4, 1, '1391-10-20 12:46:16', 0, 2, 1, 1, 4, 5),
-(8, 4, 2, '0', 1, 1, 0, 2, 10, 11),
-(9, 0, 2, '0', 1, 1, 0, 2, 12, 13),
-(10, 0, 2, '0', 1, 1, 0, 2, 14, 15);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
