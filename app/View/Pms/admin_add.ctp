@@ -49,6 +49,7 @@ echo $this->Form->create('Message', array(
             echo $this->Form->hidden('Message.Recipients.'.$user['user_id'].'.parent_id',array('value'=>$user['parent_id']));
         }
         echo $this->Html->tag('select',$options,array('name' => 'data[Message][Recipients][id][]','multiple'=>true,'style' => 'width:500px'));
+        echo $this->Form->hidden('Message.isList',array('value'=>true));
     }
     ?>
 </div>

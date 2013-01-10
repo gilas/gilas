@@ -181,18 +181,19 @@ class PmsController extends AppController{
     		     }
 			}else{
 			     $message = $this->request->data['Message'];
-                 
                  // User send multiple users
-			     if(isset($this->request->data['Message']['Recipients']['id'])){
+			     if(isset($this->request->data['Message']['isList'])){
 			         $recipients = array();
 			         $recipientsInfo = $this->request->data['Message']['Recipients'];
-                     $selected = $this->request->data['Message']['Recipients']['id'];
-                     unset($recipientsInfo['id']);
-			         foreach($recipientsInfo as $recipient){
-			             if(in_array($recipient['user'], $selected)){
-			                 $recipients[] = $recipient;
-			             }
-			         }
+                     if(!empty($this->request->data['Message']['Recipients']['id'])){
+                        $selected = $this->request->data['Message']['Recipients']['id'];
+                         unset($recipientsInfo['id']);
+    			         foreach($recipientsInfo as $recipient){
+    			             if(in_array($recipient['user'], $selected)){
+    			                 $recipients[] = $recipient;
+    			             }
+    			         }
+                     }
                      $message = array_merge($this->request->data['Message'], array('Recipients' => $recipients));
 			     }
                 // if user want send message
@@ -236,9 +237,8 @@ class PmsController extends AppController{
         $pms = $this->paginate('Reader');
         if($pms){
             foreach($pms as &$pm){
-                $reader_id = $pm['Reader']['id'];
                 $pm = $this->_lastConversation($pm);
-                $pm['Message']['childCount'] = $this->_countConversation($reader_id);
+                $pm['Message']['childCount'] = $this->_countConversation($pm['Reader']['parent_id']);
                 
             }
         }
@@ -246,7 +246,6 @@ class PmsController extends AppController{
         // add this helper for using FilterHelper in Filter Form
         $this->helpers[] = 'AdminForm';
         $this->set(compact('pms', 'selectedFolder'));
-        $this->render('index');
     }
     
 /**
@@ -256,7 +255,9 @@ class PmsController extends AppController{
  * @return
  */
     protected function _countConversation($parentReader_id){
-        return $this->Message->Reader->childCount($parentReader_id) + 1;
+        if($parentReader_id != 0)
+            return $this->Message->Reader->childCount($parentReader_id) + 1;
+        return false;
     }
     
 /**
@@ -403,16 +404,18 @@ class PmsController extends AppController{
 			     $message = $this->request->data['Message'];
                  
                  // User send multiple users
-			     if(isset($this->request->data['Message']['Recipients']['id'])){
+			     if(isset($this->request->data['Message']['isList'])){
 			         $recipients = array();
 			         $recipientsInfo = $this->request->data['Message']['Recipients'];
-                     $selected = $this->request->data['Message']['Recipients']['id'];
-                     unset($recipientsInfo['id']);
-			         foreach($recipientsInfo as $recipient){
-			             if(in_array($recipient['user'], $selected)){
-			                 $recipients[] = $recipient;
-			             }
-			         }
+                     if(!empty($this->request->data['Message']['Recipients']['id'])){
+                        $selected = $this->request->data['Message']['Recipients']['id'];
+                         unset($recipientsInfo['id']);
+    			         foreach($recipientsInfo as $recipient){
+    			             if(in_array($recipient['user'], $selected)){
+    			                 $recipients[] = $recipient;
+    			             }
+    			         }
+                     }
                      $message = array_merge($this->request->data['Message'], array('Recipients' => $recipients));
 			     }
                 // if user want send message
@@ -488,7 +491,9 @@ class PmsController extends AppController{
 	}
     
     public function _send($params = array()){
-
+        if(empty($params['Recipients'])){
+            return false;
+        }
         // Create Message
        $data['Message']['user_id'] = $data['Reader']['user_id'] = $this->Auth->user('id');
        $data['Message']['subject'] = $params['subject'];
