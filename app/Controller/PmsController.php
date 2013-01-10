@@ -142,19 +142,13 @@ class PmsController extends AppController{
                 $parent_id = $row['Reader']['parent_id'];
                 if($parent_id != 0){
                     if(! in_array($parent_id, $givedParents)){
-                        $parent = $this->Message->Reader->find('first',array(
-                            'contain' => false,
-                            'fields' =>  array('Reader.id','Reader.parent_id','Reader.new'),
-                            'conditions'=>array(
-                                'Reader.user_id'=>$this->Auth->user('id'), 
-                                'Reader.id'=> $parent_id, 
-                            ),
-                       ));
                        $givedParents[] = $parent_id;
-                       $finalIDs[] = $parent;
+                       $finalIDs[] = $row;
                    }
                 }else{
-                    $finalIDs[] = $row;
+                    if(! in_array($row['Reader']['id'], $givedParents)){
+                        $finalIDs[] = $row;
+                    }
                 }
             }
        }
@@ -185,8 +179,24 @@ class PmsController extends AppController{
     		          $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
                      return;
     		     }
-			}else{// if user want send message
-    			 if($this->_send($this->request->data['Message'])){
+			}else{
+			     $message = $this->request->data['Message'];
+                 
+                 // User send multiple users
+			     if(isset($this->request->data['Message']['Recipients']['id'])){
+			         $recipients = array();
+			         $recipientsInfo = $this->request->data['Message']['Recipients'];
+                     $selected = $this->request->data['Message']['Recipients']['id'];
+                     unset($recipientsInfo['id']);
+			         foreach($recipientsInfo as $recipient){
+			             if(in_array($recipient['user'], $selected)){
+			                 $recipients[] = $recipient;
+			             }
+			         }
+                     $message = array_merge($this->request->data['Message'], array('Recipients' => $recipients));
+			     }
+                // if user want send message
+    			 if($this->_send($message)){
                     $this->Session->setFlash('پیام با موفقیت ارسال گردید.', 'message', array('type' => 'success'));
                     $this->redirect(array('action' => 'index', 'folder' => $this->Message->folders['outbox']));
     		     }else{
@@ -216,7 +226,13 @@ class PmsController extends AppController{
         // Only message for current user must be listed
         $this->paginate['contain'] = array( 'Message.Sender.SenderInfo', 'Message.Recipients.Recipient');
         $this->paginate['conditions']['Reader.id'] = $this->_readerId($folder);
-        $this->paginate['order'] = 'Reader.id DESC';
+        /**
+         * With This we can show newest pm in top of list
+         * 
+         * $this->paginate['order'] = 'Reader.new DESC, Message.created DESC';
+         */
+        
+        $this->paginate['order'] = 'Message.created DESC';
         $pms = $this->paginate('Reader');
         if($pms){
             foreach($pms as &$pm){
@@ -247,20 +263,28 @@ class PmsController extends AppController{
  * Return last message for current message
  * 
  * @param mixed $parent, Parent Message that must be has Reader array in it
- * @return array message, Only return Message array
+ * @return array message, return last Message for gived parent
  */
     protected function _lastConversation($parent){
-        $reader = $this->Message->Reader->find('first', array(
-            'contain' => array( 'Message.Sender.SenderInfo', 'Message.Recipients.Recipient'),
-            'conditions' => array(
-                'Reader.parent_id' => $parent['Reader']['id'],
-                'Reader.rght' => $parent['Reader']['rght'] - 1,
-            ), 
-        ));
-        if($reader){
-            return $reader;    
+        // if This pm is parent
+        if($parent['Reader']['parent_id'] == 0){
+            $reader = $this->Message->Reader->find('first', array(
+                'contain' => array( 'Message.Sender.SenderInfo', 'Message.Recipients.Recipient'),
+                'conditions' => array(
+                    'Reader.parent_id' => $parent['Reader']['id'],
+                    'Reader.rght' => $parent['Reader']['rght'] - 1,// last child
+                ), 
+            ));
+            
+            if($reader){
+                return $reader;    
+            }
+            
+            return $parent;
+        }else{
+            // else give last conversation for parent of this pm
+            return $this->_lastConversation($this->_readMessageByReaderID($parent['Reader']['parent_id']));
         }
-        return $parent;
     }
     
 /**
@@ -375,8 +399,24 @@ class PmsController extends AppController{
     		          $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
                      return;
     		     }
-			}else{// if user want send message
-    			 if($this->_send($this->request->data['Message'])){
+			}else{
+			     $message = $this->request->data['Message'];
+                 
+                 // User send multiple users
+			     if(isset($this->request->data['Message']['Recipients']['id'])){
+			         $recipients = array();
+			         $recipientsInfo = $this->request->data['Message']['Recipients'];
+                     $selected = $this->request->data['Message']['Recipients']['id'];
+                     unset($recipientsInfo['id']);
+			         foreach($recipientsInfo as $recipient){
+			             if(in_array($recipient['user'], $selected)){
+			                 $recipients[] = $recipient;
+			             }
+			         }
+                     $message = array_merge($this->request->data['Message'], array('Recipients' => $recipients));
+			     }
+                // if user want send message
+    			 if($this->_send($message)){
                     $this->Session->setFlash('پیام با موفقیت ارسال گردید.', 'message', array('type' => 'success'));
                     $this->redirect(array('action' => 'index', 'folder' => $this->Message->folders['outbox']));
     		     }else{
@@ -454,7 +494,7 @@ class PmsController extends AppController{
        $data['Message']['subject'] = $params['subject'];
        $data['Message']['message'] = $params['message'];
        $data['Message']['created'] = Jalali::dateTime();  
-       $data['Reader']['read_date'] = 0;
+       $data['Reader']['read_date'] = Jalali::dateTime();
        
        // Create Reader : Reader is current user
        $data['Reader']['new'] = 0;
@@ -495,9 +535,13 @@ class PmsController extends AppController{
  * @return
  */
     public function countNewMessages(){
-        $count = $this->find('count', array(
-				'contain' => array('Reader'),
-				'conditions'=>array('Reader.user_id'=>$this->Auth->user('id'), 'Reader.new' => 1, 'Reader.folder' => $this->folders['inbox'])
+        $count = $this->Message->Reader->find('count', array(
+			'contain' => false,
+			'conditions'=>array(
+                'Reader.user_id'=>$this->Auth->user('id'), 
+                'Reader.new' => 1, 
+                'Reader.folder' => $this->Message->folders['inbox']
+            ),
 		));
 		return $count;
     }

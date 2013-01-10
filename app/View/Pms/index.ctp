@@ -80,7 +80,7 @@ if (!empty($pms)) {
                         50); 
                 ?></td>
                 <td><?php echo Jalali::niceShort($pm['Message']['created']); ?></td>
-                <td><?php echo $pm['Reader']['read_date']; ?></td>
+                <td><?php echo ($pm['Reader']['read_date'] == 0)?'خوانده نشده':Jalali::niceShort($pm['Reader']['read_date']); ?></td>
             </tr>
             <?php endforeach;?>
     </table>

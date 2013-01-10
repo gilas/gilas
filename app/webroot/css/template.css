@@ -254,7 +254,8 @@ div.alert-input-error{
 .count{
     -moz-transition: all 200ms ease 0s;
     background: -moz-linear-gradient(center top , #E24913, #D52607) repeat scroll 0 0 transparent;
-    border-color: #931A03;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E24913),to(#D52607));
+    border-color: #D52607;
     border-radius: 2px;
     border-style: solid;
     border-width: 1px;
