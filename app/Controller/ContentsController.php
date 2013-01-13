@@ -312,7 +312,7 @@ class ContentsController extends AppController {
         $this->set('title_for_layout', 'مطالب');
         $this->paginate['conditions']['Content.published'] = true;
         // Don't show locked files
-        $this->paginate['conditions'][] = 'ContentCategory.is_lock IS NULL';
+        //$this->paginate['conditions'][] = 'ContentCategory.is_lock IS NULL';
         // if it is for profile
         if($this->request['forProfile']){
             $this->paginate['conditions']['ContentCategory.access'] = 1;
