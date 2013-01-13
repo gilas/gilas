@@ -9,6 +9,7 @@
             echo $this->Html->css('bootstrap-responsive.min');
             echo $this->Html->css('template');
             echo $this->Html->css('style');
+            echo $this->Html->css('box');
             echo $this->Html->css('freely-template');
             echo $this->fetch('css');
             echo $this->Html->script(array('modernizr', 'jquery', 'jquery-ui',));

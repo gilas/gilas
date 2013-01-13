@@ -228,6 +228,7 @@ jQuery(document).ready(function(){
 			box.animate({opacity:'0'},500, function() {
 				box.animate({height:'0'},500);
 				boxChild.animate({margin:'0'},400);
+                box.remove(); // remove it from document
 			});
 		});
 /* Box close --> End */

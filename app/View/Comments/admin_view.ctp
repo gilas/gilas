@@ -1,7 +1,7 @@
 <legend>
     نظرات برای 
     <?php
-    echo $this->Html->link($comments['0']['Content']['title'], array('controller' => 'contents', 'action' => 'view', $comments['0']['Content']['id'], 'admin' => TRUE));
+    echo $this->Html->link($comments['0']['Content']['title'], array('controller' => 'Contents', 'action' => 'view', $comments['0']['Content']['id'], 'admin' => TRUE));
     ?>
 </legend>
 

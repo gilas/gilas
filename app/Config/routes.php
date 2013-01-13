@@ -33,7 +33,7 @@ Router::connect('/' . SettingsController::read('Site.AdminAddress'), array('cont
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 Router::connect('/Contents/view/:id-:slug', 
-    array('controller' => 'contents', 'action' => 'view'),
+    array('controller' => 'Contents', 'action' => 'view'),
     array(
         'pass' => array('id'),
         'id' => '[0-9]+'
@@ -41,7 +41,7 @@ Router::connect('/Contents/view/:id-:slug',
 );
 
 Router::connect('/Contents/category/:id-:slug', 
-    array('controller' => 'contents', 'action' => 'category'),
+    array('controller' => 'Contents', 'action' => 'category'),
     array(
         'pass' => array('id'),
         'id' => '[0-9]+'
@@ -49,8 +49,9 @@ Router::connect('/Contents/category/:id-:slug',
 );
 /**
  * show profile of any user
+ * use * because we send other parameters to this link
  */
-Router::connect('/~:username', 
+Router::connect('/~:username/*', 
 	array('controller' => 'Profile', 'action' => 'view'),
 	array(
         'pass' => array('username'),

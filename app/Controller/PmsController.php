@@ -21,16 +21,6 @@ class PmsController extends AppController{
     
 	public $uses = array('Message');
     
-    public $paginateConditions = array(
-        'content' => array(
-            'field' => array(
-                'Message.subject',
-                'Message.message',
-            ),
-            'type' => 'LIKE',
-        ),
-    );
-    
 /**
  * Get recipients for sending message
  * 
@@ -45,6 +35,15 @@ class PmsController extends AppController{
         
         // remove owner
         unset($users[$this->Auth->user('id')]);
+        
+        /**
+         * Formatting, every user has three field, 
+         *      user_id   : for saving in table
+         *      user_name : for showing to end user
+         *      parent_id : this field used for reply pm, that this must has
+         *                  id of parent (reader of message) that we want reply to it
+         *                  because we use this function to creaete new pm, so parent_id = 0
+         */
         $return = array();
         foreach($users as $user_key => $user_name){
             $return[] = array(
@@ -104,7 +103,7 @@ class PmsController extends AppController{
         return $reader;
     }
 /**
- * if reader is not sender , so we must don't show other recipients
+ * if reader is not sender , so we must don't show other recipients to current user
  * 
  * @param array $message , 
  *          full info of message such as sender, reader, recipient
@@ -124,34 +123,56 @@ class PmsController extends AppController{
         return $message;
     }
     
-    function _readerId($folder){
-        // Fetch all rows for current folder
-       $readerRows = $this->Message->Reader->find('all',array(
-            'contain' => false,
-            'fields' =>  array('Reader.id','Reader.parent_id','Reader.new'),
-            'conditions'=>array(
+/**
+ * Fetch all rows for current folder, 
+ *    ما ممکنه پیامی برای کاربری فرستاده باشیم پس این پیام باید در صندوق خروجی
+ *    نمایش داده شود. حال فرض شود طرف مقابل به همان پیام پاسخ دهد. بنابراین انتظار داریم
+ *    آن پیام در صندوق ورودی ما باشد . ولی چون پدراین پیام در صندوق ورودی نیست پس باید
+ *    راهی برای آوردن این قبیل پیام ها به صندوق ورودی (علاوه بر نمایش در صندوق خروجی) 
+ *    پیدا کرد . که بهترین راهی که فعلا به ذهنم رسید این بود که آی دی تمام پیام هایی
+ *    که در پوشه داده شده قرار می گیرد را در بیاورم
+ * 
+ * @param mixed $folder
+ * @param mixed $conditions
+ * @return
+ */
+    protected function _readerId($folder, $conditions = array()){
+        $conditions = array_merge(array(
                 'Reader.user_id'=>$this->Auth->user('id'), 
                 'Reader.folder' => $folder,
-            ),
+            ),$conditions);
+        // Fetch all rows for current folder
+       $readerRows = $this->Message->Reader->find('all',array(
+            'contain' => 'Message',
+            'fields' =>  array('Reader.id','Reader.parent_id','Reader.new'),
+            'conditions'=> $conditions,
             'order' => 'Reader.id DESC',
        ));
+       /**
+        * Remove all rows that have same parent
+        */
        $finalIDs = array();
        if($readerRows){
             $givedParents = array();
             foreach($readerRows as $row){
                 $parent_id = $row['Reader']['parent_id'];
                 if($parent_id != 0){
+                    // keep the first of row and delete all rows that have this parent_id
                     if(! in_array($parent_id, $givedParents)){
                        $givedParents[] = $parent_id;
                        $finalIDs[] = $row;
                    }
                 }else{
+                    // if reply of this row is in $finalID, so delete this row
                     if(! in_array($row['Reader']['id'], $givedParents)){
                         $finalIDs[] = $row;
                     }
                 }
             }
        }
+       /**
+        * Formatting result
+        */
        return Set::combine($finalIDs, '{n}.Reader.id', '{n}.Reader.id');
     }
     
@@ -206,7 +227,14 @@ class PmsController extends AppController{
     		     }
 			}
 		}elseif($msg_id){ // Give message from url (Such give message from draft)
-            $msg = $this->_readMessage($msg_id);
+            $msg = $this->Message->find('first', array(
+                'conditions' => array(
+                    'Message.id' => $msg_id,
+                    'Message.user_id' => $this->Auth->user('id'),
+                ),
+                'contain' => false,
+            ));
+            
             $this->request->data['message'] = $msg['Message'];
         }
     }
@@ -224,9 +252,18 @@ class PmsController extends AppController{
         }else{
             $this->request->params['named']['folder'] = $folder;
         }
+        $conditions = array();
+        if(isset($this->request->named['content'])){
+            $conditions =array(
+                'OR' => array(
+                    'Message.subject LIKE' => '%'.$this->request->named['content'].'%',
+                    'Message.message LIKE' => '%'.$this->request->named['content'].'%',
+                ),
+            );
+        }
         // Only message for current user must be listed
         $this->paginate['contain'] = array( 'Message.Sender.SenderInfo', 'Message.Recipients.Recipient');
-        $this->paginate['conditions']['Reader.id'] = $this->_readerId($folder);
+        $this->paginate['conditions']['Reader.id'] = $this->_readerId($folder, $conditions);
         /**
          * With This we can show newest pm in top of list
          * 
@@ -276,11 +313,9 @@ class PmsController extends AppController{
                     'Reader.rght' => $parent['Reader']['rght'] - 1,// last child
                 ), 
             ));
-            
             if($reader){
                 return $reader;    
             }
-            
             return $parent;
         }else{
             // else give last conversation for parent of this pm
@@ -357,11 +392,12 @@ class PmsController extends AppController{
  */
 	public function admin_read($reader_id = null){
 	   $message = $this->_readMessageByReaderID($reader_id);
-       if(! $message){
+       // do not show empty message of saved message
+       if(! $message or $message['Reader']['folder'] == $this->Message->folders['draft']){
             $this->Session->setFlash('چنین پیامی یافت نشد.', 'message', array('type' => 'error'));
             $this->redirect(array('action' => 'index'));
        }
-              $message = $this->_getConversation($message['Reader']['id']);
+       $message = $this->_getConversation($message['Reader']['id']);
        // set origin
        $origin = $message[0];
        unset($message[0]);
@@ -549,6 +585,20 @@ class PmsController extends AppController{
             ),
 		));
 		return $count;
+    }
+    /******** for register users ****/
+    public function index(){
+        $this->admin_index();
+    }
+    public function add($msg_id = null){
+        $this->admin_add($msg_id);
+        $this->set('users',$this->_getRecipients(array('role_id <>' => 3)));// Not Register User
+    }
+    public function read($reader_id = null){
+        $this->admin_read($reader_id);
+    }
+    public function delete(){
+        $this->admin_delete();
     }
     
 }

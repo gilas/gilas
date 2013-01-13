@@ -10,14 +10,22 @@ App::uses('AppController', 'Controller');
 class ContentsController extends AppController {
 
     public $paginateConditions = array(
-        'content' => array(
+        'title' => array(
             'type' => 'LIKE',
-            'field' => 'Content.content',
+            'field' => array(
+                'Content.intro',
+                'Content.title',
+                'Content.content',
+            ),
         ),
         'published' => array('field' => 'Content.published'),
         'frontpage' => array('field' => 'Content.frontpage'),
         'allow_comment' => array('field' => 'Content.allow_comment'),
         'content_category_id' => array('field' => 'Content.content_category_id'),
+        'user' => array(
+            'type' => 'LIKE',
+            'field' => 'User.name',
+        ),
     );
     public $components = array('RequestHandler');
     public $paginate = array('order' => 'Content.lft DESC',);
@@ -28,7 +36,9 @@ class ContentsController extends AppController {
         'category',
         'archive',
         'view',
-        'latestContents');
+        'latestContents',
+        'viewArticles',
+    );
 
     public function admin_index() {
         $this->set('title_for_layout', 'مدیریت مطالب');
@@ -211,16 +221,21 @@ class ContentsController extends AppController {
      */
     public function search($q = null) {
         $q = (isset($this->request->query['q'])) ? $this->request->query['q'] : $q;
-        $conditions = array('conditions' => array('OR' => array(
+        $conditions = array(
+            'conditions' => array(
+                'OR' => array(
                     "Content.intro LIKE" => "%$q%",
                     "Content.content LIKE" => "%$q%",
                     "Content.title LIKE" => "%$q%",
                     "ContentCategory.name LIKE" => "%$q%",
-                ),),);
+                ),
+                "ContentCategory.access" => 0, // search only in public articles
+            ),
+        );
         //for pagination link
         $this->set('pastAction', $this->action);
         // fetch content by this action and sent conditions
-        $this->setAction('index', $conditions);
+        $this->setAction('listArticles', $conditions);
     }
 
     /**
@@ -233,7 +248,7 @@ class ContentsController extends AppController {
         $this->set('pastAction', $this->action);
         $conditions = array('conditions' => array('Content.frontpage' => true),);
         // fetch content by this action and sent conditions
-        $this->setAction('index', $conditions);
+        $this->setAction('listArticles', $conditions);
     }
 
     /**
@@ -261,10 +276,11 @@ class ContentsController extends AppController {
             $this->set('pastAction', $this->action);
 
             // fetch content by this action and sent conditions
-            $this->setAction('index', array('conditions' => array('Content.content_category_id' =>
+            $this->setAction('listArticles', array('conditions' => array('Content.content_category_id' =>
                     $category['ContentCategory']['id'])));
             return;
         }
+        $this->redirect('/');
         // if no id so show all categories
         $categories = $this->Content->ContentCategory->find('all', array('conditions' =>
             array('ContentCategory.published' => true,),));
@@ -286,15 +302,24 @@ class ContentsController extends AppController {
             $this->set('pastAction', $this->action);
 
             // fetch content by this action and sent conditions
-            $this->setAction('index', array('conditions' => array('Content.created LIKE' =>
+            $this->setAction('listArticles', array('conditions' => array('Content.created LIKE' =>
                     $date)));
             return;
         }
     }
 
-    public function index($conditions = array()) {
+    public function listArticles($conditions = array()) {
         $this->set('title_for_layout', 'مطالب');
         $this->paginate['conditions']['Content.published'] = true;
+        // Don't show locked files
+        $this->paginate['conditions'][] = 'ContentCategory.is_lock IS NULL';
+        // if it is for profile
+        if($this->request['forProfile']){
+            $this->paginate['conditions']['ContentCategory.access'] = 1;
+            $this->paginate['conditions']['Content.user_id'] = $this->request['ProfileUserID'];
+        }else{
+            $this->paginate['conditions'][] = 'ContentCategory.access IS NULL';
+        }
         $this->paginate['contain'] = array('User', 'ContentCategory');
         $this->paginate['limit'] = SettingsController::read('Site.ContentCount');
         $this->paginate = Set::merge($this->paginate, $conditions);
@@ -322,11 +347,20 @@ class ContentsController extends AppController {
     }
 
     public function view($id = null) {
-        $this->Content->id = $id;
-        if (!$this->Content->exists()) {
+        $conditions = array('Content.id' => $id);
+        // if it is for profile
+        if($this->request['forProfile']){
+            $conditions['ContentCategory.access'] = 1;
+            $conditions['Content.user_id'] = $this->request['ProfileUserID'];
+        }else{
+             $conditions[] = 'ContentCategory.access IS NULL';
+        }
+        $content = $this->Content->find('first', array('conditions' => $conditions));
+        
+        if (!$content) {
             throw new NotFoundException(SettingsController::read('Error.Code-14'));
         }
-        $content = $this->Content->read();
+        
         $this->set('content', $content);
         $this->set('comments', $this->Content->Comment->find('all', array(
                     'conditions' => array('Comment.content_id' => $id, 'Comment.published' => '1'),
@@ -340,6 +374,16 @@ class ContentsController extends AppController {
             $commentObj = new CommentsController();
             $commentObj->constructClasses();
             $success = $commentObj->add_comment($this->request->data, $content['Content']['id'], $content['Content']['published_comment']);
+            switch($success){
+                case 1:
+                    $this->Session->setFlash('نظر با موفقیت افزوده شد.', 'message', array('type' => 'success'));
+                    break;
+                case 2:
+                    $this->Session->setFlash('نظر با موفقیت افزوده شد ولی برای نمایش ابتدا باید به تایید مدیریت برسد!', 'message', array('type' => 'success'));
+                    break;
+                default:
+                    $this->Session->setFlash('امکان درج نظر وجود ندارد', 'message', array('type' => 'error'), 'comment');
+            }
         }
     }
 
@@ -361,7 +405,232 @@ class ContentsController extends AppController {
                 ));
         $this->set('contents', $contents);
     }
+    
+    public function index(){
+        $this->set('title_for_layout', 'مدیریت مطالب');
+        $this->paginate['conditions']['Content.user_id'] = $this->Auth->user('id');
+        
+        // Can't list other categories for register users
+        $this->paginate['conditions']['ContentCategory.user_id'] = $this->Auth->user('id');
+                
+        $contents = $this->paginate();
+        for ($i = 0; $i < count($contents); $i++) {
+            $contents[$i]['Content']['commentCount'] = $this->Content->Comment->find('count', array('conditions' => array('content_id' => $contents[$i]['Content']['id'])));
+        }
+        // add this helper for using FilterHelper in Filter Form
+        $this->helpers[] = 'AdminForm';
+        $this->set('contentCategories', $this->Content->ContentCategory->generateTreeList(array('user_id' => $this->Auth->user('id'))));
+        $this->set(compact('contents'));
+    }
+    public function add(){
+        $this->helpers[] = 'TinyMCE.TinyMCE';
+        $this->set('title_for_layout', 'افزودن مطلب');
+        $contentCategories = $this->Content->ContentCategory->generateTreeList(array('user_id' => $this->Auth->user('id')));
+        $this->set('contentCategories', $contentCategories);
+        if ($this->request->is('post')) {
+            
+            // User can't choose locked categories
+            $categoryObj = $this->_loadController('ContentCategories');
+            if(! $categoryObj->_canEdit($this->request->data['Content']['content_category_id'])){
+                return;
+            }
+            
+            $full_content = explode($this->__readMore, $this->request->data['Content']['intro']);
+            $this->request->data['Content']['intro'] = $full_content[0];
+            if (!empty($full_content[1])) {
+                $this->request->data['Content']['content'] = $full_content[1];
+            } else {
+                $this->request->data['Content']['content'] = null;
+            }
+            $this->request->data['Content']['published'] = true;
+            $this->request->data['Content']['allow_comment'] = true;
+            $this->request->data['Content']['published_comment'] = false;
+            $this->request->data['Content']['frontpage'] = false;
+            $this->request->data['Content']['user_id'] = $this->Auth->user('id');
+            if (!empty($this->request->data['Content']['slug']))
+                $this->request->data['Content']['slug'] = Inflector::slug($this->request->data['Content']['slug']);
+            else
+                $this->request->data['Content']['slug'] = Inflector::slug($this->request->data['Content']['title']);
 
+            if ($this->Content->save($this->request->data)) {
+                $this->Session->setFlash('مطلب با موفقیت ذخیره شد.', 'message', array('type' =>'success'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
+                $this->request->data['Content']['intro'] = $full_content[0];
+                if (!empty($full_content[1])) {
+                    $this->request->data['Content']['intro'] .= $this->__readMore . $full_content[1];
+                }
+            }
+        }
+    }
+    public function edit($id = null) {
+        $this->helpers[] = 'TinyMCE.TinyMCE';
+        $this->set('title_for_layout', 'ویرایش مطلب');
+		$contentCategories = $this->Content->ContentCategory->generateTreeList(array('user_id' => $this->Auth->user('id')));
+        $this->set('contentCategories', $contentCategories);
+        $this->Content->id = $id;
+        if (!$this->Content->exists()) {
+            throw new NotFoundException(SettingsController::read('Error.Code-14'));
+        }
+        
+        if(! $this->_canEdit($id)){
+            $this->redirect(array('action' => 'index'));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            
+            // User can't choose locked categories
+            $categoryObj = $this->_loadController('ContentCategories');
+            if(! $categoryObj->_canEdit($this->request->data['Content']['content_category_id'])){
+                return;
+            }
+            
+            $full_content = explode($this->__readMore, $this->request->data['Content']['intro']);
+            $this->request->data['Content']['intro'] = $full_content[0];
+            if (!empty($full_content[1])) {
+                $this->request->data['Content']['content'] = $full_content[1];
+            } else {
+                $this->request->data['Content']['content'] = null;
+            }
+            
+            $this->request->data['Content']['published'] = true;
+            $this->request->data['Content']['allow_comment'] = true;
+            $this->request->data['Content']['published_comment'] = false;
+            $this->request->data['Content']['frontpage'] = false;
+            $this->request->data['Content']['user_id'] = $this->Auth->user('id');
+
+            if (!empty($this->request->data['Content']['slug']))
+                $this->request->data['Content']['slug'] = Inflector::slug($this->request->data['Content']['slug']);
+            else
+                $this->request->data['Content']['slug'] = Inflector::slug($this->request->data['Content']['title']);
+            if ($this->Content->save($this->request->data)) {
+                $this->Session->setFlash('مطلب با موفقیت ویرایش شد.', 'message', array('type' =>'success'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
+            }
+        } else {
+            $this->request->data = $this->Content->read();
+        }
+        $content = $this->request->data['Content']['intro'];
+        if (!empty($this->request->data['Content']['content'])) {
+            $this->request->data['Content']['intro'] = $content . $this->__readMore . $this->
+                    request->data['Content']['content'];
+        } else {
+            $this->request->data['Content']['intro'] = $content;
+        }
+    }
+    public function delete(){
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException(SettingsController::read('Error.Code-12'));
+        }
+
+        $id = $this->request->data['id']; // we recieve id via posted data
+        $count = count($id);
+        if ($count == 1) {
+            $id = current($id);
+            if(! $this->_canEdit($id)){
+                $this->redirect($this->referer());
+            }
+            $this->Content->id = $id;
+
+            if ($this->Content->delete()) {
+                $this->Session->setFlash('مطلب با موفقیت حذف شد.', 'message', array('type' =>
+                    'success'));
+            } else {
+                $this->Session->setFlash(SettingsController::read('Error.Code-16'), 'message', array('type' => 'error'));
+            }
+        } elseif ($count > 1) {
+            $countAffected = 0;
+            foreach ($id as $i) {
+                $this->Content->id = $i;
+                if($this->_canEdit($i)){
+                    if ($this->Content->delete()) {
+                        $countAffected++;
+                    }
+                }
+            }
+            $this->Session->setFlash($countAffected . ' مطلب با موفقیت حذف شد.', 'message', array('type' => 'success'));
+        }
+        $this->redirect($this->referer());
+    }
+    
+    protected function _canEdit($id){
+        $this->Content->recursive = -1;
+        $category = $this->Content->read(null, $id);
+        if($this->Auth->user('Role.name') == 'Register' and $category['Content']['user_id'] != $this->Auth->user('id')){            
+            $this->Session->setFlash('مطلب موردنظر غیرقابل ویرایش است', 'message', array('type' => 'warning'));
+            return false;
+        }
+        return true;
+    }
+    
+    public function viewArticles(){
+        //for pagination link
+        $this->set('pastAction', $this->action);
+        $conditions = array(
+        'conditions' => array(
+            'Content.user_id' => $this->request['ProfileUserID'],
+            'ContentCategory.id <>' => 1,
+            ),
+        );
+        // fetch content by this action and sent conditions
+        $this->setAction('listArticles', $conditions);
+    }
+    
+    public function _getAbout($user_id){
+        $about = $this->Content->find('first', array(
+            'conditions' => array(
+                'Content.user_id' => $user_id,
+                'Content.published' => true,
+                'ContentCategory.id' => 1, // مجموعه درباره
+            ),
+            'contain' => 'ContentCategory',
+        ));
+        if(! $about){
+            return false;
+        }
+        return $about['Content']['intro'];
+    }
+    
+    public function addAbout(){
+        $about = $this->Content->find('first', array(
+            'conditions' => array(
+                'Content.user_id' => $this->Auth->user('id'),
+                'ContentCategory.id' => 1, // مجموعه درباره
+            ),
+            'contain' => 'ContentCategory',
+        ));
+        
+        if($about){
+           $this->Content->id =  $about['Content']['id'];
+        }else{
+            $this->Content->create();
+        }
+        
+        $this->helpers[] = 'TinyMCE.TinyMCE';
+        $this->set('title_for_layout', 'افزودن مطلب');
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['Content']['title'] = 'درباره '.$this->Auth->user('name');
+            $this->request->data['Content']['slug'] = Inflector::slug($this->request->data['Content']['title']);
+            $this->request->data['Content']['content_category_id'] = 1;
+            $this->request->data['Content']['content'] = null;
+            $this->request->data['Content']['published'] = true;
+            $this->request->data['Content']['allow_comment'] = true;
+            $this->request->data['Content']['published_comment'] = false;
+            $this->request->data['Content']['frontpage'] = false;
+            $this->request->data['Content']['user_id'] = $this->Auth->user('id'); 
+            if ($this->Content->save($this->request->data)) {
+                $this->Session->setFlash('مطلب با موفقیت ذخیره شد.', 'message', array('type' =>'success'));
+                $this->redirect('/');
+            } else {
+                $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
+            }
+        }else{
+            $this->request->data = $about;
+        }
+    }
+    
 }
 
 ?>

@@ -257,10 +257,28 @@ class FilterHelper extends AppHelper{
                 $key = rawurlencode($key);
                 $value = rawurlencode($value);
                 
-                if($key == 'page' || $key == 'limit'){
-                    $url = str_replace("/$key:$value",'',$url);
+                // if exist in url, because we can add param to request in program
+                if(preg_match("/$key:$value/",$url)){
+                    // remove only page and limit
+                    if($key == 'page' || $key == 'limit'){
+                        $url = str_replace("/$key:$value",'',$url);
+                    }
+                    $urlWitoutNamed = str_replace("/$key:$value",'',$urlWitoutNamed);
+                }else{
+                    // add index trailer to url
+                    if(empty($pass) 
+                        and strpos(':', $url) === false 
+                        and (
+                            $this->request->params['action'] == 'index' 
+                            or $this->request->params['action'] == $this->request->params['prefix'].'_index'
+                        )
+                    ){
+                        $url .= '/index';
+                    }
+                    // otherwise add it
+                    $url .= "/$key:$value";
                 }
-                $urlWitoutNamed = str_replace("/$key:$value",'',$urlWitoutNamed);
+                
             }
         }
         

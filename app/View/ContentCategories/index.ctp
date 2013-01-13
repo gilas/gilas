@@ -5,32 +5,20 @@ $this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-
 $this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-trash icon-white')),array('action' => 'delete','confirm' => 'آیا مطمئن هستید ؟'),array('class' => 'btn btn-danger','escape' => false, 'rel' => 'tooltip','data-original-title' => 'حذف','tooltip-place' => 'bottom'));
 // Edit
 $this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-pencil icon-white')),array('action' => 'edit','method' => 'get','firstChild' => true),array('class' => 'btn btn-info','escape' => false, 'rel' => 'tooltip','data-original-title' => 'ویرایش','tooltip-place' => 'bottom'));
-// Publish
-$this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-ok icon-white')),array('action' => 'publish'),array('class' => 'btn btn-info','escape' => false, 'rel' => 'tooltip','data-original-title' => 'انتشار','tooltip-place' => 'bottom'));
-// unPublish
-$this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-remove icon-white')),array('action' => 'unPublish'),array('class' => 'btn btn-info','escape' => false, 'rel' => 'tooltip','data-original-title' => 'عدم انتشار','tooltip-place' => 'bottom'));
 //Show toolbar
 $this->AdminForm->showToolbar('لیست مجموعه ها');
-//Filtering
-// we use action in options for rewriting action attr without querystring
-echo $this->Filter->create('ContentCategory',array('action' => 'index'));
-echo $this->Filter->input('title',array('label' => 'عنوان'));
-echo $this->Filter->input('user',array('label' => 'ایجادکننده'));
-echo $this->Filter->end();
+
 if (!empty($contentCategories)) {
     // start form tag
     echo $this->AdminForm->startFormTag();
     ?>
-    <p>&nbsp;</p>
     <table class="table table-bordered table-striped">
 
         <tr>
-            <th><?php echo $this->AdminForm->selectAll() ?></th>
+            <th class="checkbox-col"><?php echo $this->AdminForm->selectAll() ?></th>
             <th>ردیف</th>
             <th>نام</th>
-            <th>ایجاد کننده</th>
             <th>تعداد مطالب</th>
-            <th>وضعیت انتشار</th>
         </tr>
         <?php
         //current index
@@ -49,7 +37,6 @@ if (!empty($contentCategories)) {
             }
             echo  $name;
             ?></td>
-            <td><?php echo $contentCategory['User']['name'] ?></td>
             <td id="grid-align">
             <?php 
             echo $this->Html->link(
@@ -57,25 +44,6 @@ if (!empty($contentCategories)) {
                 array('controller' => 'Contents', 'action' => 'index', 'content_category_id' => $contentCategory['ContentCategory']['id']), 
                 array('class' => 'btn')
             ); 
-            ?>
-            </td>
-            <td id="grid-align">
-            <?php
-            if ($contentCategory['ContentCategory']['published']) {
-                // Published
-                echo $this->AdminForm->item(
-                    $this->Html->image('tick.png'),//title
-                    array('action' => 'unPublish'),// url
-                    array('escape' => false)//option
-                );
-            } else {
-                // Non Published
-                echo $this->AdminForm->item(
-                    $this->Html->image('publish_x.png'),
-                    array('action' => 'publish'),
-                    array('escape' => false)
-                );
-            }
             ?>
             </td>
         </tr>

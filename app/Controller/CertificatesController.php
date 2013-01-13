@@ -3,11 +3,14 @@
 class CertificatesController extends AppController{
 	
 	public $uses = array('UserInformation', 'Option', 'Warden', 'Doc');
-	public $publicActions = array('register', 'showCode', 'view');
+	public $publicActions = array('register', 'showCode', 'view', 'index');
 	
 	public $paginateConditions = array(
 		'name' => array(
-			'field' => 'UserInformation.last_name',
+			'field' => array(
+                'UserInformation.last_name',
+                'UserInformation.first_name'
+                ),
 			'type' => 'LIKE',
 		),
 		'published' => array(
@@ -319,5 +322,32 @@ class CertificatesController extends AppController{
         $this->layout = 'print';
         // Call this function for load all data from tables
         $this->admin_view($id);
+    }
+    
+/**
+ * Return info of current username, this method can use between Controllers 
+ * 
+ * @param mixed $username
+ * @return void
+ */
+    public function _getInfo($username = null){
+        return $this->UserInformation->find('first', array(
+            'contain' => array('User', 'Raste', 'Degree', 'Place'),
+            'conditions' => array('User.username' => $username),
+        ));
+    }
+    
+/**
+ * List all Register Users
+ * 
+ * @return void
+ */
+    public function index() {
+        $this->set('title_for_layout', 'لیست اعضا');
+        $this->helpers[] = 'AdminForm';
+        $this->paginate['conditions'][] = 'UserInformation.user_id IS NOT NULL';
+        $this->paginate['contain'] = 'User';
+        $requests = $this->paginate();
+        $this->set('requests', $requests);
     }
 }

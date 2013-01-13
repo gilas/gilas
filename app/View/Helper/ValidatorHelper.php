@@ -91,12 +91,19 @@ class ValidatorHelper extends AppHelper{
                         // the first index is rule
                         $rule = $rule[0];
                     }
-                    if(!in_array($rule, array('notempty', 'minlength', 'maxlength', 'url', 'email'))){
+                    // we can have minlength and minLength 
+                    if(!in_array($rule, array('notempty', 'minlength', 'maxlength', 'minLength', 'maxLength', 'url', 'email','equalTo'))){
                         continue;
                     }
                     switch($rule){
                         case 'notempty':
                             $rule = 'required';
+                            break;
+                        case 'minLength':
+                            $rule = 'minlength';
+                            break;
+                        case 'maxLength':
+                            $rule = 'maxlength';
                             break;
                     }
                     $rules[$id][$rule] = $ruleValue;
@@ -214,8 +221,20 @@ class ValidatorHelper extends AppHelper{
  * @param string $message : message
  * @return void
  */
-    public function addCustomRule($element, $rule, $message){
-        $this->_fields[$this->_formID][$element] = compact('rule', 'message');
+     public function addCustomRule($element, $rule,$value, $message){
+        // for equalTo we must use another field with this code, we can point to currect field
+        if(strpos($value, '#') === 0){
+            $val = substr($value,1);
+            $val = $this->extract($val);
+            $value = '#'.$val['model']. Inflector::camelize($val['field']);
+        }
+        $fields = $this->extract($element);
+        $this->_fields[$this->_formID][$fields['model']][$fields['field']] = array(
+            $rule => array(
+                'rule' => array($rule, $value),
+                'message' => $message,
+            ),
+        );
     }
     
     public function setDefaults (){
@@ -246,74 +265,9 @@ class ValidatorHelper extends AppHelper{
         }
         return $this->Html->scriptBlock('$(function(){'.$script.'});',array('inline' => false));
     }
+    
+    public function removeRule($field, $rule){
+        $field = $this->extract($field);
+        unset($this->_fields[$this->_formID][$field['model']][$field['field']][$rule]);
+    }
 }
-
-/*
-	// validate signup form on keyup and submit
-	$("#signupForm").validate({
-		rules: {
-			firstname: "required",
-			lastname: "required",
-			username: {
-				required: true,
-				minlength: 2
-			},
-			password: {
-				required: true,
-				minlength: 5
-			},
-			confirm_password: {
-				required: true,
-				minlength: 5,
-				equalTo: "#password"
-			},
-			email: {
-				required: true,
-				email: true
-			},
-			topic: {
-				required: "#newsletter:checked",
-				minlength: 2
-			},
-			agree: "required"
-		},
-		messages: {
-			firstname: "Please enter your firstname",
-			lastname: "Please enter your lastname",
-			username: {
-				required: "Please enter a username",
-				minlength: "Your username must consist of at least 2 characters"
-			},
-			password: {
-				required: "Please provide a password",
-				minlength: "Your password must be at least 5 characters long"
-			},
-			confirm_password: {
-				required: "Please provide a password",
-				minlength: "Your password must be at least 5 characters long",
-				equalTo: "Please enter the same password as above"
-			},
-			email: "Please enter a valid email address",
-			agree: "Please accept our policy"
-		}
-	});
-
-       required: "تکمیل این فیلد اجباری است.",
-       remote: "لطفا این فیلد را تصحیح کنید.",
-       email: ".لطفا یک ایمیل صحیح وارد کنید",
-       url: "لطفا آدرس صحیح وارد کنید.",
-       date: "لطفا یک تاریخ صحیح وارد کنید",
-       dateISO: "لطفا تاریخ صحیح وارد کنید (ISO).",
-       number: "لطفا عدد صحیح وارد کنید.",
-       digits: "لطفا تنها رقم وارد کنید",
-       creditcard: "لطفا کریدیت کارت صحیح وارد کنید.",
-       equalTo: "لطفا مقدار برابری وارد کنید",
-       accept: "لطفا مقداری وارد کنید که ",
-       maxlength: jQuery.validator.format("لطفا بیشتر از {0} حرف وارد نکنید."),
-       minlength: jQuery.validator.format("لطفا کمتر از {0} حرف وارد نکنید."),
-       rangelength: jQuery.validator.format("لطفا مقداری بین {0} تا {1} حرف وارد کنید."),
-       range: jQuery.validator.format("لطفا مقداری بین {0} تا {1} حرف وارد کنید."),
-       max: jQuery.validator.format("لطفا مقداری کمتر از {0} حرف وارد کنید."),
-       min: jQuery.validator.format("لطفا مقداری بیشتر از {0} حرف وارد کنید.")
-       
-*/

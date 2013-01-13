@@ -91,11 +91,11 @@ $this->Html->css('select', null, array('inline' => false));
     <?php endforeach; ?>
 <?php endif; ?>
 <div class="tabs-1 widget">
-    <ul class="nav nav-tabs">
+    <ul class="tabs">
         <li class="active"><a href="#reply" data-toggle="tab">پاسخ</a></li>
     </ul>
-	<div class="tab-content">
-		<div id="reply" class="tab-pane active">
+	<div class="tab_container">
+		<div id="reply" class="tab_content">
             <?php
             $this->Validator->addRule('Message');
             $this->Validator->validate(); 
@@ -145,7 +145,7 @@ $this->Html->css('select', null, array('inline' => false));
                         echo $this->Form->hidden('Message.Recipients.'.$user['user_id'].'.user',array('value'=>$user['user_id']));
                         echo $this->Form->hidden('Message.Recipients.'.$user['user_id'].'.parent_id',array('value'=>$user['parent_id']));
                     }
-                    echo $this->Html->tag('select',$options,array('name' => 'data[Message][Recipients][id][]','multiple'=>true,'style' => 'width:500px', 'id' => 'recipients'));
+                    echo $this->Html->tag('select',$options,array('name' => 'data[Message][Recipients][id][0]','style' => 'width:500px', 'id' => 'recipients'));
                     echo $this->Form->hidden('Message.isList',array('value'=>true));
                 }
                 ?>

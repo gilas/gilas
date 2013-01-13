@@ -137,7 +137,7 @@ a{
 }
 .form-filter label,.form-filter input,.form-filter select,.form-filter a{
     display: inline-block;
-    margin: 0 10px 0 0;
+    margin: 0 9px 0 0;
     vertical-align: middle;
 }
 .form-filter select{
@@ -209,6 +209,9 @@ div.alert-input-error{
 }
 .ordering-col{
     width:86px;
+}
+.checkbox-col{
+    width:15px;
 }
 
 .table-min-padding td{
@@ -361,3 +364,40 @@ span.information{
     padding: 30px;
 }
 .pm-attach{}
+
+/************** Show PM as summary ******/
+.pm-summary{
+    background-color: #F5F5F5;
+    cursor: pointer;
+    height: 20px;
+    padding: 5px;
+    margin: 0;
+}
+.pm-summary .pm-header{
+    border: none;
+}
+.pm-summary .pm-sender{
+    clear: none;
+    float:right;
+    color:#000;
+    padding-top: 0;
+    margin-right: 10px;
+}
+.pm-summary .pm-info{
+    display: none;
+}
+.pm-summary .pm-subject{
+    height: 20px;
+    max-width: 300px;
+    overflow: hidden;
+    padding: 3px;
+}
+.pm-summary .pm-message{
+    color:#B3B3B3;
+    padding: 0;
+    margin-right: 10px;
+    float: right;
+    overflow: hidden;
+    height: 20px;
+    max-width: 300px;
+}

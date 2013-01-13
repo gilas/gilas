@@ -36,6 +36,17 @@ class CommentsController extends AppController {
         $this->set('comments', $comments);
     }
 
+/**
+ * Add comment for given $content_id
+ * 
+ * @param mixed $data : data of comment
+ * @param mixed $content_id : id of content that must add current comment to it
+ * @param mixed $is_published : true or false : that indicate the comment show directly or not
+ * @return  $success
+ *           1 : Comment added and can show it directly
+ *           2 : Comment added but cann't show it directly
+ *           false : Comment Not added   
+ */
     public function add_comment(array $data, $content_id, $is_published) {
 
         $this->request->data = $data;
@@ -45,13 +56,13 @@ class CommentsController extends AppController {
         $this->request->data['Comment']['website'] = $this->_haveHttpPrefix($this->request->data['Comment']['website']);
 
         if ($this->Comment->save($this->request->data)) {
-            if ($is_published)
-                $this->Session->setFlash('نظر با موفقیت افزوده شد.', 'message', array('type' => 'success'), 'comment');
-            else
-                $this->Session->setFlash('نظر با موفقیت افزوده شد ولی برای نمایش ابتدا باید به تایید مدیریت برسد!', 'message', array('type' => 'success'), 'comment');
-        } else {
-            $this->Session->setFlash('امکان درج نظر وجود ندارد', 'message', array('type' => 'error'), 'comment');
+            if ($is_published){
+                return 1;
+            }else{
+                return 2;
+            }
         }
+        return false;
     }
 
     public function admin_view($id = NULL) {

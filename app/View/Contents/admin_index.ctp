@@ -20,6 +20,7 @@ $this->AdminForm->showToolbar('لیست مطالب');
 // we use action in options for rewriting action attr without querystring
 echo $this->Filter->create('Content',array('action' => 'index'));
 echo $this->Filter->input('title',array('label' => 'عنوان'));
+echo $this->Filter->input('user',array('label' => 'نویسنده'));
 echo $this->Filter->input('published',array(
     'label' => 'وضعیت',
     'options' => array('' => '','0' => 'منتشر نشده', '1' => 'منتشر شده'))
@@ -102,7 +103,7 @@ if (!empty($contents)) {
                     // not in frontpage
                     echo $this->AdminForm->item(
                         $this->Html->image('publish_x.png'),
-                        array('action' => 'addToFrontpage'),
+                        array('action' => 'addToFrontPage'),
                         array('escape' => false)
                     );
                 }

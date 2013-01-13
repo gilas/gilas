@@ -122,7 +122,7 @@ class CommentHelper extends AppHelper {
                         <small>
                             ارسال شده در : 
                             <?php
-                            echo $this->Html->link($comment['Content']['title'], array('controller' => 'contents', 'action' => 'view', $comment['Content']['id'], 'admin' => FALSE), array('target' => '_blank'));
+                            echo $this->Html->link($comment['Content']['title'], array('controller' => 'Contents', 'action' => 'view', $comment['Content']['id'], 'admin' => FALSE), array('target' => '_blank'));
                             if ($this->_haveParent($comment)) {
                                 ?> | در پاسخ به : 
                                 <?php

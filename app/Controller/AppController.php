@@ -68,7 +68,6 @@ class AppController extends Controller {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->__initializeAuth();
-        $this->set('isLogedIn', $this->_isLogedIn());
     }
     
     private function __initializeAuth(){
@@ -76,20 +75,14 @@ class AppController extends Controller {
         $this->Auth->loginAction =    array('plugin' => null,'controller' => 'users','action' => 'login');
         $this->Auth->logoutRedirect = array('plugin' => null,'controller' => 'users','action' => 'login');
         $this->Auth->authenticate =   array(
-            //AuthComponent::ALL => array('scope' => array('User.is_active' => 1)),
+            // Login Only actived users
+            AuthComponent::ALL => array('scope' => array('User.active' => true)),
             'Form',
         );
         $this->Auth->flash =  array('element' => 'message','key' => 'auth','params' => array('type' => 'warning  no-margin-login top',));
         $this->Auth->allow($this->publicActions);
     }
 
-    function _isLogedIn() {
-        $logedIn = FALSE;
-        if ($this->Auth->user()) {
-            $logedIn = TRUE;
-        }
-        return $logedIn;
-    }
 
     public function beforeRender() {
         parent::beforeRender();
@@ -212,6 +205,26 @@ class AppController extends Controller {
         $this->Auth->flash($this->Auth->authError);
         $this->redirect($this->referer());
     }
+    
+    /**
+     * choose action for given action via adminForm
+     * all sent data for admin form will be recieve by this action and this action choose requested action
+     * @return void
+     */
+    public function dispatch() {
+        if (empty($this->request->data['action'])) {
+            $this->Session->setFlash('اشکال در پردازش اطلاعات', 'alert', array('type' => 'error'));
+            $this->redirect($this->referer());
+        }
+        $action = $this->request->data['action'];
+        unset($this->request->data['action']);
+        if($this->GilasAcl->hasPermission(array('action' => $action))){
+            //without prefix
+            return $this->setAction($action);
+        }
+        $this->Auth->flash($this->Auth->authError);
+        $this->redirect($this->referer());
+    }
 
     /**
      * Specify row can move Up or move down, by adding 'hasRight' and 'hasLeft' indexes
@@ -322,5 +335,21 @@ class AppController extends Controller {
             $this->Session->setFlash($countAffected . ' ' . $flashMessage, 'message', array('type' => 'success'));
         }
     }
-
+    
+    /**
+     * Use to load Controller in another Controllers
+     * 
+     * @param mixed $controller : name of controller without "Controller" trailer
+     * @param bool $initialize : true of false , for call constructClasses()
+     * @return : Object of $controller
+     */
+    protected function _loadController($controller, $initialize = true){
+        App::import('Controller',$controller);
+        $controller.='Controller';
+        $obj = new $controller;
+        if($initialize){
+            $obj->constructClasses();
+        }
+        return $obj;
+    }
 }

@@ -155,3 +155,182 @@ span.information {
     margin-left: 18px;
     width: 100%;
 }
+.login-widget div.input, .login-widget div.submit{
+    margin: 0 3px;
+}
+.login-widget div.submit{
+    text-align: left;
+}
+.login-widget form label{
+    color: #FFFFFF;
+    margin: 4px;    
+}
+hr.line{
+    border-bottom: 1px solid #EEEEEE;
+    visibility: visible;
+    height: auto;
+}
+/******* Profile *************/
+.profile-logo{
+    float: right;
+    width: 100px;
+    height: 100px;
+    background-color: #EEE;
+}
+.profile-about{
+    float: right;
+    height: 280px;
+    padding: 10px;
+    width: 452px;
+}
+.profile-about-content{
+    height: 229px;
+    overflow-y: scroll;
+    width: 450px;
+}
+.profile-about-title{
+    margin: 0;
+    border-bottom: 1px solid #DDDDDD;
+}
+.profile-about-content p{
+    margin: 0;
+    font-size: 14px;
+}
+.profile-menu{
+    float:right;
+}
+.profile-info{
+    float: left;
+    width: 250px;
+    background-color: #EDEDED;
+}
+.profile-pic{
+    text-align: center;
+    margin: 10px;
+}
+.profile-info-item{
+    margin: 10px;
+    color: #85B602;
+}
+.profile-info-item label{
+    min-width: 80px;
+}
+
+.profile-menu .menu a{
+    color:black;
+    text-decoration: none;
+    display: block;
+    padding: 7px 16px;
+}
+.profile-menu .menu a:hover{
+    color:highlight;
+}
+.profile-menu .menu li{
+	background:url(../img/new/seperator.png) no-repeat left;
+    list-style: none;
+    float: right;
+    max-height: 30px;
+}
+.profile-menu .menu>li:last-child{
+	background:none ; 
+}
+.profile-menu .menu li:hover{
+    background-color: #E8EAEF;
+    cursor: pointer;
+}
+
+.profile-menu .menu{
+    padding: 0;
+    margin: 0;
+}
+.profile-menu .menu .active{
+    background-color: #E8EAEF;
+    border-top: 1px solid #BCBFC5;
+}
+
+.profile-menu .menu li ul{
+   visibility: hidden;
+    position: absolute;
+    padding: 0;
+    float: right;
+    width: auto;
+    z-index:100;
+    *float:none;
+    *position: relative;
+    *right:0;
+}
+
+.profile-menu .menu li:hover ul{
+    visibility: visible;
+    *float:none;
+    *position: relative;
+    *right:0;
+    *zoom:1;
+    
+}
+.profile-menu .menu li ul li{
+    float: none;
+    border: none;
+	border-bottom:1px solid #BCBFC5;
+	background-color: #E8EAEF;
+    width: auto;
+}
+.profile-menu .menu li ul li.active{
+	border-right: 4px solid #BCBFC5;
+}
+.profile-menu .menu li ul li a{
+    min-width:100px;
+}
+footer{
+    color: #FFFFFF;
+}
+.form-filter .submit input, .form-filter a{
+    margin: 0 5px;
+    padding: 2px 12px;
+}
+.form-filter a{
+    background: -moz-linear-gradient(center top , #FFFFFF, #E0E0E0) repeat scroll 0 0 transparent;
+    border: 1px solid #B7B6B6;
+    color: #000000 !important;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    box-shadow: 0 2px 0 #CFCFCF;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    outline: medium none;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    height:19px;
+    padding-top: 7px;
+    padding-bottom: 0;
+    height: 17px;
+}
+.form-filter label{
+    min-width: inherit;
+}
+
+.pagination .page.active{
+    padding: 4px 12px;
+    float: right;
+    border: 1px solid #DDD;
+    border-right: none;
+}
+.pagination .pages{
+    margin-right: 5px;
+}
+.pagination .disabled{
+    padding: 4px 12px;
+    float: right;
+    border: 1px solid #DDD;
+    border-right: none;
+}
+.pagination .disabled:first-child{
+    border: 1px solid #DDD;
+}
+.count{
+    top:0;
+}
+a:hover{
+    text-decoration: none;
+}

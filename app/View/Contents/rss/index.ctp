@@ -5,7 +5,7 @@ $this->set('documentData', array(
 $this->set('channelData', array(
     'title' => 'مطالب جدید',
     'link' => $this->Html->url(array(
-        'controller' => 'contents', 
+        'controller' => 'Contents', 
         'action' => 'index', 
         'ext' => 'rss'
         ), true),
@@ -20,7 +20,7 @@ foreach ($contents as $content) {
   echo $this->Rss->item(array(), array(
     'title' => $content['Content']['title'],
     'link' => array( 
-        'controller' => 'contents', 
+        'controller' => 'Contents', 
         'action' => 'view',
         $content['Content']['id'].'-'.$content['Content']['slug'],
     ),

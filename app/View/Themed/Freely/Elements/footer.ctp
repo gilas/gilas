@@ -20,7 +20,7 @@
         <div class="social_widget widget">
 			<ul>
 				<li data-tooltip="مشترک فید ما باشید">
-                    <a class="social_icon3" href="<?php echo $this->Html->url(array('controller' => 'contents', 'action' => 'index', 'ext' => 'rss')); ?>">Rss</a>
+                    <a class="social_icon3" href="<?php echo $this->Html->url(array('controller' => 'Contents', 'action' => 'index', 'ext' => 'rss')); ?>">Rss</a>
                 </li>
 			</ul>
 		</div><!--/ social_widget-->

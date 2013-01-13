@@ -2,7 +2,7 @@
 if(! empty($categories)){
 	foreach ($categories as $category) {
 	    $this->Html->addCrumb($category['ContentCategory']['name'], array(
-	        'controller' => 'contents',
+	        'controller' => 'Contents',
 	        'action' => 'category',
 	        $category['ContentCategory']['id'] . '-' . $category['ContentCategory']['name'],
 	    ));

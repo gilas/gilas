@@ -17,7 +17,46 @@ class User extends AppModel {
      */
     public $displayField = 'name';
 
-
+    public $validate = array(
+		'name' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'تکمیل این فیلد ضروری است',
+			),
+		),
+		'username' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'تکمیل این فیلد ضروری است',
+			),
+            'isUnique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'این نام کاربری قبلا انتخاب شده است',
+			),
+		),
+		'password' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'تکمیل این فیلد ضروری است',
+                'on' => 'create',
+			),
+            'minLength' => array(
+                'rule'    => array('minLength', '6'),
+                'message' => 'حداقل 6 کاراکتر باید وارد شود',
+                'allowEmpty' => true,
+            ),
+		),
+        'email' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'تکمیل این فیلد ضروری است',
+			),
+            'email' => array(
+				'rule' => array('email'),
+				'message' => 'پست الکترونیک صحیح نمی باشد',
+			),
+		),
+	);
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
     /**

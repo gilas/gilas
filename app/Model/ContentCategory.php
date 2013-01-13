@@ -43,9 +43,9 @@ class ContentCategory extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'ParentContentCategory' => array(
-			'className' => 'ContentCategory',
-			'foreignKey' => 'parent_id',
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -58,19 +58,6 @@ class ContentCategory extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'ChildContentCategory' => array(
-			'className' => 'ContentCategory',
-			'foreignKey' => 'parent_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Content' => array(
 			'className' => 'Content',
 			'foreignKey' => 'content_category_id',
@@ -85,5 +72,10 @@ class ContentCategory extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+    
+    public $namedAccess = array(
+        0 => 'عمومی',
+        1 => 'نمایش در صفحه شخصی اعضا',
+    );
 
 }
