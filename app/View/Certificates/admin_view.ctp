@@ -1,37 +1,48 @@
+<?php
+$this->Html->script('modal', false);
+$this->Html->css('modal', null, array('inline' => false));
+?>
+<!-- Modal Form -->
+<form id="statusForm" method="post" action="<?php echo $this->Html->url(array('action' => 'changeStatus', $request['UserInformation']['id'])) ?>" style="display: none;">
+    <input type="hidden" name="status" value="" id="statusInput" />
+    <p>دلیل عدم تائید را بیان نمائید.</p>
+    <textarea name="desc" style="width:320px;height:150px;"></textarea>
+    <div class="clearfix"></div>
+    <input type="submit" value="ارسال" class="btn btn-success" />
+</form>
+<!-- End Modal Form -->
 <div class="row" id="toolbar-menu">
     <div class="title">اطلاعات درخواست <?php echo $request['UserInformation']['formattedStatus']; ?></div>
     <ul id="toolbar">
         <li>
         <?php 
         // First OK
-        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-ok icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id'], 'value' => '1' ), array('class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید اولیه', 'tooltip-place' => 'bottom'));
+        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-ok icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 1), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید اولیه', 'tooltip-place' => 'bottom'));
         ?>
         </li>
         <li>
-        <?php
-        // Remove
-        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-remove icon-white')),array('action' => 'remove', $request['UserInformation']['id']), array('class' => 'btn btn-danger', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'حذف', 'tooltip-place' => 'bottom')) 
-        ?>
+            <a onclick="$('#statusInput').val(-1);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="حذف" rel="tooltip" class="btn btn-danger" href="#">
+                <i class="icon-remove icon-white"></i>
+            </a>
         </li>
         <li>
         <?php 
         // Doc OK
-        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-file icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id'], 'value' => '2'), array('class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید مدارک', 'tooltip-place' => 'bottom'));
+        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-file icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 2), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید مدارک', 'tooltip-place' => 'bottom'));
         ?>
         <span style="margin-right:5px;">|</span>
         </li>
         <li>
         <?php 
         // Warden OK
-        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-user icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id'], 'value' => '3'), array('class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید بازرس', 'tooltip-place' => 'bottom')); 
+        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-user icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 3), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید بازرس', 'tooltip-place' => 'bottom')); 
         ?>
         <span style="margin-right:5px;">|</span>
         </li>
         <li>
-        <?php
-        // Warden Not OK
-        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-user icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id'], 'value' => '-3'), array('class' => 'btn btn-danger', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'عدم تائید بازرس', 'tooltip-place' => 'bottom')); 
-        ?>
+            <a onclick="$('#statusInput').val(-3);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="حذف" rel="tooltip" class="btn btn-danger" href="#">
+                <i class="icon-remove icon-white"></i>
+            </a>
         </li>
         <li>
         <?php
@@ -315,6 +326,30 @@
                 <div class="span3">
                     <label class="label-information">کد رهگیری</label>
                     <span class="information"><?php echo $request['UserInformation']['code_rahgiri']; ?></span>
+                </div>
+			</div>
+            <div class="row row-margin">
+                <div class="span6">
+                    <label class="label-information">تاریخچه</label>
+                    <?php
+                    $desc = unserialize($request['UserInformation']['status_desc']);
+                    if($desc):
+                    ?>
+                    <table class="table">
+                        <tr>
+                            <th>وضعیت</th>
+                            <th>تاریخ</th>
+                            <th>توضیحات</th>
+                        </tr>
+                        <?php foreach($desc as $descValue): ?>
+                        <tr>
+                            <td><?php echo $formattedStatus[$descValue['status']]; ?></td>
+                            <td><?php echo Jalali::niceShort($descValue['date']); ?></td>
+                            <td><?php echo $descValue['desc']; ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                    <?php endif;?>
                 </div>
 			</div>
         </div>

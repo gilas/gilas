@@ -82,6 +82,42 @@ class CertificatesController extends AppController{
         $this->set('statusOptions', $this->UserInformation->namedStatus);
     }
     
+    protected function _changeStatus($id, $status = null, $statusDesc = null){
+        /**
+         * Status cann't be null
+         */
+        if(is_null($status)){
+            return false;
+        }
+        /**
+         * Can not change status to new request
+         */
+        if($status == 0){
+            return false;
+        }
+        /**
+         * all negetive status must be has description
+         */
+        if($status < 0 and empty($statusDesc)){
+            return false;
+        }
+        $this->UserInformation->recursive = -1;
+        $info = $this->UserInformation->read(null, $id);
+        if(! $info){
+            return false;
+        }
+        
+        $desc = unserialize($info['UserInformation']['status_desc']);
+        $desc[]  = array(
+            'status' => $status,
+            'date' => Jalali::dateTime(),
+            'desc' => $statusDesc,
+        );
+        $desc = serialize($desc);
+        $this->UserInformation->id = $id;
+
+        return $this->UserInformation->save(array('status' => $status, 'status_desc' => $desc));
+    }
     public function admin_changeStatus($id){
         // the request must be sent via post
         if (!$this->request->is('post')) {
@@ -91,12 +127,8 @@ class CertificatesController extends AppController{
         if(! $this->UserInformation->exists()){
             throw new NotFoundException(SettingsController::read('Error.Code-14'));
         }
-        $value = 1;
-        if(isset($this->request->named['value'])){
-            $value = $this->request->named['value'];
-        }
-        if($this->UserInformation->saveField('status', $value)){
-            $this->Session->setFlash('درخواست تائید گردید.', 'message', array('type' => 'success'));
+        if($this->_changeStatus($id, $this->request->data('status'), $this->request->data('desc'))){
+            $this->Session->setFlash('وضعیت درخواست مربوطه تغییر یافت', 'message', array('type' => 'success'));
             $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
@@ -182,6 +214,7 @@ class CertificatesController extends AppController{
         $this->set('request', $request);
         $this->set('wardenOptions', $this->_loadWarden($id));
         $this->set('docsOptions',  $this->_loadDoc($id));
+        $this->set('formattedStatus', $this->UserInformation->formattedStatus);
     }
     
     protected function _loadDoc($id){
