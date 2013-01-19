@@ -40,7 +40,7 @@ $this->Html->css('modal', null, array('inline' => false));
         <span style="margin-right:5px;">|</span>
         </li>
         <li>
-            <a onclick="$('#statusInput').val(-3);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="حذف" rel="tooltip" class="btn btn-danger" href="#">
+            <a onclick="$('#statusInput').val(-3);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="عدم تائید بازرس" rel="tooltip" class="btn btn-danger" href="#">
                 <i class="icon-remove icon-white"></i>
             </a>
         </li>

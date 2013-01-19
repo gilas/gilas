@@ -7,6 +7,8 @@ class ProfileController extends AppController{
         '/Contents/viewArticles',
         '/Contents/view',
         '/Contents/category',
+        '/about',
+        '/Complaints/register',
     );
     
 /**
@@ -28,10 +30,6 @@ class ProfileController extends AppController{
             throw new NotFoundException(SettingsController::read('Error.Code-14'));
         }
         $this->set('info', $info);
-        
-        $contentController = $this->_loadController('Contents');
-        $about = $contentController->_getAbout($info['User']['id']);
-        $this->set('about', $about);
         
         $contentCategoryController = $this->_loadController('ContentCategories');
         $categories = $contentCategoryController->getList($info['User']['id']);
@@ -64,6 +62,12 @@ class ProfileController extends AppController{
                 $url['action'] = $passes[2];    
             }else{
                 $url['action'] = 'index';
+            }
+            if($url['controller'] == 'about'){
+                $contentController = $this->_loadController('Contents');
+                $about = $contentController->_getAbout($user_id);
+                $this->set('requestedURL', 'about');
+                return $about;
             }
         }
         
@@ -100,13 +104,20 @@ class ProfileController extends AppController{
         if($this->request->data){
             $extra['data'] = $this->request->data;
         }
-        
         // Convert to string
         //Notice : by converting it to string, other data that passes by $extra
         // (e.x. forProfile) don't merge by $url
         $url = Router::url($url);
         $url = substr($url, strlen($this->request->base));
         
-        return $this->requestAction($url, $extra);
+        $content = $this->requestAction($url, $extra);
+        
+        $newLink = 'href="'.Router::url('/').'~'. $this->request['username'].'/';
+        $pastLink = 'href="'.Router::url('/');
+        $content = str_replace($pastLink, $newLink, $content);
+        $newLink = 'action="'.Router::url('/').'~'. $this->request['username'].'/';
+        $pastLink = 'action="'.Router::url('/');
+        $content = str_replace($pastLink, $newLink, $content);
+        return $content;
     }
 }

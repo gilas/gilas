@@ -29,6 +29,7 @@
             <div id="wrapper">
                 <header class="clearfix">
                     <div class="logo"><a href="<?php echo $this->Html->url('/'); ?>"><?php echo $this->Html->image('logo.png') ?></a></div><!--/ logo-->
+                    <div id="topMenu"><?php echo $this->element('topMenu'); ?></div>
                 </header>
                 <div id="content-wrapper">
                     <section id="content">

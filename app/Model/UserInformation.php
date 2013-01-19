@@ -23,13 +23,6 @@ class UserInformation extends AppModel {
                 'message' => 'تکمیل این فیلد ضروری است',
             ),
         ),
-        'degree_id' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
-                'required' => true,
-                'message' => 'تکمیل این فیلد ضروری است',
-            ),
-        ),
         'first_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),

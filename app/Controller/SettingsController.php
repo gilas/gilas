@@ -28,26 +28,33 @@ class SettingsController extends AppController {
                 $this->Setting->saveField('value',$value);
             }
 			$this->Session->setFlash('تنظیمات با موفقیت ویرایش گردید.', 'message', array('type' => 'success'));
-            $this->redirect(array('action' => 'index', 'admin' => true));
+            $this->redirect($this->referer());
         }
         $this->set('title_for_layout', 'ویرایش تنظیمات سیستم');
-        $sections = array('Site');
-        if($this->Auth->user('Role.name') == 'SuperAdmin'){
-            $sections[] = 'Error';
+        $sections = array();
+        if(!empty($this->request->named['section'])){
+            $sections = explode(',', $this->request->named['section']);
+        }else{
+            $sections = array('Site');
+            if($this->Auth->user('Role.name') == 'SuperAdmin'){
+                $sections[] = 'Error';
+            }
         }
         $settings = $this->Setting->find('all', array('conditions' => array('section' => $sections)));
+        $namedSection = array();
         if($settings){
             $newArray = array();
             foreach($settings as $setting){
                 $newArray[$setting['Setting']['section']][$setting['Setting']['id']] = array(
                     'value' => $setting['Setting']['value'],
                     'alias' => $setting['Setting']['alias'], 
+                    'params' => unserialize($setting['Setting']['params']),
                 );
-                 
+                 $namedSection[$setting['Setting']['section']] = $setting['Setting']['namedSection'];
             }
             $settings = $newArray;
         }
-        $this->set('settings', $settings);
+        $this->set(compact('settings', 'namedSection'));
     }
 
     public static function read($name) {

@@ -93,6 +93,9 @@ class AppController extends Controller {
         if ($this->request->is('ajax')) {
             $this->layout = 'ajax';
         }
+        if (!empty($this->request->named['layout'])) {
+            $this->layout = 'iframe';
+        }
     }
 
     /**
@@ -352,4 +355,14 @@ class AppController extends Controller {
         }
         return $obj;
     }
+    
+    /**
+     * Settings for each Controller
+     * the Controller must be has a view file for this action that call in it the below code
+     * echo $this->requestAction(array('controller' => 'settings', 'action' => 'index', 'section' => '{Your-Section}'), array('return'));
+     * 
+     * @return void
+     */
+    public function admin_settings(){}
+    
 }

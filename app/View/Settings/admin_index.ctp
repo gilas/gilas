@@ -10,7 +10,7 @@ echo $this->Form->create('Setting');
             </a>
         </li>
         <li>
-            <a href="<?php echo $this->Html->url(array('controller' => 'dashboards')); ?>" class="btn btn-danger" tooltip-place="bottom" data-original-title="انصراف" rel="tooltip" >
+            <a <?php if(!empty($this->request->named['layout'])) echo 'href="#" onclick="window.parent.closeModal();return false;"'; else echo 'href="'.$this->Html->url(array('controller' => 'dashboards')).'"'; ?> class="btn btn-danger" tooltip-place="bottom" data-original-title="انصراف" rel="tooltip" >
                 <i class="icon-remove icon-white"></i>
             </a>
         </li>
@@ -22,7 +22,7 @@ if($settings){
     $firstChild = true;
     foreach($settings as $key => $setting){
         echo '<li '.(($firstChild)?'class="active"':'').'>';
-            echo $this->Html->link($key,'#'.$key,array('data-toggle' => 'tab'));
+            echo $this->Html->link($namedSection[$key],'#'.$key,array('data-toggle' => 'tab'));
         echo '</li>';
         $firstChild = false;
     }
@@ -33,7 +33,7 @@ if($settings){
     foreach($settings as $key => $setting){
         echo "<div id='$key' class='tab-pane fade ".(($firstChild)?'active in':'')."'>";
         foreach($setting as $k => $s){
-            echo $this->Form->input($k, array( 'label' => $s['alias'] ,'value' => $s['value'],'style' => 'width:100%'));
+            echo $this->Form->input($k, array( 'label' => $s['alias'] ,'value' => $s['value'],'style' => 'width:90%', 'options' => @$s['params']['options']));
         }
         echo '</div>';   
         $firstChild = false;     

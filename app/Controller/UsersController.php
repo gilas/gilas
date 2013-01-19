@@ -11,7 +11,7 @@
 
 class UsersController extends AppController {
     
-    public $publicActions = array('login');
+    public $publicActions = array('login', 'logout');
     
     public $paginateConditions = array(
         'username' => array(

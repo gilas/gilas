@@ -45,6 +45,8 @@ class CertificatesController extends AppController{
         $this->set('isargariOptions', $this->UserInformation->namedIsargari);
         $this->set('vazifehOmoomiOptions', $this->UserInformation->namedVazifehOmoomi);
         $this->set('madrakTahsiliOptions', $this->UserInformation->namedMadrakTahsili);
+        $this->set('genderOptions', $this->UserInformation->namedGender);
+        $this->set('taaholOptions', $this->UserInformation->namedTaahol);
         $this->set('docs', $this->Option->find('list', array(
             'conditions' => array(
                 'Option.section' => 'docs',

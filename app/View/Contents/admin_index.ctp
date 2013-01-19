@@ -13,6 +13,8 @@ $this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-
 $this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-ok icon-white')),array('action' => 'publish'),array('class' => 'btn btn-info','escape' => false, 'rel' => 'tooltip','data-original-title' => 'انتشار','tooltip-place' => 'bottom'));
 // unPublish
 $this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-remove icon-white')),array('action' => 'unPublish'),array('class' => 'btn btn-info','escape' => false, 'rel' => 'tooltip','data-original-title' => 'عدم انتشار','tooltip-place' => 'bottom'));
+// Settings
+$this->AdminForm->addToolbarItem($this->Html->tag('i','',array('class' => 'icon-wrench icon-white')),array('action' => 'settings', 'layout' => 'iframe'),array('class' => 'btn btn-warning','escape' => false, 'rel' => 'tooltip','data-original-title' => 'تنظیمات','tooltip-place' => 'bottom'));
 //Show toolbar
 $this->AdminForm->showToolbar('لیست مطالب');
 

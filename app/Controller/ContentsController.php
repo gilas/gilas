@@ -312,7 +312,7 @@ class ContentsController extends AppController {
         $this->set('title_for_layout', 'مطالب');
         $this->paginate['conditions']['Content.published'] = true;
         // Don't show locked files
-        //$this->paginate['conditions'][] = 'ContentCategory.is_lock IS NULL';
+        $this->paginate['conditions'][] = 'ContentCategory.is_lock IS NULL';
         // if it is for profile
         if($this->request['forProfile']){
             $this->paginate['conditions']['ContentCategory.access'] = 1;
@@ -321,7 +321,7 @@ class ContentsController extends AppController {
             $this->paginate['conditions'][] = 'ContentCategory.access IS NULL';
         }
         $this->paginate['contain'] = array('User', 'ContentCategory');
-        $this->paginate['limit'] = SettingsController::read('Site.ContentCount');
+        $this->paginate['limit'] = SettingsController::read('Content.count');
         $this->paginate = Set::merge($this->paginate, $conditions);
         // RSS
         if ($this->RequestHandler->isRss()) {
@@ -407,6 +407,7 @@ class ContentsController extends AppController {
     }
     
     public function index(){
+        $this->_checkAuth('Content.register_has_content');
         $this->set('title_for_layout', 'مدیریت مطالب');
         $this->paginate['conditions']['Content.user_id'] = $this->Auth->user('id');
         
@@ -423,6 +424,7 @@ class ContentsController extends AppController {
         $this->set(compact('contents'));
     }
     public function add(){
+        $this->_checkAuth('Content.register_has_content');
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'افزودن مطلب');
         $contentCategories = $this->Content->ContentCategory->generateTreeList(array('user_id' => $this->Auth->user('id')));
@@ -443,7 +445,7 @@ class ContentsController extends AppController {
                 $this->request->data['Content']['content'] = null;
             }
             $this->request->data['Content']['published'] = true;
-            $this->request->data['Content']['allow_comment'] = true;
+            $this->request->data['Content']['allow_comment'] = SettingsController::read('Content.comment_for_registers');
             $this->request->data['Content']['published_comment'] = false;
             $this->request->data['Content']['frontpage'] = false;
             $this->request->data['Content']['user_id'] = $this->Auth->user('id');
@@ -465,6 +467,7 @@ class ContentsController extends AppController {
         }
     }
     public function edit($id = null) {
+        $this->_checkAuth('Content.register_has_content');
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'ویرایش مطلب');
 		$contentCategories = $this->Content->ContentCategory->generateTreeList(array('user_id' => $this->Auth->user('id')));
@@ -494,7 +497,7 @@ class ContentsController extends AppController {
             }
             
             $this->request->data['Content']['published'] = true;
-            $this->request->data['Content']['allow_comment'] = true;
+            $this->request->data['Content']['allow_comment'] = SettingsController::read('Content.comment_for_registers');
             $this->request->data['Content']['published_comment'] = false;
             $this->request->data['Content']['frontpage'] = false;
             $this->request->data['Content']['user_id'] = $this->Auth->user('id');
@@ -521,6 +524,7 @@ class ContentsController extends AppController {
         }
     }
     public function delete(){
+        $this->_checkAuth('Content.register_has_content');
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException(SettingsController::read('Error.Code-12'));
         }
@@ -629,8 +633,14 @@ class ContentsController extends AppController {
         }else{
             $this->request->data = $about;
         }
-    }
+    }    
     
+    protected function _checkAuth($key){
+        if(! SettingsController::read($key)){
+            $this->Auth->flash($this->Auth->authError);
+            $this->redirect($this->referer());
+        }
+     }
 }
 
 ?>

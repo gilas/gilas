@@ -28,7 +28,7 @@ class ContentCategoriesController extends AppController {
         $this->set('parents', $this->ContentCategory->generateTreeList());
         if ($this->request->is('post')) {
             $this->ContentCategory->create();
-            $this->request->data['ContentCategory']['is_lock'] = false;
+            $this->request->data['ContentCategory']['is_lock'] = null;
             if ($this->ContentCategory->save($this->request->data)) {
                 // Save Level for this item
                 $path = $this->ContentCategory->getPath();
@@ -111,7 +111,7 @@ class ContentCategoriesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             
-            $this->request->data['ContentCategory']['is_lock'] = false;
+            $this->request->data['ContentCategory']['is_lock'] = null;
             if ($this->ContentCategory->save($this->request->data)) {
                 // Save Level for this item
                 $path = $this->ContentCategory->getPath();
@@ -204,6 +204,7 @@ class ContentCategoriesController extends AppController {
      * 
      */
      public function index(){
+        $this->_checkAuth('Content.register_has_content');
         $this->set('title_for_layout', 'مدیریت مجموعه مطالب');
         $this->paginate['ContentCategory']['conditions']['ContentCategory.user_id'] = $this->Auth->user('id');
         $contentCategories = $this->paginate('ContentCategory');
@@ -217,12 +218,13 @@ class ContentCategoriesController extends AppController {
         $this->set(compact('contentCategories'));
      }
      public function add(){
+        $this->_checkAuth('Content.register_has_content');
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'افزودن مجموعه مطالب');
         $this->set('parents', $this->ContentCategory->generateTreeList(array('user_id' => $this->Auth->user('id'))));
         if ($this->request->is('post')) {
             $this->ContentCategory->create();
-            $this->request->data['ContentCategory']['is_lock'] = false;
+            $this->request->data['ContentCategory']['is_lock'] = null;
             $this->request->data['ContentCategory']['user_id'] = $this->Auth->user('id');
             $this->request->data['ContentCategory']['published'] = true;
             $this->request->data['ContentCategory']['access'] = 1;
@@ -240,6 +242,7 @@ class ContentCategoriesController extends AppController {
         }
      }
      public function edit($id){
+        $this->_checkAuth('Content.register_has_content');
         $this->helpers[] = 'TinyMCE.TinyMCE';
         $this->set('title_for_layout', 'ویرایش مجموعه مطلب');
         $this->ContentCategory->id = $id;   
@@ -250,7 +253,7 @@ class ContentCategoriesController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            $this->request->data['ContentCategory']['is_lock'] = false;
+            $this->request->data['ContentCategory']['is_lock'] = null;
             $this->request->data['ContentCategory']['user_id'] = $this->Auth->user('id');
             $this->request->data['ContentCategory']['published'] = true;
             $this->request->data['ContentCategory']['access'] = 1;
@@ -273,6 +276,14 @@ class ContentCategoriesController extends AppController {
         }
      }
      public function delete(){
+        $this->_checkAuth('Content.register_has_content');
         $this->admin_delete();
+     }
+     
+     protected function _checkAuth($key){
+        if(! SettingsController::read($key)){
+            $this->Auth->flash($this->Auth->authError);
+            $this->redirect($this->referer());
+        }
      }
 }

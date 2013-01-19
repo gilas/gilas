@@ -4,6 +4,11 @@ $(function() {
 			placement: $(this).attr('tooltip-place')
 		})
 	})
+    $('html').keypress(function(event){
+        if(event.keyCode == 27){
+            $('#cancelButton').trigger('click');
+        }
+    })
 })
 
 function alert(message) {
@@ -28,3 +33,7 @@ $(function(){
         return false;
     })
 })
+
+function closeModal(){
+    $.modal.close();
+}

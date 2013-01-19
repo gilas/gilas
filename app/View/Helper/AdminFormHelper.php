@@ -99,6 +99,14 @@ class AdminFormHelper extends AppHelper{
             unset($url['normalLink']);
             return $this->Html->link($title, $url,$options); 
         }
+        
+        // iframe Link
+        if(!empty($url['layout'])){
+            if($url['layout'] == 'iframe'){
+                return $this->_createIframe($title, $url,$options);
+            }
+            return $this->_createIframe($title, $url,$options);
+        }
         if(is_array($url)){
             $extraField = array();
             foreach($url as $key => $value){
@@ -188,5 +196,14 @@ class AdminFormHelper extends AppHelper{
     public function endFormTag(){
         return $this->Form->end();
     }
-    
+    protected $_modalCount = 0;
+    protected function _createIframe($title, $url, $options){
+        $options['id'] = 'modal'.$this->_modalCount++;
+        $script = '$.modal("<iframe width=\"500px\" height=\"400px\" style=\"border:none\"  src=\"'.$this->Html->url($url).'\" />",{overlayClose:true,minHeight:400,minWidth:500});';
+        $this->Html->script('modal', false);
+        $this->Html->css('modal', null, array('inline' => false));
+
+        $this->Html->scriptBlock("\$(function(){\$('#{$options['id']}').click(function(){{$script} return false;})})", array('inline' => false));
+        return $this->Html->link($title, $url, $options);
+    }
 }

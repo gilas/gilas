@@ -37,6 +37,11 @@ class ValidatorHelper extends AppHelper{
  */
     protected $_formID = null;
     
+    public $defaultParams = array(
+        'errorClass' => 'alert-input-error',
+        'errorElement' => 'div',
+    );
+    
     public function __construct(View $View, $settings = array()) {
 		parent::__construct($View, $settings);
         
@@ -54,7 +59,7 @@ class ValidatorHelper extends AppHelper{
  * 
  * @return script block
  */
-    public function validate(){
+    public function validate($inline = false){
         
         $this->setDefaults();
         
@@ -123,7 +128,7 @@ class ValidatorHelper extends AppHelper{
         
         // add to output
         $this->_output[] = $script;
-        return $this->output();
+        return $this->output($inline);
              
     }
     
@@ -238,12 +243,18 @@ class ValidatorHelper extends AppHelper{
     }
     
     public function setDefaults (){
-        $this->_output[] = '
-            $.validator.setDefaults({
-            	errorClass : "alert-input-error",
-                errorElement : "div",
-            });
-        ';
+        if($this->defaultParams){
+            $output = array();
+            foreach($this->defaultParams as $key => $value){
+                if(strpos($value, 'function') !== false){
+                    $output[] = '"'.$key.'" : '.$value;
+                }else{
+                    $output[] = '"'.$key.'" : "'.$value.'"';
+                }
+                
+            }
+            $this->_output[] = '$.validator.setDefaults({'.implode(',', $output).'});';
+        }
     }
     
     public function beforeRender(){
@@ -255,7 +266,7 @@ class ValidatorHelper extends AppHelper{
         return true;
     }
     
-    public function output(){
+    public function output($inline = false){
         if(empty($this->_output)){
             return;
         }
@@ -263,7 +274,7 @@ class ValidatorHelper extends AppHelper{
         foreach($this->_output as $output){
             $script .= $output;
         }
-        return $this->Html->scriptBlock('$(function(){'.$script.'});',array('inline' => false));
+        return $this->Html->scriptBlock('$(function(){'.$script.'});',array('inline' => $inline));
     }
     
     public function removeRule($field, $rule){

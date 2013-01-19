@@ -3,12 +3,14 @@
     	<h3 class="widget-title">منوی اصلی</h3>
         <?php if(AuthComponent::user('Role.name') == 'Register'): ?>
     	<ul class="menu">
+            <?php if(SettingsController::read('Content.register_has_content')): ?>
             <li class="current-menu-item">
                 <?php echo $this->Html->link('لیست مجموعه ها', array('controller' => 'ContentCategories', 'action' => 'index', 'admin' => false, 'plugin' => false)); ?>
             </li>
             <li class="current-menu-item">
                 <?php echo $this->Html->link('لیست مطالب', array('controller' => 'Contents', 'action' => 'index', 'admin' => false, 'plugin' => false)); ?>
             </li>
+            <?php endif; ?>
             <li class="current-menu-item">
                 <?php echo $this->Html->link('درباره', array('controller' => 'Contents', 'action' => 'addAbout', 'admin' => false, 'plugin' => false)); ?>
             </li>
@@ -39,15 +41,5 @@
             </li>
         </ul>
         <?php endif; ?>
-    </div>
-<?php else: ?>
-    <div class="categories_widget widget login-widget">
-    	<h3 class="widget-title">ورود</h3>
-        <?php
-        echo $this->Form->create('User', array('action' => 'login'));
-        echo $this->Form->input('username', array('label' => 'نام کاربری'));
-        echo $this->Form->input('password', array('label' => 'کلمه عبور'));
-        echo $this->Form->end(array('class' => 'button green small', 'label' => 'ورود'));
-        ?>
     </div>
 <?php endif; ?>

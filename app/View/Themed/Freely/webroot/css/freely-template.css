@@ -172,7 +172,7 @@ hr.line{
 }
 /******* Profile *************/
 .profile-logo{
-    float: right;
+    float: left;
     width: 100px;
     height: 100px;
     background-color: #EEE;
@@ -200,17 +200,19 @@ hr.line{
     float:right;
 }
 .profile-info{
-    float: left;
-    width: 250px;
     background-color: #EDEDED;
+    display: inline-block;
 }
 .profile-pic{
     text-align: center;
     margin: 10px;
+    float:right;
 }
 .profile-info-item{
     margin: 10px;
     color: #85B602;
+    float:right;
+    width: 240px;
 }
 .profile-info-item label{
     min-width: 80px;
@@ -244,7 +246,7 @@ hr.line{
     margin: 0;
 }
 .profile-menu .menu .active{
-    background-color: #E8EAEF;
+    background-color: #E8EAEF !important;
     border-top: 1px solid #BCBFC5;
 }
 
@@ -333,4 +335,27 @@ footer{
 }
 a:hover{
     text-decoration: none;
+}
+#topMenu {
+    float: left;
+    margin-top: 70px;
+}
+
+#topMenu a{
+    margin: 0 3px;
+    padding: 10px;
+}
+form .error-message {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+#loginForm{
+    background-color: #FFFFFF;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 3px 2px 4px #CCCCCC;
+    margin-top: 10px;
+    padding: 15px;
+    position: absolute;
+    z-index: 100;
 }

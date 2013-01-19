@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 12, 2013 at 02:15 PM
+-- Generation Time: Jan 19, 2013 at 10:01 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -37,15 +37,15 @@ CREATE TABLE IF NOT EXISTS `gl_acos` (
   `lft` int(11) DEFAULT NULL,
   `rght` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=296 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=329 ;
 
 --
 -- Dumping data for table `gl_acos`
 --
 
 INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'controllers', 1, 494),
-(2, 1, NULL, NULL, 'Comments', 2, 31),
+(1, NULL, NULL, NULL, 'controllers', 1, 554),
+(2, 1, NULL, NULL, 'Comments', 2, 27),
 (3, 2, NULL, NULL, 'admin_index', 3, 4),
 (5, 2, NULL, NULL, 'admin_view', 7, 8),
 (6, 2, NULL, NULL, 'admin_publish_comment', 9, 10),
@@ -54,23 +54,23 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (9, 2, NULL, NULL, 'admin_replyComment', 15, 16),
 (10, 2, NULL, NULL, 'admin_editComment', 17, 18),
 (11, 2, NULL, NULL, 'admin_dispatch', 19, 20),
-(12, 1, NULL, NULL, 'ContactDetails', 32, 51),
-(13, 12, NULL, NULL, 'admin_add', 33, 34),
-(14, 12, NULL, NULL, 'admin_edit', 35, 36),
-(15, 12, NULL, NULL, 'admin_delete', 37, 38),
-(16, 12, NULL, NULL, 'admin_index', 39, 40),
-(17, 12, NULL, NULL, 'admin_getLinkItem', 41, 42),
-(19, 12, NULL, NULL, 'admin_dispatch', 45, 46),
-(20, 1, NULL, NULL, 'ContentCategories', 52, 79),
-(21, 20, NULL, NULL, 'admin_add', 53, 54),
-(22, 20, NULL, NULL, 'admin_index', 55, 56),
-(23, 20, NULL, NULL, 'admin_delete', 57, 58),
-(24, 20, NULL, NULL, 'admin_edit', 59, 60),
-(25, 20, NULL, NULL, 'admin_publish', 61, 62),
-(26, 20, NULL, NULL, 'admin_unPublish', 63, 64),
-(27, 20, NULL, NULL, 'admin_getLinkItem', 65, 66),
-(28, 20, NULL, NULL, 'admin_dispatch', 67, 68),
-(29, 1, NULL, NULL, 'Contents', 80, 147),
+(12, 1, NULL, NULL, 'ContactDetails', 28, 49),
+(13, 12, NULL, NULL, 'admin_add', 29, 30),
+(14, 12, NULL, NULL, 'admin_edit', 31, 32),
+(15, 12, NULL, NULL, 'admin_delete', 33, 34),
+(16, 12, NULL, NULL, 'admin_index', 35, 36),
+(17, 12, NULL, NULL, 'admin_getLinkItem', 37, 38),
+(19, 12, NULL, NULL, 'admin_dispatch', 41, 42),
+(20, 1, NULL, NULL, 'ContentCategories', 50, 79),
+(21, 20, NULL, NULL, 'admin_add', 51, 52),
+(22, 20, NULL, NULL, 'admin_index', 53, 54),
+(23, 20, NULL, NULL, 'admin_delete', 55, 56),
+(24, 20, NULL, NULL, 'admin_edit', 57, 58),
+(25, 20, NULL, NULL, 'admin_publish', 59, 60),
+(26, 20, NULL, NULL, 'admin_unPublish', 61, 62),
+(27, 20, NULL, NULL, 'admin_getLinkItem', 63, 64),
+(28, 20, NULL, NULL, 'admin_dispatch', 65, 66),
+(29, 1, NULL, NULL, 'Contents', 80, 149),
 (30, 29, NULL, NULL, 'admin_index', 81, 82),
 (31, 29, NULL, NULL, 'admin_add', 83, 84),
 (32, 29, NULL, NULL, 'admin_delete', 85, 86),
@@ -84,177 +84,207 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (40, 29, NULL, NULL, 'admin_disallowComment', 101, 102),
 (41, 29, NULL, NULL, 'admin_getLinkItem', 103, 104),
 (48, 29, NULL, NULL, 'admin_dispatch', 117, 118),
-(49, 1, NULL, NULL, 'Dashboards', 148, 155),
-(50, 49, NULL, NULL, 'admin_index', 149, 150),
-(51, 49, NULL, NULL, 'admin_dispatch', 151, 152),
-(52, 1, NULL, NULL, 'GalleryCategories', 156, 179),
-(53, 52, NULL, NULL, 'admin_index', 157, 158),
-(54, 52, NULL, NULL, 'admin_add', 159, 160),
-(55, 52, NULL, NULL, 'admin_edit', 161, 162),
-(56, 52, NULL, NULL, 'admin_delete', 163, 164),
-(57, 52, NULL, NULL, 'admin_publish', 165, 166),
-(58, 52, NULL, NULL, 'admin_unPublish', 167, 168),
-(59, 52, NULL, NULL, 'admin_getLinkItem', 169, 170),
-(61, 52, NULL, NULL, 'admin_dispatch', 173, 174),
-(62, 1, NULL, NULL, 'GalleryItems', 180, 209),
-(63, 62, NULL, NULL, 'admin_index', 181, 182),
-(64, 62, NULL, NULL, 'admin_add', 183, 184),
-(65, 62, NULL, NULL, 'admin_edit', 185, 186),
-(66, 62, NULL, NULL, 'admin_delete', 187, 188),
-(67, 62, NULL, NULL, 'admin_unPublish', 189, 190),
-(68, 62, NULL, NULL, 'admin_publish', 191, 192),
-(71, 62, NULL, NULL, 'admin_move', 197, 198),
-(72, 62, NULL, NULL, 'admin_getLinkItem', 199, 200),
-(73, 62, NULL, NULL, 'admin_dispatch', 201, 202),
-(74, 1, NULL, NULL, 'MenuTypes', 210, 225),
-(75, 74, NULL, NULL, 'admin_index', 211, 212),
-(76, 74, NULL, NULL, 'admin_add', 213, 214),
-(77, 74, NULL, NULL, 'admin_edit', 215, 216),
-(78, 74, NULL, NULL, 'admin_getTypes', 217, 218),
-(79, 74, NULL, NULL, 'admin_delete', 219, 220),
-(80, 74, NULL, NULL, 'admin_dispatch', 221, 222),
-(81, 1, NULL, NULL, 'Menus', 226, 249),
-(82, 81, NULL, NULL, 'admin_index', 227, 228),
-(83, 81, NULL, NULL, 'admin_add', 229, 230),
-(84, 81, NULL, NULL, 'admin_edit', 231, 232),
-(85, 81, NULL, NULL, 'admin_delete', 233, 234),
-(86, 81, NULL, NULL, 'admin_move', 235, 236),
-(87, 81, NULL, NULL, 'admin_publish', 237, 238),
-(88, 81, NULL, NULL, 'admin_unPublish', 239, 240),
-(90, 81, NULL, NULL, 'admin_dispatch', 243, 244),
-(91, 1, NULL, NULL, 'Pages', 250, 259),
-(93, 91, NULL, NULL, 'admin_dispatch', 253, 254),
-(94, 1, NULL, NULL, 'Settings', 260, 271),
-(95, 94, NULL, NULL, 'admin_index', 261, 262),
-(97, 94, NULL, NULL, 'admin_dispatch', 265, 266),
-(98, 1, NULL, NULL, 'SliderItems', 272, 295),
-(99, 98, NULL, NULL, 'admin_index', 273, 274),
-(100, 98, NULL, NULL, 'admin_add', 275, 276),
-(101, 98, NULL, NULL, 'admin_edit', 277, 278),
-(102, 98, NULL, NULL, 'admin_delete', 279, 280),
-(103, 98, NULL, NULL, 'admin_move', 281, 282),
-(104, 98, NULL, NULL, 'admin_publish', 283, 284),
-(105, 98, NULL, NULL, 'admin_unPublish', 285, 286),
-(107, 98, NULL, NULL, 'admin_dispatch', 289, 290),
-(108, 1, NULL, NULL, 'Users', 296, 327),
-(109, 108, NULL, NULL, 'admin_login', 297, 298),
-(110, 108, NULL, NULL, 'admin_logout', 299, 300),
-(112, 108, NULL, NULL, 'admin_dispatch', 303, 304),
-(113, 1, NULL, NULL, 'WeblinkCategories', 328, 343),
-(114, 113, NULL, NULL, 'admin_index', 329, 330),
-(115, 113, NULL, NULL, 'admin_add', 331, 332),
-(116, 113, NULL, NULL, 'admin_edit', 333, 334),
-(117, 113, NULL, NULL, 'admin_delete', 335, 336),
-(118, 113, NULL, NULL, 'admin_getLinkItem', 337, 338),
-(119, 113, NULL, NULL, 'admin_dispatch', 339, 340),
-(120, 1, NULL, NULL, 'Weblinks', 344, 365),
-(121, 120, NULL, NULL, 'admin_index', 345, 346),
-(122, 120, NULL, NULL, 'admin_add', 347, 348),
-(123, 120, NULL, NULL, 'admin_edit', 349, 350),
-(124, 120, NULL, NULL, 'admin_delete', 351, 352),
-(125, 120, NULL, NULL, 'admin_publish', 353, 354),
-(126, 120, NULL, NULL, 'admin_unPublish', 355, 356),
-(128, 120, NULL, NULL, 'admin_dispatch', 359, 360),
-(135, 1, NULL, NULL, 'TinyMCE', 366, 367),
-(136, 1, NULL, NULL, 'UploadPack', 368, 369),
-(137, 1, NULL, NULL, 'AclPermissions', 370, 381),
-(138, 137, NULL, NULL, 'admin_index', 371, 372),
-(139, 137, NULL, NULL, 'admin_editPermission', 373, 374),
-(140, 137, NULL, NULL, 'admin_sync', 375, 376),
-(141, 137, NULL, NULL, 'admin_dispatch', 377, 378),
+(49, 1, NULL, NULL, 'Dashboards', 150, 159),
+(50, 49, NULL, NULL, 'admin_index', 151, 152),
+(51, 49, NULL, NULL, 'admin_dispatch', 153, 154),
+(52, 1, NULL, NULL, 'GalleryCategories', 160, 185),
+(53, 52, NULL, NULL, 'admin_index', 161, 162),
+(54, 52, NULL, NULL, 'admin_add', 163, 164),
+(55, 52, NULL, NULL, 'admin_edit', 165, 166),
+(56, 52, NULL, NULL, 'admin_delete', 167, 168),
+(57, 52, NULL, NULL, 'admin_publish', 169, 170),
+(58, 52, NULL, NULL, 'admin_unPublish', 171, 172),
+(59, 52, NULL, NULL, 'admin_getLinkItem', 173, 174),
+(61, 52, NULL, NULL, 'admin_dispatch', 177, 178),
+(62, 1, NULL, NULL, 'GalleryItems', 186, 217),
+(63, 62, NULL, NULL, 'admin_index', 187, 188),
+(64, 62, NULL, NULL, 'admin_add', 189, 190),
+(65, 62, NULL, NULL, 'admin_edit', 191, 192),
+(66, 62, NULL, NULL, 'admin_delete', 193, 194),
+(67, 62, NULL, NULL, 'admin_unPublish', 195, 196),
+(68, 62, NULL, NULL, 'admin_publish', 197, 198),
+(71, 62, NULL, NULL, 'admin_move', 203, 204),
+(72, 62, NULL, NULL, 'admin_getLinkItem', 205, 206),
+(73, 62, NULL, NULL, 'admin_dispatch', 207, 208),
+(74, 1, NULL, NULL, 'MenuTypes', 218, 235),
+(75, 74, NULL, NULL, 'admin_index', 219, 220),
+(76, 74, NULL, NULL, 'admin_add', 221, 222),
+(77, 74, NULL, NULL, 'admin_edit', 223, 224),
+(78, 74, NULL, NULL, 'admin_getTypes', 225, 226),
+(79, 74, NULL, NULL, 'admin_delete', 227, 228),
+(80, 74, NULL, NULL, 'admin_dispatch', 229, 230),
+(81, 1, NULL, NULL, 'Menus', 236, 261),
+(82, 81, NULL, NULL, 'admin_index', 237, 238),
+(83, 81, NULL, NULL, 'admin_add', 239, 240),
+(84, 81, NULL, NULL, 'admin_edit', 241, 242),
+(85, 81, NULL, NULL, 'admin_delete', 243, 244),
+(86, 81, NULL, NULL, 'admin_move', 245, 246),
+(87, 81, NULL, NULL, 'admin_publish', 247, 248),
+(88, 81, NULL, NULL, 'admin_unPublish', 249, 250),
+(90, 81, NULL, NULL, 'admin_dispatch', 253, 254),
+(91, 1, NULL, NULL, 'Pages', 262, 273),
+(93, 91, NULL, NULL, 'admin_dispatch', 265, 266),
+(94, 1, NULL, NULL, 'Settings', 274, 287),
+(95, 94, NULL, NULL, 'admin_index', 275, 276),
+(97, 94, NULL, NULL, 'admin_dispatch', 279, 280),
+(98, 1, NULL, NULL, 'SliderItems', 288, 313),
+(99, 98, NULL, NULL, 'admin_index', 289, 290),
+(100, 98, NULL, NULL, 'admin_add', 291, 292),
+(101, 98, NULL, NULL, 'admin_edit', 293, 294),
+(102, 98, NULL, NULL, 'admin_delete', 295, 296),
+(103, 98, NULL, NULL, 'admin_move', 297, 298),
+(104, 98, NULL, NULL, 'admin_publish', 299, 300),
+(105, 98, NULL, NULL, 'admin_unPublish', 301, 302),
+(107, 98, NULL, NULL, 'admin_dispatch', 305, 306),
+(108, 1, NULL, NULL, 'Users', 314, 347),
+(109, 108, NULL, NULL, 'admin_login', 315, 316),
+(110, 108, NULL, NULL, 'admin_logout', 317, 318),
+(112, 108, NULL, NULL, 'admin_dispatch', 321, 322),
+(113, 1, NULL, NULL, 'WeblinkCategories', 348, 365),
+(114, 113, NULL, NULL, 'admin_index', 349, 350),
+(115, 113, NULL, NULL, 'admin_add', 351, 352),
+(116, 113, NULL, NULL, 'admin_edit', 353, 354),
+(117, 113, NULL, NULL, 'admin_delete', 355, 356),
+(118, 113, NULL, NULL, 'admin_getLinkItem', 357, 358),
+(119, 113, NULL, NULL, 'admin_dispatch', 359, 360),
+(120, 1, NULL, NULL, 'Weblinks', 366, 389),
+(121, 120, NULL, NULL, 'admin_index', 367, 368),
+(122, 120, NULL, NULL, 'admin_add', 369, 370),
+(123, 120, NULL, NULL, 'admin_edit', 371, 372),
+(124, 120, NULL, NULL, 'admin_delete', 373, 374),
+(125, 120, NULL, NULL, 'admin_publish', 375, 376),
+(126, 120, NULL, NULL, 'admin_unPublish', 377, 378),
+(128, 120, NULL, NULL, 'admin_dispatch', 381, 382),
+(135, 1, NULL, NULL, 'TinyMCE', 390, 391),
+(136, 1, NULL, NULL, 'UploadPack', 392, 393),
+(137, 1, NULL, NULL, 'AclPermissions', 394, 407),
+(138, 137, NULL, NULL, 'admin_index', 395, 396),
+(139, 137, NULL, NULL, 'admin_editPermission', 397, 398),
+(140, 137, NULL, NULL, 'admin_sync', 399, 400),
+(141, 137, NULL, NULL, 'admin_dispatch', 401, 402),
 (161, 29, NULL, NULL, 'index', 133, 134),
-(162, 1, NULL, NULL, 'Places', 382, 395),
-(163, 162, NULL, NULL, 'admin_index', 383, 384),
-(164, 162, NULL, NULL, 'admin_dispatch', 385, 386),
-(165, 1, NULL, NULL, 'DebugKit', 396, 407),
-(166, 165, NULL, NULL, 'ToolbarAccess', 397, 406),
-(167, 166, NULL, NULL, 'history_state', 398, 399),
-(168, 166, NULL, NULL, 'sql_explain', 400, 401),
-(169, 166, NULL, NULL, 'admin_dispatch', 402, 403),
-(170, 1, NULL, NULL, 'Degrees', 408, 421),
-(171, 170, NULL, NULL, 'admin_index', 409, 410),
-(172, 170, NULL, NULL, 'admin_add', 411, 412),
-(173, 170, NULL, NULL, 'admin_edit', 413, 414),
-(174, 170, NULL, NULL, 'admin_delete', 415, 416),
-(175, 170, NULL, NULL, 'admin_dispatch', 417, 418),
-(176, 162, NULL, NULL, 'admin_add', 387, 388),
-(177, 162, NULL, NULL, 'admin_edit', 389, 390),
-(178, 162, NULL, NULL, 'admin_delete', 391, 392),
-(179, 1, NULL, NULL, 'Rastes', 422, 435),
-(180, 179, NULL, NULL, 'admin_index', 423, 424),
-(181, 179, NULL, NULL, 'admin_add', 425, 426),
-(182, 179, NULL, NULL, 'admin_edit', 427, 428),
-(183, 179, NULL, NULL, 'admin_delete', 429, 430),
-(184, 179, NULL, NULL, 'admin_dispatch', 431, 432),
-(185, 1, NULL, NULL, 'Certificates', 436, 461),
-(186, 185, NULL, NULL, 'admin_index', 437, 438),
-(197, 185, NULL, NULL, 'admin_changeDocs', 455, 456),
-(189, 185, NULL, NULL, 'admin_delete', 439, 440),
-(190, 185, NULL, NULL, 'admin_dispatch', 441, 442),
-(191, 185, NULL, NULL, 'getCountRequest', 443, 444),
-(192, 185, NULL, NULL, 'admin_view', 445, 446),
-(193, 185, NULL, NULL, 'view', 447, 448),
-(194, 185, NULL, NULL, 'admin_changeStatus', 449, 450),
-(195, 185, NULL, NULL, 'admin_remove', 451, 452),
-(196, 185, NULL, NULL, 'admin_changeWarden', 453, 454),
-(198, 185, NULL, NULL, 'admin_print', 457, 458),
-(225, 215, NULL, NULL, 'countNewMessages', 481, 482),
-(224, 215, NULL, NULL, 'admin_read', 479, 480),
-(212, 1, NULL, NULL, 'Profile', 462, 469),
-(213, 212, NULL, NULL, 'view', 463, 464),
-(214, 212, NULL, NULL, 'admin_dispatch', 465, 466),
-(215, 1, NULL, NULL, 'Pms', 470, 493),
-(216, 215, NULL, NULL, 'admin_add', 471, 472),
-(218, 215, NULL, NULL, 'admin_index', 473, 474),
-(219, 215, NULL, NULL, 'admin_delete', 475, 476),
-(223, 215, NULL, NULL, 'admin_dispatch', 477, 478),
-(226, 108, NULL, NULL, 'admin_add', 309, 310),
-(227, 108, NULL, NULL, 'admin_index', 311, 312),
-(228, 108, NULL, NULL, 'admin_active', 313, 314),
-(229, 108, NULL, NULL, 'admin_inactive', 315, 316),
-(230, 108, NULL, NULL, 'admin_edit', 317, 318),
-(231, 108, NULL, NULL, 'admin_delete', 319, 320),
-(232, 108, NULL, NULL, 'login', 321, 322),
-(233, 108, NULL, NULL, 'logout', 323, 324),
-(283, 166, NULL, NULL, 'dispatch', 404, 405),
-(282, 120, NULL, NULL, 'dispatch', 363, 364),
-(281, 113, NULL, NULL, 'dispatch', 341, 342),
-(280, 108, NULL, NULL, 'dispatch', 325, 326),
-(238, 20, NULL, NULL, 'index', 69, 70),
-(239, 20, NULL, NULL, 'add', 71, 72),
-(240, 20, NULL, NULL, 'edit', 73, 74),
-(241, 20, NULL, NULL, 'delete', 75, 76),
-(279, 98, NULL, NULL, 'dispatch', 293, 294),
-(278, 94, NULL, NULL, 'dispatch', 269, 270),
-(277, 179, NULL, NULL, 'dispatch', 433, 434),
-(276, 212, NULL, NULL, 'dispatch', 467, 468),
-(275, 215, NULL, NULL, 'dispatch', 483, 484),
-(274, 162, NULL, NULL, 'dispatch', 393, 394),
-(273, 91, NULL, NULL, 'dispatch', 257, 258),
-(272, 81, NULL, NULL, 'dispatch', 247, 248),
-(271, 74, NULL, NULL, 'dispatch', 223, 224),
-(270, 62, NULL, NULL, 'dispatch', 207, 208),
-(269, 52, NULL, NULL, 'dispatch', 177, 178),
-(268, 170, NULL, NULL, 'dispatch', 419, 420),
-(267, 49, NULL, NULL, 'dispatch', 153, 154),
+(162, 1, NULL, NULL, 'Places', 408, 423),
+(163, 162, NULL, NULL, 'admin_index', 409, 410),
+(164, 162, NULL, NULL, 'admin_dispatch', 411, 412),
+(165, 1, NULL, NULL, 'DebugKit', 424, 437),
+(166, 165, NULL, NULL, 'ToolbarAccess', 425, 436),
+(167, 166, NULL, NULL, 'history_state', 426, 427),
+(168, 166, NULL, NULL, 'sql_explain', 428, 429),
+(169, 166, NULL, NULL, 'admin_dispatch', 430, 431),
+(170, 1, NULL, NULL, 'Degrees', 438, 453),
+(171, 170, NULL, NULL, 'admin_index', 439, 440),
+(172, 170, NULL, NULL, 'admin_add', 441, 442),
+(173, 170, NULL, NULL, 'admin_edit', 443, 444),
+(174, 170, NULL, NULL, 'admin_delete', 445, 446),
+(175, 170, NULL, NULL, 'admin_dispatch', 447, 448),
+(176, 162, NULL, NULL, 'admin_add', 413, 414),
+(177, 162, NULL, NULL, 'admin_edit', 415, 416),
+(178, 162, NULL, NULL, 'admin_delete', 417, 418),
+(179, 1, NULL, NULL, 'Rastes', 454, 469),
+(180, 179, NULL, NULL, 'admin_index', 455, 456),
+(181, 179, NULL, NULL, 'admin_add', 457, 458),
+(182, 179, NULL, NULL, 'admin_edit', 459, 460),
+(183, 179, NULL, NULL, 'admin_delete', 461, 462),
+(184, 179, NULL, NULL, 'admin_dispatch', 463, 464),
+(185, 1, NULL, NULL, 'Certificates', 470, 497),
+(186, 185, NULL, NULL, 'admin_index', 471, 472),
+(197, 185, NULL, NULL, 'admin_changeDocs', 489, 490),
+(189, 185, NULL, NULL, 'admin_delete', 473, 474),
+(190, 185, NULL, NULL, 'admin_dispatch', 475, 476),
+(191, 185, NULL, NULL, 'getCountRequest', 477, 478),
+(192, 185, NULL, NULL, 'admin_view', 479, 480),
+(193, 185, NULL, NULL, 'view', 481, 482),
+(194, 185, NULL, NULL, 'admin_changeStatus', 483, 484),
+(195, 185, NULL, NULL, 'admin_remove', 485, 486),
+(196, 185, NULL, NULL, 'admin_changeWarden', 487, 488),
+(198, 185, NULL, NULL, 'admin_print', 491, 492),
+(225, 215, NULL, NULL, 'countNewMessages', 519, 520),
+(224, 215, NULL, NULL, 'admin_read', 517, 518),
+(212, 1, NULL, NULL, 'Profile', 498, 507),
+(213, 212, NULL, NULL, 'view', 499, 500),
+(214, 212, NULL, NULL, 'admin_dispatch', 501, 502),
+(215, 1, NULL, NULL, 'Pms', 508, 533),
+(216, 215, NULL, NULL, 'admin_add', 509, 510),
+(218, 215, NULL, NULL, 'admin_index', 511, 512),
+(219, 215, NULL, NULL, 'admin_delete', 513, 514),
+(223, 215, NULL, NULL, 'admin_dispatch', 515, 516),
+(226, 108, NULL, NULL, 'admin_add', 327, 328),
+(227, 108, NULL, NULL, 'admin_index', 329, 330),
+(228, 108, NULL, NULL, 'admin_active', 331, 332),
+(229, 108, NULL, NULL, 'admin_inactive', 333, 334),
+(230, 108, NULL, NULL, 'admin_edit', 335, 336),
+(231, 108, NULL, NULL, 'admin_delete', 337, 338),
+(232, 108, NULL, NULL, 'login', 339, 340),
+(233, 108, NULL, NULL, 'logout', 341, 342),
+(283, 166, NULL, NULL, 'dispatch', 432, 433),
+(282, 120, NULL, NULL, 'dispatch', 385, 386),
+(281, 113, NULL, NULL, 'dispatch', 361, 362),
+(280, 108, NULL, NULL, 'dispatch', 343, 344),
+(238, 20, NULL, NULL, 'index', 67, 68),
+(239, 20, NULL, NULL, 'add', 69, 70),
+(240, 20, NULL, NULL, 'edit', 71, 72),
+(241, 20, NULL, NULL, 'delete', 73, 74),
+(279, 98, NULL, NULL, 'dispatch', 309, 310),
+(278, 94, NULL, NULL, 'dispatch', 283, 284),
+(277, 179, NULL, NULL, 'dispatch', 465, 466),
+(276, 212, NULL, NULL, 'dispatch', 503, 504),
+(275, 215, NULL, NULL, 'dispatch', 521, 522),
+(274, 162, NULL, NULL, 'dispatch', 419, 420),
+(273, 91, NULL, NULL, 'dispatch', 269, 270),
+(272, 81, NULL, NULL, 'dispatch', 257, 258),
+(271, 74, NULL, NULL, 'dispatch', 231, 232),
+(270, 62, NULL, NULL, 'dispatch', 213, 214),
+(269, 52, NULL, NULL, 'dispatch', 181, 182),
+(268, 170, NULL, NULL, 'dispatch', 449, 450),
+(267, 49, NULL, NULL, 'dispatch', 155, 156),
 (266, 29, NULL, NULL, 'dispatch', 135, 136),
-(265, 20, NULL, NULL, 'dispatch', 77, 78),
-(264, 12, NULL, NULL, 'dispatch', 49, 50),
+(265, 20, NULL, NULL, 'dispatch', 75, 76),
+(264, 12, NULL, NULL, 'dispatch', 45, 46),
 (263, 2, NULL, NULL, 'dispatch', 23, 24),
-(262, 185, NULL, NULL, 'dispatch', 459, 460),
-(261, 137, NULL, NULL, 'dispatch', 379, 380),
+(262, 185, NULL, NULL, 'dispatch', 493, 494),
+(261, 137, NULL, NULL, 'dispatch', 403, 404),
 (284, 29, NULL, NULL, 'listArticles', 137, 138),
 (285, 29, NULL, NULL, 'add', 139, 140),
 (286, 29, NULL, NULL, 'edit', 141, 142),
 (287, 29, NULL, NULL, 'delete', 143, 144),
 (288, 29, NULL, NULL, 'addAbout', 145, 146),
-(289, 215, NULL, NULL, 'index', 485, 486),
-(290, 215, NULL, NULL, 'add', 487, 488),
-(291, 215, NULL, NULL, 'read', 489, 490),
-(292, 215, NULL, NULL, 'delete', 491, 492),
-(293, 2, NULL, NULL, 'view', 25, 26),
-(294, 2, NULL, NULL, 'publish_comment', 27, 28),
-(295, 2, NULL, NULL, 'unpublish_comment', 29, 30);
+(289, 215, NULL, NULL, 'index', 523, 524),
+(290, 215, NULL, NULL, 'add', 525, 526),
+(291, 215, NULL, NULL, 'read', 527, 528),
+(292, 215, NULL, NULL, 'delete', 529, 530),
+(301, 299, NULL, NULL, 'dispatch', 537, 538),
+(300, 299, NULL, NULL, 'admin_dispatch', 535, 536),
+(299, 1, NULL, NULL, 'Complaints', 534, 541),
+(296, 137, NULL, NULL, 'admin_settings', 405, 406),
+(297, 185, NULL, NULL, 'admin_settings', 495, 496),
+(298, 2, NULL, NULL, 'admin_settings', 25, 26),
+(302, 299, NULL, NULL, 'admin_settings', 539, 540),
+(303, 12, NULL, NULL, 'admin_settings', 47, 48),
+(304, 20, NULL, NULL, 'admin_settings', 77, 78),
+(305, 29, NULL, NULL, 'admin_settings', 147, 148),
+(306, 49, NULL, NULL, 'admin_settings', 157, 158),
+(307, 170, NULL, NULL, 'admin_settings', 451, 452),
+(308, 52, NULL, NULL, 'admin_settings', 183, 184),
+(309, 62, NULL, NULL, 'admin_settings', 215, 216),
+(310, 74, NULL, NULL, 'admin_settings', 233, 234),
+(311, 81, NULL, NULL, 'admin_settings', 259, 260),
+(312, 91, NULL, NULL, 'admin_settings', 271, 272),
+(313, 162, NULL, NULL, 'admin_settings', 421, 422),
+(314, 215, NULL, NULL, 'admin_settings', 531, 532),
+(315, 212, NULL, NULL, 'admin_settings', 505, 506),
+(316, 179, NULL, NULL, 'admin_settings', 467, 468),
+(317, 94, NULL, NULL, 'admin_settings', 285, 286),
+(318, 98, NULL, NULL, 'admin_settings', 311, 312),
+(319, 1, NULL, NULL, 'Smses', 542, 553),
+(320, 319, NULL, NULL, 'admin_settings', 543, 544),
+(321, 319, NULL, NULL, 'admin_send', 545, 546),
+(322, 319, NULL, NULL, 'admin_index', 547, 548),
+(323, 319, NULL, NULL, 'admin_dispatch', 549, 550),
+(324, 319, NULL, NULL, 'dispatch', 551, 552),
+(325, 108, NULL, NULL, 'admin_settings', 345, 346),
+(326, 113, NULL, NULL, 'admin_settings', 363, 364),
+(327, 120, NULL, NULL, 'admin_settings', 387, 388),
+(328, 166, NULL, NULL, 'admin_settings', 434, 435);
 
 -- --------------------------------------------------------
 
@@ -300,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `gl_aros_acos` (
   PRIMARY KEY (`id`),
   KEY `aco_id` (`aco_id`),
   KEY `aro_id` (`aro_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=285 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=295 ;
 
 --
 -- Dumping data for table `gl_aros_acos`
@@ -577,10 +607,17 @@ INSERT INTO `gl_aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_upda
 (278, 4, 291, '1', '1', '1', '1'),
 (279, 4, 292, '1', '1', '1', '1'),
 (280, 4, 225, '1', '1', '1', '1'),
-(281, 4, 293, '1', '1', '1', '1'),
+(287, 3, 320, '1', '1', '1', '1'),
 (282, 4, 263, '1', '1', '1', '1'),
-(283, 4, 294, '1', '1', '1', '1'),
-(284, 4, 295, '1', '1', '1', '1');
+(286, 2, 305, '1', '1', '1', '1'),
+(285, 3, 305, '1', '1', '1', '1'),
+(288, 3, 321, '1', '1', '1', '1'),
+(289, 3, 322, '1', '1', '1', '1'),
+(290, 3, 323, '1', '1', '1', '1'),
+(291, 2, 320, '1', '1', '1', '1'),
+(292, 2, 321, '1', '1', '1', '1'),
+(293, 2, 322, '1', '1', '1', '1'),
+(294, 2, 323, '1', '1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -600,7 +637,7 @@ CREATE TABLE IF NOT EXISTS `gl_comments` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `content_id` (`content_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `gl_comments`
@@ -626,7 +663,8 @@ INSERT INTO `gl_comments` (`id`, `parent_id`, `content_id`, `name`, `email`, `we
 (17, 0, 5, 'fdg', 'dsf@df.sd', 'http://www.df.df', 'asdfasdddddddddddddddddddddd', 0, '1391-10-22 21:41:59'),
 (18, 0, 5, 'fdg', 'dsf@df.sd', 'http://www.df.df', 'asdfasdddddddddddddddddddddd', 0, '1391-10-22 21:43:27'),
 (19, 0, 8, 'cb', 'dsf@df.sd', 'http://www.df.df', 'cvbcxbvcxb xcv bcxv bcdf gdsf dfs', 0, '1391-10-23 09:59:53'),
-(20, 0, 11, 'xcvb', 'dsf@df.sd', 'http://www.df.df', 'xcvbcxvbcxvbcxvbcxvbcxvbxcv', 0, '1391-10-23 14:33:31');
+(20, 0, 11, 'xcvb', 'dsf@df.sd', 'http://www.df.df', 'xcvbcxvbcxvbcxvbcxvbcxvbxcv', 0, '1391-10-23 14:33:31'),
+(21, 0, 11, 'تا', 'dfh@fg.fg', 'http://dfghfdh.fdh', 'اتتاتتاتااللاااااااااااااااااااااااااااااااااااااااااااااااا', 0, '1391-10-24 11:17:42');
 
 -- --------------------------------------------------------
 
@@ -660,7 +698,7 @@ CREATE TABLE IF NOT EXISTS `gl_content_categories` (
   `descriptions` text COLLATE utf8_persian_ci,
   `published` tinyint(4) NOT NULL DEFAULT '1',
   `access` int(11) DEFAULT NULL COMMENT 'نشان می دهد که این مجموعه کجا باید نمایش داده شود.',
-  `is_lock` int(11) NOT NULL DEFAULT '0' COMMENT 'اگر قفل باشد دیگر غیر قابل ویرایش و حذف است',
+  `is_lock` int(11) DEFAULT NULL COMMENT 'اگر قفل باشد دیگر غیر قابل ویرایش و حذف است',
   `lft` int(11) DEFAULT NULL,
   `rght` int(11) DEFAULT NULL,
   `level` int(11) DEFAULT '0',
@@ -703,7 +741,7 @@ CREATE TABLE IF NOT EXISTS `gl_contents` (
   UNIQUE KEY `UQ_gl_contents_slug` (`slug`),
   KEY `content_category_id` (`content_category_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `gl_contents`
@@ -712,9 +750,10 @@ CREATE TABLE IF NOT EXISTS `gl_contents` (
 INSERT INTO `gl_contents` (`id`, `user_id`, `content_category_id`, `title`, `slug`, `intro`, `content`, `allow_comment`, `published_comment`, `frontpage`, `published`, `created`, `modified`, `lft`, `rght`, `parent_id`) VALUES
 (1, 1, 0, 'چگونگی درخواست پروانه', 'چگونگی_درخواست_پروانه', '<p>با توجه به نوع اطلاعاتی که در دو اتحادیه هتل آپارتمان و محصولات فرهنگی دیده شد. متوجه می شویم که باید اطلاعات را به دو گونه تقسیم بندی کنیم</p>\r\n<p>اطلاعات عمومی که برای همگی مشترک است .</p>\r\n<p>اطلاعاتی که مختص همان اتحادیه است.</p>\r\n<p>\r\n', '\r\n</p>\r\n<h3>اطلاعات عمومی :</h3>\r\n<p><strong>اطلاعات فردی :</strong> نام - نام خانوادگی - کد ملی - شماره شناسنامه - محل صدور - تاریخ تولد - مدرک تحصیلی - جنسیت - وضعیت تاهل - افراد تحت تکفل - آدرس - تلفن منزل - کدپستی -تلفن همراه - وضعیت نظام وظیفه</p>\r\n<p><strong>اطلاعات شغل :</strong> عنوان - آدرس - تلفن ثابت - کد پستی- منطقه شهرداری - نوع مالکیت - کد (یا نام) رسته -</p>\r\n<p>&nbsp;</p>\r\n<h3>اطلاعات مختص هر اتحادیه :</h3>\r\n<p><strong>محصولات فرهنگی : </strong></p>\r\n<p>وضعیت ایثارگری - شاغل دولتی هست یا نه - عضو اتحادیه دیگر هست یا نه - پروانه کسب از اتحادیه دیگر دارد یا نه - مشاغل قبل از تقاضا - سابقه کار</p>\r\n<p>علاوه بر اطلاعات فوق فرمی است که بازرس باید تائید نماید که شامل موارد ذیل است</p>\r\n<p>در حریم آرایشگاه زنانه یا نه - در حریم مدرسه یا نه - در حریم باشگاه یا نه - در حریم فروشگاه یا نه - زیرزمین یا نه - طبقه فوقانی یا نه - مکان مورد مورد تائید است یا نه</p>\r\n<p>&nbsp;</p>\r\n<p>پرداخت مبالغ مرود که از قرار زیر است :</p>\r\n<p>حساب اتحادیه به مبلغ 300 تومان - حساب خزانه به مبلغ 3 تومان - حساب آموزش فرانگران به مبلغ 12 تومان</p>\r\n<p>&nbsp;</p>\r\n<hr />\r\n<p>&nbsp;</p>\r\n<p><strong>هتل آپارتمان:</strong></p>\r\n<p>تعداد کل واحد - تعداد اتاق - تعداد سوئیت - تعداد یک خوابه - تعداد دو خوابه - تعداد سه خوابه - شماره بهره برداری از اداره میراث و گردشگری</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<h3>مدارک مورد نیاز</h3>\r\n<p><strong>محصولات فرهنگی :</strong></p>\r\n<p>2 سری تمام صفحات شناسنامه - 2 سری پایان خدمت - 2 سری آخرین مدرک تحصیلی - 20 تا عکس 3 در چهار - 2 سری کارت ملی - کد &divide;ستی 10 رقمی - 2 سری اجاره نامه یا سند مالکیت - کپی تجاری مغازه</p>\r\n<p>&nbsp;</p>\r\n<p><strong>هتل آپارتمان :</strong></p>\r\n<p>مجوز بهره برداری - تمام صفحات سند مالکیت - پروانه و پایان کار - تمام صفحات شناسنامه مالک و تمام شرکا (در صورت داشتن شریک) - رضایت نامه یا وکالت نامه شرکا - کارت پایان خدمت یا معافیت - آخرین مدرک تحصیلی - 10 تا عکس 3 در 4 - کارت ملی - کد پستی 10 رقمی</p>', 0, 0, 1, 1, '1391-10-08 11:20:57', '1391-10-14 10:41:51', 1, 2, NULL),
 (2, 1, 0, 'ذخیره اطلاعات پروانه', 'ذخیره_اطلاعات_پروانه', '<p>با توجه به بحثی که گفته شد. تقسیم بندی اینگونه خواهد شد.</p>\r\n<p>اطلاعات فردی - اطلاعات کسب و کار - مدارک که باید به صورت تیک مانند باشد - سایر شرایط (که البته فقط در محصولات فرهنگی داشتیم. در جایی که بازرس باید مکان را تایید می کرد)</p>\r\n<p>&nbsp;</p>\r\n<p>البته محمد این گونه تقسیم بندی کرده بود</p>\r\n<p>تمامی اطلاعات در یک جدول آورده شود ولی اطلاعات رسته - منطقه یا شهر - درجه در جداول دیگری باشد تا حالت دینامیک داشته باشد.</p>\r\n<p>ولی به نظر من می توان جداول را بهتر نیز کرد. به گونه ای که اطلاعات فردی در یک جدول و اطلاعات کسب و کار در جدول دیگر. ولی باید دید آیا لزومی دارد یا نه.</p>', NULL, 1, 0, 1, 1, '1391-10-08 15:10:02', '1391-10-14 13:41:04', 3, 4, NULL),
-(6, 2, 1, 'درباره حمید ممدوحی', 'درباره_حمید_ممدوحی', '<p>درباره حمید ممدوحی.</p>\r\n<p>مدیریت می تواند روی مطلب درباره اعضا نیز ویرایش را انجام دهد</p>', NULL, 1, 0, 0, 1, '1391-10-22 20:37:03', '1391-10-23 15:57:27', 5, 6, NULL),
+(6, 2, 1, 'درباره حمید ممدوحی', 'درباره_حمید_ممدوحی', '<p>بیوگرافی- فعالیت های شغلی</p>', NULL, 1, 0, 0, 1, '1391-10-22 20:37:03', '1391-10-24 09:40:49', 5, 6, NULL),
 (12, 3, 0, 'تغییرات صورت گرفته در جداول', 'تغییرات_صورت_گرفته_در_جداول', '<p>کارهایی که برای امکان صفحه شخصی داشتن در جداول صورت گرفت</p>\r\n<p>1- ایجاد ستون is_lock در جدول ContentCategory برای قفل کردن مجموعه های سیستمی</p>\r\n<p>2- ایجاد ستون user_id در جدول ContentCategory برای شخصی سازی مجموعه ها</p>\r\n<p>3- ایجاد ستون access در جدول ContentCategory که اگر 1 بود یعنی فقط باید در صفحات شخصی نمایش داده شود و در غیر این صورت برای نمایش عموم حتما باید مقدار NULL داشته باشد. زیرا اگر غیر از NULL داشته باشد برای نمایش مطالب بدون مجموعه دچار مشکل می شویم</p>', NULL, 0, 0, 1, 1, '1391-10-23 11:12:28', '1391-10-23 16:36:21', 9, 10, NULL),
-(11, 2, 4, 'مقدمه', 'مقدمه', '<p>این مطلب برای صفحه شخصی من است .</p>\r\n<p>به نظرم مطالبی که برای صفحات شخصی درج می شوند باید قابلیت های ذیلا را داشته باشند.</p>\r\n<p>1- فقط در صفحه شخصی نویسنده نمایش داده شوند.</p>\r\n<p>2- پرچم های انتشار و نظر دهی باید فعال و باقی پرچم ها مانند نمایش در صفحه اصلی و نمایش بدون تائید نظرات غیر فعال.</p>\r\n', '\r\n<p>3- فقط به مجموعه هایی دسترسی داشته باشد که خودش تعریف کرده است</p>\r\n<p>4- فقط به مطالبی دسترسی داشته باشد که خودش تعریف کرده است</p>\r\n<p>&nbsp;</p>\r\n<p>بروزرسانی توسط مدیریت :</p>\r\n<p>1- مدیریت باید بتواند تمامی نظرات خود را روی این مطالب اعمال کند</p>', 1, 0, 0, 1, '1391-10-23 10:38:10', '1391-10-23 16:35:33', 7, 8, NULL);
+(11, 2, 4, 'مقدمه', 'مقدمه', '<p>این مطلب برای صفحه شخصی من است .</p>\r\n<p>به نظرم مطالبی که برای صفحات شخصی درج می شوند باید قابلیت های ذیلا را داشته باشند.</p>\r\n<p>1- فقط در صفحه شخصی نویسنده نمایش داده شوند.</p>\r\n<p>2- پرچم های انتشار و نظر دهی باید فعال و باقی پرچم ها مانند نمایش در صفحه اصلی و نمایش بدون تائید نظرات غیر فعال.</p>\r\n', '\r\n<p>3- فقط به مجموعه هایی دسترسی داشته باشد که خودش تعریف کرده است</p>\r\n<p>4- فقط به مطالبی دسترسی داشته باشد که خودش تعریف کرده است</p>\r\n<p>&nbsp;</p>\r\n<p>بروزرسانی توسط مدیریت :</p>\r\n<p>1- مدیریت باید بتواند تمامی نظرات خود را روی این مطالب اعمال کند</p>', 1, 0, 0, 1, '1391-10-23 10:38:10', '1391-10-24 12:02:59', 7, 8, NULL),
+(13, 2, 5, 'طزرذ', 'طزرذزطرذطزرذ', '<p>طزرذزطرذطزرذطزرذطزرذ</p>', NULL, 1, 0, 0, 1, '1391-10-24 11:14:27', '1391-10-24 11:14:27', 11, 12, NULL);
 
 -- --------------------------------------------------------
 
@@ -871,34 +910,42 @@ INSERT INTO `gl_roles` (`id`, `name`, `title`, `lft`, `rght`, `parent_id`) VALUE
 CREATE TABLE IF NOT EXISTS `gl_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `section` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL,
+  `namedSection` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL,
   `key` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL,
   `value` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL,
   `alias` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL,
+  `params` text COLLATE utf8_persian_ci,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=18 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `gl_settings`
 --
 
-INSERT INTO `gl_settings` (`id`, `section`, `key`, `value`, `alias`, `modified`) VALUES
-(1, 'Site', 'Name', 'بیگ آی تی بلاگ', 'عنوان سایت', '1391-10-22 19:56:20'),
-(2, 'Site', 'Keywords', 'گیلاس,سیستم مدیریت محتوای فارسی,کیک پی اچ پی,CMS,CakePHP,Gilas', 'توضیحات', '1391-10-22 19:56:20'),
-(3, 'Site', 'Description', 'سیستم مدیریت محتوای گیلاس تولید شده در دپارتمان وب شرکت اندیشه نوین', 'توضیحات', '1391-10-22 19:56:20'),
-(4, 'Site', 'FootNote', 'کلیه حقوق مادی و معنوی این نرم افزار متعلق به شرکت اندیشه نوین می باشد.', 'پانویس', '1391-10-22 19:56:20'),
-(5, 'Site', 'AdminAddress', 'admin', 'آدرس مدیریت', '1391-10-22 19:56:20'),
-(6, 'Error', 'Code-11', 'خطای شماره 11 - امکان ورود به سیستم وجود ندارد!', 'خطای شماره 11', '1391-10-22 19:56:20'),
-(7, 'Error', 'Code-12', 'خطای شماره 12 - درخواست شما نا معتبر است و امکان بررسی آن وجود ندارد!', 'خطای شماره 12', '1391-10-22 19:56:20'),
-(8, 'Error', 'Code-13', 'خطای شماره 13 - اطلاعات وارد شده معتبر نمی باشد. لطفا به خطاهای سیستم دقت کرده و مجددا تلاش نمایید!', 'خطای شماره 13', '1391-10-22 19:56:20'),
-(9, 'Error', 'Code-14', 'خطای شماره 14 – امکان انجام عملیات درخواستی بدلیل ارسال نادرست اطلاعات وجود ندارد!', 'خطای شماره 14', '1391-10-22 19:56:20'),
-(10, 'Error', 'Code-15', 'خطای شماره 15 – امکان حذف به علت دارا بودن آیتم های زیر مجموعه وجود ندارد. لطفا ابتدا آیتم های زیر مجموعه را حذف نمایید!', 'خطای شماره 15', '1391-10-22 19:56:20'),
-(11, 'Error', 'Code-16', 'خطای شماره 16 - به هر دلیلی امکان حذف وجود ندارد!', 'خطای شماره 16', '1391-10-22 19:56:20'),
-(12, 'Site', 'Email', '', 'ایمیل سایت', '1391-10-22 19:56:20'),
-(13, 'Error', 'Code-17', 'خطای شماره 17 - اشکال در انجام تراکنش', 'خطای شماره 17', '1391-10-22 19:56:20'),
-(14, 'Site', 'Template', 'Freely', 'قالب سایت', '1391-10-22 19:56:20'),
-(16, 'Error', 'Code-18', 'این آیتم به صورت سیستمی تعریف شده است و امکان ویرایش یا حذف آن وجود ندارد', 'خطای شماره 18', '1391-10-22 19:56:20'),
-(17, 'Site', 'ContentCount', '3', 'تعداد مطالب در صفحه اصلی', '1391-10-22 19:56:20');
+INSERT INTO `gl_settings` (`id`, `section`, `namedSection`, `key`, `value`, `alias`, `params`, `modified`) VALUES
+(1, 'Site', 'سایت', 'Name', 'بیگ آی تی بلاگ', 'عنوان سایت', NULL, '1391-10-29 09:06:37'),
+(2, 'Site', 'سایت', 'Keywords', 'گیلاس,سیستم مدیریت محتوای فارسی,کیک پی اچ پی,CMS,CakePHP,Gilas', 'توضیحات', NULL, '1391-10-29 09:06:37'),
+(3, 'Site', 'سایت', 'Description', 'سیستم مدیریت محتوای گیلاس تولید شده در دپارتمان وب شرکت اندیشه نوین', 'توضیحات', NULL, '1391-10-29 09:06:37'),
+(4, 'Site', 'سایت', 'FootNote', 'کلیه حقوق مادی و معنوی این نرم افزار متعلق به شرکت اندیشه نوین می باشد.', 'پانویس', NULL, '1391-10-29 09:06:37'),
+(5, 'Site', 'سایت', 'AdminAddress', 'admin', 'آدرس مدیریت', NULL, '1391-10-29 09:06:37'),
+(6, 'Error', 'خطای سیستمی', 'Code-11', 'خطای شماره 11 - امکان ورود به سیستم وجود ندارد!', 'خطای شماره 11', NULL, '1391-10-29 09:06:37'),
+(7, 'Error', 'خطای سیستمی', 'Code-12', 'خطای شماره 12 - درخواست شما نا معتبر است و امکان بررسی آن وجود ندارد!', 'خطای شماره 12', NULL, '1391-10-29 09:06:37'),
+(8, 'Error', 'خطای سیستمی', 'Code-13', 'خطای شماره 13 - اطلاعات وارد شده معتبر نمی باشد. لطفا به خطاهای سیستم دقت کرده و مجددا تلاش نمایید!', 'خطای شماره 13', NULL, '1391-10-29 09:06:37'),
+(9, 'Error', 'خطای سیستمی', 'Code-14', 'خطای شماره 14 – امکان انجام عملیات درخواستی بدلیل ارسال نادرست اطلاعات وجود ندارد!', 'خطای شماره 14', NULL, '1391-10-29 09:06:37'),
+(10, 'Error', 'خطای سیستمی', 'Code-15', 'خطای شماره 15 – امکان حذف به علت دارا بودن آیتم های زیر مجموعه وجود ندارد. لطفا ابتدا آیتم های زیر مجموعه را حذف نمایید!', 'خطای شماره 15', NULL, '1391-10-29 09:06:37'),
+(11, 'Error', 'خطای سیستمی', 'Code-16', 'خطای شماره 16 - به هر دلیلی امکان حذف وجود ندارد!', 'خطای شماره 16', NULL, '1391-10-29 09:06:37'),
+(12, 'Site', 'سایت', 'Email', '', 'ایمیل سایت', NULL, '1391-10-29 09:06:37'),
+(13, 'Error', 'خطای سیستمی', 'Code-17', 'خطای شماره 17 - اشکال در انجام تراکنش', 'خطای شماره 17', NULL, '1391-10-29 09:06:37'),
+(14, 'Site', 'سایت', 'Template', 'Freely', 'قالب سایت', NULL, '1391-10-29 09:06:37'),
+(16, 'Error', 'خطای سیستمی', 'Code-18', 'این آیتم به صورت سیستمی تعریف شده است و امکان ویرایش یا حذف آن وجود ندارد', 'خطای شماره 18', NULL, '1391-10-29 09:06:37'),
+(17, 'Content', 'مطالب', 'count', '1', 'تعداد مطالب در صفحه اصلی', NULL, '1391-10-30 08:42:26'),
+(18, 'Content', 'مطالب', 'comment_for_registers', '0', 'قابلیت نظردهی برای مطالب اعضا', 'a:1:{s:7:"options";a:2:{i:0;s:6:"خیر";i:1;s:6:"بله";}}', '1391-10-30 08:42:26'),
+(19, 'Content', 'مطالب', 'register_has_content', '1', 'قابلیت نوشتن مطلب توسط اعضا', 'a:1:{s:7:"options";a:2:{i:0;s:6:"خیر";i:1;s:6:"بله";}}', '1391-10-30 08:42:26'),
+(20, 'SMS', 'پیامک', 'username', '4gdfh  df hhjfj56', 'نام کاربری', NULL, '1391-10-29 18:48:56'),
+(21, 'SMS', 'پیامک', 'password', '456', 'رمز عبور', NULL, '1391-10-29 18:48:56'),
+(22, 'SMS', 'پیامک', 'number', '456', 'شماره پیامک', NULL, '1391-10-29 18:48:56'),
+(23, 'SMS', 'پیامک', 'link', '456', 'آدرس صفحه وب', NULL, '1391-10-29 18:48:56');
 
 -- --------------------------------------------------------
 
@@ -947,9 +994,9 @@ CREATE TABLE IF NOT EXISTS `gl_users` (
 --
 
 INSERT INTO `gl_users` (`id`, `username`, `password`, `name`, `email`, `active`, `role_id`, `registered_date`, `last_logged_in`, `last_ip_logged_in`) VALUES
-(1, 'admin', '9ee2c9367485427679bd7a0ec1c7f3263869b387', 'جمال طوسی', 'jamal4533@yahoo.com', 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(2, 'hamid', 'ddd20c26354abe5caefbdce42621716d09dcbe3f', 'حمید ممدوحی', 'hamid.mamdoohi@gmail.com', 1, 3, '0000-00-00 00:00:00', '1391-10-23 15:45:48', '::1'),
-(3, 'razzaghi', '6017b1c16ab39a4f14f2a579fa9aa629936c78b6', 'محمد رزاقی', '1razzaghi@gmail.com', 1, 2, '0000-00-00 00:00:00', '1391-10-23 15:45:59', '127.0.0.1');
+(1, 'admin', '9ee2c9367485427679bd7a0ec1c7f3263869b387', 'جمال طوسی', 'jamal4533@yahoo.com', 1, 2, '0000-00-00 00:00:00', '1391-10-30 08:51:24', '127.0.0.1'),
+(2, 'hamid', 'ddd20c26354abe5caefbdce42621716d09dcbe3f', 'حمید ممدوحی', 'hamid.mamdoohi@gmail.com', 1, 3, '0000-00-00 00:00:00', '1391-10-25 17:03:33', '127.0.0.1'),
+(3, 'razzaghi', '6017b1c16ab39a4f14f2a579fa9aa629936c78b6', 'محمد رزاقی', '1razzaghi@gmail.com', 1, 2, '0000-00-00 00:00:00', '1391-10-24 11:24:17', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -981,6 +1028,39 @@ CREATE TABLE IF NOT EXISTS `gl_weblinks` (
   PRIMARY KEY (`id`),
   KEY `weblink_category_id` (`weblink_category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `yg_complaints`
+--
+
+CREATE TABLE IF NOT EXISTS `yg_complaints` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `attachment_file_name` varchar(100) DEFAULT NULL,
+  `comp_name` varchar(50) NOT NULL,
+  `comp_family` varchar(50) NOT NULL,
+  `comp_email` varchar(100) DEFAULT NULL,
+  `comp_mobile` varchar(11) NOT NULL,
+  `comp_address` varchar(255) DEFAULT NULL,
+  `user_defence` text,
+  `commit_vote` text,
+  `created` varchar(20) NOT NULL,
+  `status` int(11) NOT NULL,
+  `status_desc` text NOT NULL,
+  `code_rahgiri` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `yg_complaints`
+--
+
+INSERT INTO `yg_complaints` (`id`, `user_id`, `subject`, `content`, `attachment_file_name`, `comp_name`, `comp_family`, `comp_email`, `comp_mobile`, `comp_address`, `user_defence`, `commit_vote`, `created`, `status`, `status_desc`, `code_rahgiri`) VALUES
+(1, 2, '123', '21312', NULL, '123', '213', '', '21312333333', '', NULL, NULL, '1391-10-30 08:53:51', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-30 08:53:51";}}', 'C-0853510001');
 
 -- --------------------------------------------------------
 
@@ -1037,7 +1117,16 @@ CREATE TABLE IF NOT EXISTS `yg_messages` (
   `created` char(20) DEFAULT NULL,
   `files` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `yg_messages`
+--
+
+INSERT INTO `yg_messages` (`id`, `user_id`, `subject`, `message`, `created`, `files`) VALUES
+(1, 3, 'sdfgdsfg', '<p>dsgdsfg</p>', '1391-10-24 09:34:30', NULL),
+(2, 2, 'sdfg', '<p>sdfgsdfg</p>', '1391-10-24 09:34:44', NULL),
+(3, 2, 'ghgh', '<p>ghghhg</p>', '1391-10-24 09:34:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1146,19 @@ CREATE TABLE IF NOT EXISTS `yg_messages_users` (
   `lft` int(11) NOT NULL,
   `rght` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `yg_messages_users`
+--
+
+INSERT INTO `yg_messages_users` (`id`, `message_id`, `user_id`, `read_date`, `new`, `folder`, `is_sender`, `parent_id`, `lft`, `rght`) VALUES
+(1, 1, 3, '1391-10-24 11:26:44', 0, 2, 1, 0, 1, 6),
+(2, 1, 2, '1391-10-24 11:54:27', 0, 1, 0, 0, 7, 12),
+(3, 2, 2, '1391-10-24 11:54:27', 0, 2, 1, 2, 8, 9),
+(4, 2, 3, '1391-10-24 11:26:44', 0, 1, 0, 1, 2, 3),
+(5, 3, 2, '1391-10-24 11:54:27', 0, 2, 1, 2, 10, 11),
+(6, 3, 3, '1391-10-24 11:26:44', 0, 1, 0, 1, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -1129,6 +1230,23 @@ CREATE TABLE IF NOT EXISTS `yg_rastes` (
 
 INSERT INTO `yg_rastes` (`id`, `name`) VALUES
 (1, 'رسته 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `yg_sms`
+--
+
+CREATE TABLE IF NOT EXISTS `yg_sms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from` char(14) DEFAULT NULL,
+  `to` char(14) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `created` char(20) DEFAULT NULL,
+  `identifier` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1503,16 +1621,19 @@ CREATE TABLE IF NOT EXISTS `yg_user_informations` (
   `market_masahat` tinyint(4) DEFAULT NULL,
   `code_rahgiri` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
-  `created` char(20) NOT NULL,
+  `status_desc` text CHARACTER SET utf8,
+  `created` char(20) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `yg_user_informations`
 --
 
-INSERT INTO `yg_user_informations` (`id`, `user_id`, `first_name`, `last_name`, `place_id`, `raste_id`, `degree_id`, `father_name`, `gender`, `code_melli`, `shenasnameh_number`, `mahale_sodoor`, `birth_day`, `din`, `mazhab`, `vazifeh_omoomi`, `madrak_tahsili`, `taahol`, `sarparast`, `afrad_tahte_takafol`, `isargari`, `gov_employment`, `reg_other_union`, `parvaneh_other_union`, `latest_employment`, `history_duration`, `postal_code`, `telephone`, `home_address`, `mobile`, `market_name`, `market_sign`, `market_address`, `market_telephone`, `market_fax`, `market_postal_code`, `mantagheh_shahrdari`, `nahiye_shahrdari`, `hozeh_kalantari`, `vazeyat_joghrafiaee`, `mahale_esteghrar`, `vazeyat_malekiat`, `market_masahat`, `code_rahgiri`, `status`, `created`) VALUES
-(17, 2, 'حمید', 'ممدوحی', 1, 1, 2, 'احمد', 1, '0946217742', '21572', '124', '1367-04-26', 'اسلام', 'شیعه', 3, 7, 1, 2, NULL, 0, '', '', NULL, '', NULL, '1232131231', '05116580907', 'بلوار توس - توس 65/6 - کوچه گلستان - پلاک 37', '09159922885', 'سیاحت شرق', '', 'ابوذر غفاری 13 - پلاک 98', '05118467980', '05118464994', '1231231231', 0, NULL, '', 1, 1, 2, 89, '2227310017', 2, '1391-10-13 22:27:31');
+INSERT INTO `yg_user_informations` (`id`, `user_id`, `first_name`, `last_name`, `place_id`, `raste_id`, `degree_id`, `father_name`, `gender`, `code_melli`, `shenasnameh_number`, `mahale_sodoor`, `birth_day`, `din`, `mazhab`, `vazifeh_omoomi`, `madrak_tahsili`, `taahol`, `sarparast`, `afrad_tahte_takafol`, `isargari`, `gov_employment`, `reg_other_union`, `parvaneh_other_union`, `latest_employment`, `history_duration`, `postal_code`, `telephone`, `home_address`, `mobile`, `market_name`, `market_sign`, `market_address`, `market_telephone`, `market_fax`, `market_postal_code`, `mantagheh_shahrdari`, `nahiye_shahrdari`, `hozeh_kalantari`, `vazeyat_joghrafiaee`, `mahale_esteghrar`, `vazeyat_malekiat`, `market_masahat`, `code_rahgiri`, `status`, `status_desc`, `created`) VALUES
+(17, 2, 'حمید', 'ممدوحی', 1, 1, 2, 'احمد', 1, '0946217742', '21572', '124', '1367-04-26', 'اسلام', 'شیعه', 3, 7, 1, 2, NULL, 0, '', '', NULL, '', NULL, '1232131231', '05116580907', 'بلوار توس - توس 65/6 - کوچه گلستان - پلاک 37', '09159922885', 'سیاحت شرق', '', 'ابوذر غفاری 13 - پلاک 98', '05118467980', '05118464994', '1231231231', 0, NULL, '', 1, 1, 2, 89, '2227310017', 1, 'a:5:{i:0;a:3:{s:6:"status";s:2:"-1";s:4:"date";s:19:"1391-10-28 10:20:47";s:4:"desc";s:5:"gfgjh";}i:1;a:3:{s:6:"status";s:2:"-1";s:4:"date";s:19:"1391-10-28 10:21:29";s:4:"desc";s:17:"asfdsadf cxv xcvb";}i:2;a:3:{s:6:"status";s:2:"-3";s:4:"date";s:19:"1391-10-28 10:27:17";s:4:"desc";s:9:"3215456\r\n";}i:3;a:3:{s:6:"status";s:1:"3";s:4:"date";s:19:"1391-10-28 10:27:35";s:4:"desc";N;}i:4;a:3:{s:6:"status";s:1:"1";s:4:"date";s:19:"1391-10-30 09:00:37";s:4:"desc";N;}}', '1391-10-13 22:27:31'),
+(21, 0, 'gh', 'hg', 1, 1, 0, 'gh', 1, '0945981961', '123', '32', '1300-01-01', 'gh', 'gh', 1, 1, 1, 1, NULL, 0, '', '', '', '', NULL, '1324646546', '456666666666', 'fd', '54666666666', '456', '', '46555555555555555555555', '465555555555', '654444444444', '5644444444', 127, NULL, '', 1, 1, 1, 45, '0849030021', -1, NULL, '1391-10-30 08:49:03'),
+(22, 0, '123', '123', 1, 1, 0, '123', 1, '0945981961', '213', '32', '1300-01-01', '12', '213', 1, 1, 1, 1, NULL, 0, '', '', '', '', NULL, '1213222223', '123333333333', '213', '12333333333', '123', '', '21111', '123333333333', '213333333333', '1233333333', 127, NULL, '', 1, 1, 1, 127, '0850490022', -1, NULL, '1391-10-30 08:50:49');
 
 -- --------------------------------------------------------
 
