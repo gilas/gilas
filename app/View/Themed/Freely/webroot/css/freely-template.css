@@ -26,7 +26,7 @@ body {
 	min-width:50px;
 }
 .form-list .one-third label:first-child{
-	min-width:110px;
+	min-width:100px;
 	display: block;
 }
 .form-list .two-third input[type=text],.form-list .two-third  select{

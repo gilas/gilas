@@ -22,6 +22,16 @@
         }
         ?>
     </div>
+    <div class="span2 well" style="padding: 4px;">
+        <?php echo $this->Html->image('icon-pack/48x48/File.png'); ?>
+        <?php echo $this->Html->link('شکایات', array('controller' => 'Complaints', 'action' => 'index', 'admin' => TRUE)); ?>
+        <?php
+        $count = $this->requestAction(array('controller' => 'Complaints', 'action' => 'countNewComplaints', 'admin' => false));
+        if($count){
+            echo $this->Html->link($count,  array('controller' => 'Complaints', 'action' => 'index','status' => 0, 'admin' => TRUE), array('class' => 'count') );
+        }
+        ?>
+    </div>
 </div>
 <div class="page-header">
     <h1>مدیریت بخش ها <small>مدیریت منو ، مطالب، گالری، اسلاید و ...</small></h1>

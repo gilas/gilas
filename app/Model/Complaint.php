@@ -98,7 +98,22 @@ class Complaint extends AppModel {
             ),
         )
 	);
-
+    
+    public $namedStatus = array(
+        -1 => 'حذف شده',
+        0 => 'در دست بررسی',
+        1 => 'ارجاع به واحد صنفی',
+        2 => 'ارجاع به کمیسیون',
+        3 => 'خاتمه',
+    );
+    public $formattedStatus = array(
+        -1 => '<span class="label label-important">حذف شده</span>',
+        0 => '<span class="label">در دست بررسی</span>',
+        1 => '<span class="label label-success">ارجاع به واحد صنفی</span>',
+        2 => '<span class="label label-success">ارجاع به کمیسیون</span>',
+        3 => '<span class="label label-success">خاتمه</span>',
+    );
+    
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
@@ -115,4 +130,18 @@ class Complaint extends AppModel {
 			'order' => ''
 		)
 	);
+    
+    public function afterFind($results){
+        if(empty($results)){
+            return $results;
+        }
+        if($this->findQueryType != 'count'){
+            foreach($results as &$result){
+                //TODO: Unknown error , how to get type of find (all, first, count, ...) 
+                $result['Complaint']['namedStatus'] = $this->namedStatus[$result['Complaint']['status']];
+                $result['Complaint']['formattedStatus'] = $this->formattedStatus[$result['Complaint']['status']];
+            }
+        }
+        return $results;
+    }
 }

@@ -196,6 +196,24 @@ class UsersController extends AppController {
         $this->redirect($this->referer());
     }
     
+    /**
+     * Create User, This function used with other Controllers
+     * 
+     * @param mixed $user , must contain this fields
+     *          name, username, password, role_id
+     * @return
+     */
+    public function _createUser($user = array()){
+        if(empty($user)){
+            return false;
+        }
+        $this->User->create();
+        $user['registered_date'] = Jalali::dateTime();
+        if(! $this->User->save($user)){
+            return false;
+        }
+        return $this->User->id ;
+    }
 
 }
 

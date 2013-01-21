@@ -8,6 +8,23 @@
 class UserInformation extends AppModel {
 
     public $tablePrefix = 'yg_';
+    public $actsAs = array(
+        'UploadPack.Upload' => array(
+            'avatar' => array(
+                'styles' => array(
+                    'thumb' => '120x120'
+                ),
+                'path' => ':webroot/img/members/avatar/:id-:basename-:style.:extension',
+            ),
+            'logo' => array(
+                'styles' => array(
+                    'thumb' => '120x120'
+                ),
+                'path' => ':webroot/img/members/logo/:id-:basename-:style.:extension',
+            ),
+        ),
+    );
+    
 	public $validate = array(
         'place_id' => array(
             'notempty' => array(
@@ -302,6 +319,31 @@ class UserInformation extends AppModel {
                 'rule' => array('between', 1, 3),
                 'message' => 'مقدار وارد شده نامعتبر است',
             ),
+        ),
+        'avatar' => array(
+            'notempty' => array(
+                'rule' => array('attachmentPresence'),
+                'message' => 'انتخاب تصویر الزامی است',
+                'on' => 'create',
+            ),
+            'maxSize' => array(
+                'rule' => array('attachmentMaxSize', 2096576),
+                'message' => 'اندازه تصویر آپلودی نمی تواند بیشتر از 2 مگابایت باشد'
+            ),
+            'extension' => array(
+                'rule' => array('attachmentContentType', array('image/jpeg', 'image/gif', 'image/png', 'image/pjpeg')),
+                'message' => 'فقط مجاز به آپلود تصویر می باشید'
+            )
+        ),
+        'logo' => array(
+            'maxSize' => array(
+                'rule' => array('attachmentMaxSize', 2096576),
+                'message' => 'اندازه تصویر آپلودی نمی تواند بیشتر از 2 مگابایت باشد'
+            ),
+            'extension' => array(
+                'rule' => array('attachmentContentType', array('image/jpeg', 'image/gif', 'image/png', 'image/pjpeg')),
+                'message' => 'فقط مجاز به آپلود تصویر می باشید'
+            )
         ),
         
     );

@@ -1,7 +1,10 @@
 <div class="page">
 <div class="center">بسمه تعالی</div>
-<div class="center">اتحادیه صنف عرضه ککندگان محصولات فرهنگی</div>
+<div class="center">اتحادیه صنف عرضه کنندگان محصولات فرهنگی</div>
 <div class="para">
+    <div style="float:left;">
+        <span class="information"><?php echo $this->Upload->image($request, 'UserInformation.avatar',array('style' => 'thumb')); ?></span>
+    </div>
 	<div class="row row-margin">
         <div class="span2">
             <label class="label-information">نام</label>
@@ -96,3 +99,9 @@
 	</div>
 </div>
 </div>
+<style>
+.label-information{
+    min-width: 150px;
+    display: inline-block;
+}
+</style>

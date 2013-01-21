@@ -4,7 +4,7 @@ class CertificatesController extends AppController{
 	
 	public $uses = array('UserInformation', 'Option', 'Warden', 'Doc');
 	public $publicActions = array('register', 'showCode', 'view', 'index');
-	
+	public $helpers = array('UploadPack.Upload');
 	public $paginateConditions = array(
 		'name' => array(
 			'field' => array(
@@ -78,6 +78,7 @@ class CertificatesController extends AppController{
         if(empty($this->request->named['published'])){
             $this->paginate['conditions']['UserInformation.status <>'] = -1;
         }
+        $this->paginate['order'] = 'UserInformation.id DESC';
         // must get data with paginate() for pagination
         $requests = $this->paginate();
         $this->set('requests', $requests);
@@ -108,8 +109,32 @@ class CertificatesController extends AppController{
         if(! $info){
             return false;
         }
-        
+
+        switch($status){
+            case 1:
+            case -1:
+                if($info['UserInformation']['status'] != 0) 
+                    return false; 
+                break;
+            case 2:
+                if($info['UserInformation']['status'] != 1) 
+                    return false;
+                break;
+            case 3:
+            case -3:
+                if($info['UserInformation']['status'] != 2) 
+                    return false;
+                break;
+            
+        }
         $desc = unserialize($info['UserInformation']['status_desc']);
+        
+        // Cann't sat saved status again
+        $savedStatues = Set::combine($desc, '{n}.status', '{n}.status');
+        if(in_array($status, $savedStatues)){
+            return false;
+        }
+        
         $desc[]  = array(
             'status' => $status,
             'date' => Jalali::dateTime(),
@@ -118,7 +143,20 @@ class CertificatesController extends AppController{
         $desc = serialize($desc);
         $this->UserInformation->id = $id;
 
-        return $this->UserInformation->save(array('status' => $status, 'status_desc' => $desc));
+        $return =  $this->UserInformation->save(array('status' => $status, 'status_desc' => $desc));
+        
+        // Create User
+        if($return and $status == 1){
+            $obj = $this->_loadController('Users');
+            $user_id = $obj->_createUser(array(
+                'name' => $info['UserInformation']['first_name'].' '.$info['UserInformation']['last_name'],
+                'username' => $info['UserInformation']['code_melli'],
+                'password' => $info['UserInformation']['shenasnameh_number'],
+                'role_id' => 3, 
+            ));
+            $this->UserInformation->saveField('user_id', $user_id);
+        }
+        return $return;
     }
     public function admin_changeStatus($id){
         // the request must be sent via post

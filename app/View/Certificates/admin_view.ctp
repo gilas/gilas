@@ -14,6 +14,7 @@ $this->Html->css('modal', null, array('inline' => false));
 <div class="row" id="toolbar-menu">
     <div class="title">اطلاعات درخواست <?php echo $request['UserInformation']['formattedStatus']; ?></div>
     <ul id="toolbar">
+        <?php if($request['UserInformation']['status'] == 0): ?>
         <li>
         <?php 
         // First OK
@@ -21,35 +22,40 @@ $this->Html->css('modal', null, array('inline' => false));
         ?>
         </li>
         <li>
+            <span style="margin-right:5px;">|</span>
             <a onclick="$('#statusInput').val(-1);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="حذف" rel="tooltip" class="btn btn-danger" href="#">
                 <i class="icon-remove icon-white"></i>
             </a>
         </li>
+        <?php endif; ?>
+        <?php if($request['UserInformation']['status'] == 1): ?>
         <li>
+        <span style="margin-right:5px;">|</span>
         <?php 
         // Doc OK
         echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-file icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 2), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید مدارک', 'tooltip-place' => 'bottom'));
         ?>
-        <span style="margin-right:5px;">|</span>
         </li>
+        <?php endif; ?>
+        <?php if($request['UserInformation']['status'] == 2): ?>
         <li>
         <?php 
         // Warden OK
         echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-user icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 3), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید بازرس', 'tooltip-place' => 'bottom')); 
         ?>
-        <span style="margin-right:5px;">|</span>
         </li>
         <li>
+            <span style="margin-right:5px;">|</span>
             <a onclick="$('#statusInput').val(-3);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="عدم تائید بازرس" rel="tooltip" class="btn btn-danger" href="#">
-                <i class="icon-remove icon-white"></i>
+                <i class="icon-user icon-white"></i>
             </a>
         </li>
+        <?php endif; ?>
         <li>
         <?php
         // Print
         echo $this->Html->link($this->Html->tag('i', '', array('class' => 'icon-print icon-white')),array('action' => 'print', $request['UserInformation']['id']), array('class' => 'btn btn-info popup-link', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'چاپ', 'tooltip-place' => 'bottom')); 
         ?>
-        <span style="margin-right:5px;">|</span>
         </li>
     </ul>
 </div>
@@ -63,6 +69,9 @@ $this->Html->css('modal', null, array('inline' => false));
     </ul>
 	<div class="tab-content">
 		<div id="profile" class="tab-pane active">
+            <div style="float:left;">
+                <?php echo $this->Upload->image($request, 'UserInformation.avatar',array('style' => 'thumb')); ?>
+            </div>
 			<div class="row row-margin">
                 <div class="span3">
                     <label class="label-information">نام</label>
@@ -157,6 +166,9 @@ $this->Html->css('modal', null, array('inline' => false));
 			</div>
 		</div>
 		<div id="work" class="tab-pane">
+            <div style="float:left;">
+                <?php echo $this->Upload->image($request, 'UserInformation.logo',array('style' => 'thumb')); ?>
+            </div>
             <div class="row row-margin">
                 <div class="span3">
                     <label class="label-information">مکان</label>

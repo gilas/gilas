@@ -13,6 +13,7 @@ echo $this->Form->create('UserInformation',array(
 		'div' => array('class' => 'input text')
 	),
 	'class' => 'form-list',
+    'type' => 'file',
 ));
 ?>
 <div id="tab" class="tabs-1 widget">
@@ -73,6 +74,7 @@ echo $this->Form->create('UserInformation',array(
 				<?php
                 echo $this->Form->input('din', array('label' => 'دین'));
 				echo $this->Form->input('mazhab', array('label' => 'مذهب'));
+                echo $this->Form->input('avatar', array('label' => 'تصویر متقاضی', 'type' => 'file'));
 				?>
         </div><!--/ tab_content-->
 
@@ -102,6 +104,7 @@ echo $this->Form->create('UserInformation',array(
 				echo $this->Form->input('market_fax', 			array('label' => 'فاکس'));
 				echo $this->Form->input('market_address', 		array('label' => 'نشانی','type'=>'text','div' => array('class' => 'input text')));
 				echo $this->Form->input('market_postal_code', 	array('label' => 'کد پستی'));
+                echo $this->Form->input('logo', array('label' => 'لوگو', 'type' => 'file'));
 				?>
         </div><!--/ tab_content-->
 		<div id="place" class="tab_content">

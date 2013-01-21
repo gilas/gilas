@@ -25,6 +25,16 @@
                 <?php echo $this->Html->link('پیام نگار'.$newMessage, array('controller' => 'Pms', 'action' => 'index', 'admin' => false, 'plugin' => false),array('escape' => false)); ?>
             </li>
             <li class="current-menu-item">
+                 <?php
+                 $newComplaint = null;
+                $count = $this->requestAction(array('controller' => 'Complaints', 'action' => 'countNewComplaints', 'admin' => false));
+                if($count){
+                    $newComplaint = $this->Html->tag('span', $count, array('class' => 'count'));
+                }
+                ?>
+                <?php echo $this->Html->link('شکایت'.$newComplaint, array('controller' => 'Complaints', 'action' => 'index', 'admin' => false, 'plugin' => false),array('escape' => false)); ?>
+            </li>
+            <li class="current-menu-item">
                 <?php echo $this->Html->link('صفحه شخصی', '/~'. AuthComponent::user('username')); ?>
             </li>
             <li class="current-menu-item">

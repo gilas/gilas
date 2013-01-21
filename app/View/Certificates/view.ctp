@@ -29,16 +29,19 @@ if(! isset($request)){
                     <label class="label-information">نام خانوادگی</label>
                     <span class="information"><?php echo $request['UserInformation']['last_name']; ?></span>
                 </div>
+                <div style="float:left;">
+                    <span class="information"><?php echo $this->Upload->image($request, 'UserInformation.avatar',array('style' => 'thumb')); ?></span>
+                </div>
                 <div class="one-third">
                     <label class="label-information">نام پدر</label>
                     <span class="information"><?php echo $request['UserInformation']['father_name']; ?></span>
                 </div>
-			</div>
-            <div class="form-row">
                 <div class="one-third">
                     <label class="label-information">جنسیت</label>
                     <span class="information"><?php echo $request['UserInformation']['namedGender']; ?></span>
                 </div>
+			</div>
+            <div class="form-row">
                 <div class="one-third">
                     <label class="label-information">کد ملی</label>
                     <span class="information"><?php echo $request['UserInformation']['code_melli']; ?></span>
@@ -125,16 +128,19 @@ if(! isset($request)){
                     <label class="label-information">رسته صنفی</label>
                     <span class="information"><?php echo $request['Raste']['name']; ?></span>
                 </div>
+                <div style="float:left;">
+                    <span class="information"><?php echo $this->Upload->image($request, 'UserInformation.logo',array('style' => 'thumb')); ?></span>
+                </div>
                 <div class="one-third">
                     <label class="label-information">درجه صنفی</label>
                     <span class="information"><?php echo $request['Degree']['name']; ?></span>
                 </div>
-			</div>
-            <div class="form-row">
                 <div class="one-third">
                     <label class="label-information">عنوان</label>
                     <span class="information"><?php echo $request['UserInformation']['market_name']; ?></span>
                 </div>
+			</div>
+            <div class="form-row">
                 <div class="one-third">
                     <label class="label-information">عنوان تابلو</label>
                     <span class="information"><?php echo $request['UserInformation']['market_sign']; ?></span>
