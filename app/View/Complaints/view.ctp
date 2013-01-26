@@ -1,86 +1,54 @@
+
 <?php
+if($complaint['Complaint']['status'] == 1):
 $this->Html->script('modal', false);
 $this->Html->css('modal', null, array('inline' => false));
-// Load Date Picker
-$this->Html->script('jquery.datepicker',false);
-$this->Html->css('jquery.datepicker',null,array('inline' => false));
 ?>
 <!-- Modal Form -->
-<form id="statusForm" method="post" action="<?php echo $this->Html->url(array('action' => 'changeStatus', $complaint['Complaint']['id'])) ?>" style="display: none;">
-    <input type="hidden" name="status" value="" id="statusInput" />
-    <p id="para">دلیل عدم تائید را بیان نمائید.</p>
-    <textarea name="desc" style="width:320px;height:150px;"></textarea>
+<form id="statusForm" method="post" action="<?php echo $this->Html->url(array('action' => 'addReply', $complaint['Complaint']['id'])) ?>" style="display: none;">
+    <p>دفاعیه خود را بنویسید.</p>
+    <textarea name="defence" style="width:320px;height:150px;"></textarea>
     <div class="clearfix"></div>
     <input type="submit" value="ارسال" class="btn btn-success" />
 </form>
 <!-- End Modal Form -->
-
-<!-- Modal Form -->
-<form id="commiteForm" method="post" action="<?php echo $this->Html->url(array('action' => 'changeStatus', $complaint['Complaint']['id'])) ?>" style="display: none;">
-    <input type="hidden" name="status" value="" id="commiteStatusInput" />
-    <p id="para">تاریخ تشکیل کمیته را مشخص نمائید.</p>
-    <input name="commiteDate" id="datepicker"/>
-    <div class="clearfix"></div>
-    <input type="submit" value="ارسال" class="btn btn-success" />
-</form>
-<script>
-    $(function(){
-        $('#datepicker').datepicker({
-            defaultDate: new JalaliDate(<?php Jalali::date('Y,m,d'); ?>),
-            showButtonPanel: false,
-            dateFormat: 'yy-mm-dd'
-        });
-    })
-</script>
-<!-- End Modal Form -->
+<p>
+لطفا دفاعیه خود را در مورد شکایت مطرح شده عنوان فرمائید.
+</p>
 <div class="row" id="toolbar-menu">
     <div class="title">اطلاعات شکایت شماره <?php echo $complaint['Complaint']['id']; ?> <?php echo $complaint['Complaint']['formattedStatus']; ?></div>
     <ul id="toolbar">
-        <?php if($complaint['Complaint']['status'] == 0): ?>
         <li>
-            <?php 
-            // First OK
-            echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-ok icon-white')),array('action' => 'changeStatus', $complaint['Complaint']['id']), array('data' => array('status' => 1), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'ارجاع به متشاکی', 'tooltip-place' => 'bottom'));
-            ?>
-        </li>
-        <li>
-            <span style="margin-right:5px;">|</span>
-            <a onclick="$('#statusInput').val(-1);$('#para').html('دلیل حذف را بیان نمائید.');$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="حذف" rel="tooltip" class="btn btn-danger" href="#">
-                <i class="icon-remove icon-white"></i>
+            <a onclick="$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="ثبت دفاعیه" rel="tooltip" class="btn btn-primary" href="#">
+                ثبت دفاعیه
             </a>
-        </li>
-        <?php endif; ?>
-        <?php if($complaint['Complaint']['status'] == 2): ?>
-        <li>
-            <span style="margin-right:5px;">|</span>
-            <a onclick="$('#commiteStatusInput').val(3);$('#commiteForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="ارجاع به کمیسیون" rel="tooltip" class="btn btn-success" href="#">
-                <i class="icon-user icon-white"></i>
-            </a>
-        </li>
-        <?php endif; ?>
-        <li>
-            <span style="margin-right:5px;">|</span>
-            <a onclick="$('#statusInput').val(4);$('#para').html('نتیجه را ذکر فرمائید.');$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="خاتمه" rel="tooltip" class="btn" href="#">
-                <i class="icon-ok"></i>
-            </a>
-        </li>
-        <li>
-        <?php
-        // Print
-        echo $this->Html->link($this->Html->tag('i', '', array('class' => 'icon-print icon-white')),array('action' => 'print', $complaint['Complaint']['id']), array('class' => 'btn btn-info popup-link', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'چاپ', 'tooltip-place' => 'bottom')); 
-        ?>
         </li>
     </ul>
 </div>
+<?php elseif($complaint['Complaint']['status'] == 4): ?>
+<p>
+نظر کمیسیون اعلام گردید.
+</p>
+<div class="row" id="toolbar-menu">
+    <div class="title">اطلاعات شکایت شماره <?php echo $complaint['Complaint']['id']; ?> <?php echo $complaint['Complaint']['formattedStatus']; ?></div>
+</div>
+<?php else: ?>
+<p>
+دفاعیه شما ثبت گردید. نتیجه کمیسیون متعاقبا اعلام می گردد.
+</p>
+<div class="row" id="toolbar-menu">
+    <div class="title">اطلاعات شکایت شماره <?php echo $complaint['Complaint']['id']; ?> <?php echo $complaint['Complaint']['formattedStatus']; ?></div>
+</div>
+<?php endif; ?>
 <div class="tabs-1 widget">
-    <ul class="nav nav-tabs">
+    <ul class="tabs">
         <li class="active"><a href="#profile" data-toggle="tab">اطلاعات شاکی و متشاکی</a></li>
         <li><a href="#complaint" data-toggle="tab">متن  شکایت</a></li>
         <li><a href="#commit" data-toggle="tab">کمیسیون</a></li>
         <li><a href="#other" data-toggle="tab">اطلاعات جانبی</a></li>
     </ul>
-	<div class="tab-content">
-		<div id="profile" class="tab-pane active">
+	<div class="tab_container">
+		<div id="profile" class="tab_content">
             <h2>شاکی</h2>
 			<div class="row row-margin">
                 <div class="span3">
@@ -107,7 +75,7 @@ $this->Html->css('jquery.datepicker',null,array('inline' => false));
                 </div>
 			</div>
 		</div>
-		<div id="complaint" class="tab-pane">
+				<div id="complaint" class="tab_content">
             <div class="row row-margin">
                 <div class="span9">
                     <label class="label-information">موضوع</label>
@@ -133,7 +101,7 @@ $this->Html->css('jquery.datepicker',null,array('inline' => false));
                 </div>
 			</div>
 		</div>
-        <div id="commit" class="tab-pane">
+        <div id="commit" class="tab_content">
             <div class="row row-margin">
                 <div class="span9">
                     <label class="label-information">تاریخ تشکیل کمیسیون</label>
@@ -147,7 +115,7 @@ $this->Html->css('jquery.datepicker',null,array('inline' => false));
                 </div>
 			</div>
 		</div>
-        <div id="other" class="tab-pane">
+        <div id="other" class="tab_content">
             <div class="row row-margin">
                 <div class="span3">
                     <label class="label-information">تاریخ ارسال درخواست</label>
@@ -156,28 +124,6 @@ $this->Html->css('jquery.datepicker',null,array('inline' => false));
                 <div class="span3">
                     <label class="label-information">کد رهگیری</label>
                     <span class="information"><?php echo $complaint['Complaint']['code_rahgiri']; ?></span>
-                </div>
-			</div>
-            <div class="row row-margin">
-                <div class="span6">
-                    <label class="label-information">تاریخچه</label>
-                    <?php
-                    $desc = unserialize($complaint['Complaint']['status_desc']);
-                    if($desc):
-                    ?>
-                    <table class="table">
-                        <tr>
-                            <th>وضعیت</th>
-                            <th>تاریخ</th>
-                        </tr>
-                        <?php foreach($desc as $descValue): ?>
-                        <tr>
-                            <td><?php echo $formattedStatus[$descValue['status']]; ?></td>
-                            <td><?php echo Jalali::niceShort($descValue['date']); ?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                    <?php endif;?>
                 </div>
 			</div>
         </div>

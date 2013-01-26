@@ -3,6 +3,9 @@
     	<h3 class="widget-title">منوی اصلی</h3>
         <?php if(AuthComponent::user('Role.name') == 'Register'): ?>
     	<ul class="menu">
+            <li class="current-menu-item">
+                <?php echo $this->Html->link('اطلاعات پروانه کسب', array('controller' => 'Certificates', 'action' => 'view', 'admin' => false, 'plugin' => false)); ?>
+            </li>
             <?php if(SettingsController::read('Content.register_has_content')): ?>
             <li class="current-menu-item">
                 <?php echo $this->Html->link('لیست مجموعه ها', array('controller' => 'ContentCategories', 'action' => 'index', 'admin' => false, 'plugin' => false)); ?>

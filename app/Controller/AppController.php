@@ -365,4 +365,26 @@ class AppController extends Controller {
      */
     public function admin_settings(){}
     
+    /**
+     * Send PM
+     * 
+     * @param mixed $user_id
+     * @param mixed $subject
+     * @param mixed $message
+     * @return
+     */
+    protected function _sendPM($user_id, $subject, $message){
+        $pms = $this->_loadController('Pms');
+        return $pms->_send(array(
+            'subject' => $subject,
+            'message' => $message,
+            'Recipients' => array(
+                array(
+                    'user' => $user_id,
+                    'parent_id' => 0,
+                )
+            ),
+        ));
+    }
+    
 }

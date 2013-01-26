@@ -527,6 +527,7 @@ class PmsController extends AppController{
 	}
     
     public function _send($params = array()){
+        
         if(empty($params['Recipients'])){
             return false;
         }
@@ -542,7 +543,6 @@ class PmsController extends AppController{
        $data['Reader']['folder'] = $this->Message->folders['outbox'];
        $data['Reader']['is_sender'] = true;
        $data['Reader']['parent_id'] = (isset($params['parent_id']))?$params['parent_id']:0;
-
        // get data of recipients
        $i = 0;
        $recipients = array();
@@ -560,12 +560,15 @@ class PmsController extends AppController{
        }
         //Save message, sender data
         $this->Message->saveAll($data);
-        //Save recipients data
-        foreach($recipients as $r){
-            $this->Message->Recipients->create();
-            $r['message_id'] = $this->Message->id;
-            $this->Message->Recipients->save($r);
+        if($this->Message->id){
+            //Save recipients data
+            foreach($recipients as $r){
+                $this->Message->Recipients->create();
+                $r['message_id'] = $this->Message->id;
+                $this->Message->Recipients->save($r);
+            }
         }
+        
        // return id for success saving otherwise return false
        return $this->Message->id;
     }

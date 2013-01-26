@@ -63,6 +63,16 @@ class UsersController extends AppController {
                     'last_logged_in' => Jalali::dateTime(),
                     'last_ip_logged_in' => $this->request->clientIp(),
                 ));
+                $this->loadModel('UserInformation');
+                $info = $this->UserInformation->find('first', array(
+                    'conditions' => array(
+                        'UserInformation.user_id' => $this->Auth->user('id'),
+                    ),
+                    'contain' => false,
+                ));
+                if($info){
+                    $this->Session->write('Auth.User.UserInformation', $info['UserInformation']);
+                }
                 $this->Session->setFlash('شما با موفقیت وارد سیستم شدید', 'message', array('type' => 'success'));
                 $this->redirect($this->Auth->redirect());
             } else {

@@ -36,7 +36,7 @@ if (!empty($requests)) {
                 <td id="grid-align"><?php echo $this->AdminForm->checkbox($request['Complaint']['id']); ?></td>
                 <td id="grid-align"><?php echo ++$index; ?></td>
                 <td><?php echo $request['Complaint']['comp_name'].' '.$request['Complaint']['comp_family']; ?></td>
-                <td><?php echo $request['User']['name']; ?></td>
+                <td><?php echo $request['UserInformation']['first_name'].' '.$request['UserInformation']['last_name']; ?></td>
                 <td><?php echo $this->Html->link($request['Complaint']['subject'], array('action' => 'view', $request['Complaint']['id'])); ?></td>
                 <td><?php echo Jalali::niceShort($request['Complaint']['created']); ?></td>
                 <td><?php echo $request['Complaint']['formattedStatus']; ?></td>

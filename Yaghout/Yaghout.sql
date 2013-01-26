@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 21, 2013 at 12:42 PM
+-- Generation Time: Jan 22, 2013 at 05:34 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -37,14 +37,14 @@ CREATE TABLE IF NOT EXISTS `gl_acos` (
   `lft` int(11) DEFAULT NULL,
   `rght` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=337 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=339 ;
 
 --
 -- Dumping data for table `gl_acos`
 --
 
 INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'controllers', 1, 568),
+(1, NULL, NULL, NULL, 'controllers', 1, 572),
 (2, 1, NULL, NULL, 'Comments', 2, 27),
 (3, 2, NULL, NULL, 'admin_index', 3, 4),
 (5, 2, NULL, NULL, 'admin_view', 7, 8),
@@ -186,7 +186,7 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (182, 179, NULL, NULL, 'admin_edit', 459, 460),
 (183, 179, NULL, NULL, 'admin_delete', 461, 462),
 (184, 179, NULL, NULL, 'admin_dispatch', 463, 464),
-(185, 1, NULL, NULL, 'Certificates', 470, 497),
+(185, 1, NULL, NULL, 'Certificates', 470, 499),
 (186, 185, NULL, NULL, 'admin_index', 471, 472),
 (197, 185, NULL, NULL, 'admin_changeDocs', 489, 490),
 (189, 185, NULL, NULL, 'admin_delete', 473, 474),
@@ -198,16 +198,16 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (195, 185, NULL, NULL, 'admin_remove', 485, 486),
 (196, 185, NULL, NULL, 'admin_changeWarden', 487, 488),
 (198, 185, NULL, NULL, 'admin_print', 491, 492),
-(225, 215, NULL, NULL, 'countNewMessages', 519, 520),
-(224, 215, NULL, NULL, 'admin_read', 517, 518),
-(212, 1, NULL, NULL, 'Profile', 498, 507),
-(213, 212, NULL, NULL, 'view', 499, 500),
-(214, 212, NULL, NULL, 'admin_dispatch', 501, 502),
-(215, 1, NULL, NULL, 'Pms', 508, 533),
-(216, 215, NULL, NULL, 'admin_add', 509, 510),
-(218, 215, NULL, NULL, 'admin_index', 511, 512),
-(219, 215, NULL, NULL, 'admin_delete', 513, 514),
-(223, 215, NULL, NULL, 'admin_dispatch', 515, 516),
+(225, 215, NULL, NULL, 'countNewMessages', 521, 522),
+(224, 215, NULL, NULL, 'admin_read', 519, 520),
+(212, 1, NULL, NULL, 'Profile', 500, 509),
+(213, 212, NULL, NULL, 'view', 501, 502),
+(214, 212, NULL, NULL, 'admin_dispatch', 503, 504),
+(215, 1, NULL, NULL, 'Pms', 510, 535),
+(216, 215, NULL, NULL, 'admin_add', 511, 512),
+(218, 215, NULL, NULL, 'admin_index', 513, 514),
+(219, 215, NULL, NULL, 'admin_delete', 515, 516),
+(223, 215, NULL, NULL, 'admin_dispatch', 517, 518),
 (226, 108, NULL, NULL, 'admin_add', 327, 328),
 (227, 108, NULL, NULL, 'admin_index', 329, 330),
 (228, 108, NULL, NULL, 'admin_active', 331, 332),
@@ -227,8 +227,8 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (279, 98, NULL, NULL, 'dispatch', 309, 310),
 (278, 94, NULL, NULL, 'dispatch', 283, 284),
 (277, 179, NULL, NULL, 'dispatch', 465, 466),
-(276, 212, NULL, NULL, 'dispatch', 503, 504),
-(275, 215, NULL, NULL, 'dispatch', 521, 522),
+(276, 212, NULL, NULL, 'dispatch', 505, 506),
+(275, 215, NULL, NULL, 'dispatch', 523, 524),
 (274, 162, NULL, NULL, 'dispatch', 419, 420),
 (273, 91, NULL, NULL, 'dispatch', 269, 270),
 (272, 81, NULL, NULL, 'dispatch', 257, 258),
@@ -248,10 +248,10 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (286, 29, NULL, NULL, 'edit', 141, 142),
 (287, 29, NULL, NULL, 'delete', 143, 144),
 (288, 29, NULL, NULL, 'addAbout', 145, 146),
-(289, 215, NULL, NULL, 'index', 523, 524),
-(290, 215, NULL, NULL, 'add', 525, 526),
-(291, 215, NULL, NULL, 'read', 527, 528),
-(292, 215, NULL, NULL, 'delete', 529, 530),
+(289, 215, NULL, NULL, 'index', 525, 526),
+(290, 215, NULL, NULL, 'add', 527, 528),
+(291, 215, NULL, NULL, 'read', 529, 530),
+(292, 215, NULL, NULL, 'delete', 531, 532),
 (298, 185, NULL, NULL, 'admin_settings', 495, 496),
 (297, 137, NULL, NULL, 'admin_settings', 405, 406),
 (296, 29, NULL, NULL, 'admin_settings', 147, 148),
@@ -266,8 +266,8 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (307, 81, NULL, NULL, 'admin_settings', 259, 260),
 (308, 91, NULL, NULL, 'admin_settings', 271, 272),
 (309, 162, NULL, NULL, 'admin_settings', 421, 422),
-(310, 215, NULL, NULL, 'admin_settings', 531, 532),
-(311, 212, NULL, NULL, 'admin_settings', 505, 506),
+(310, 215, NULL, NULL, 'admin_settings', 533, 534),
+(311, 212, NULL, NULL, 'admin_settings', 507, 508),
 (312, 179, NULL, NULL, 'admin_settings', 467, 468),
 (313, 94, NULL, NULL, 'admin_settings', 285, 286),
 (314, 98, NULL, NULL, 'admin_settings', 311, 312),
@@ -275,23 +275,25 @@ INSERT INTO `gl_acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`
 (316, 113, NULL, NULL, 'admin_settings', 363, 364),
 (317, 120, NULL, NULL, 'admin_settings', 387, 388),
 (318, 166, NULL, NULL, 'admin_settings', 434, 435),
-(319, 1, NULL, NULL, 'Complaints', 534, 553),
-(320, 319, NULL, NULL, 'admin_dispatch', 535, 536),
-(321, 319, NULL, NULL, 'dispatch', 537, 538),
-(322, 319, NULL, NULL, 'admin_settings', 539, 540),
-(323, 1, NULL, NULL, 'Smses', 554, 567),
-(324, 323, NULL, NULL, 'admin_settings', 555, 556),
-(326, 323, NULL, NULL, 'receive', 557, 558),
-(327, 323, NULL, NULL, 'admin_send', 559, 560),
-(328, 323, NULL, NULL, 'admin_index', 561, 562),
-(329, 323, NULL, NULL, 'admin_dispatch', 563, 564),
-(330, 323, NULL, NULL, 'dispatch', 565, 566),
-(331, 319, NULL, NULL, 'admin_index', 541, 542),
-(332, 319, NULL, NULL, 'admin_view', 543, 544),
-(333, 319, NULL, NULL, 'index', 545, 546),
-(334, 319, NULL, NULL, 'countNewComplaints', 547, 548),
-(335, 319, NULL, NULL, 'view', 549, 550),
-(336, 319, NULL, NULL, 'admin_changeStatus', 551, 552);
+(319, 1, NULL, NULL, 'Complaints', 536, 557),
+(320, 319, NULL, NULL, 'admin_dispatch', 537, 538),
+(321, 319, NULL, NULL, 'dispatch', 539, 540),
+(322, 319, NULL, NULL, 'admin_settings', 541, 542),
+(323, 1, NULL, NULL, 'Smses', 558, 571),
+(324, 323, NULL, NULL, 'admin_settings', 559, 560),
+(326, 323, NULL, NULL, 'receive', 561, 562),
+(327, 323, NULL, NULL, 'admin_send', 563, 564),
+(328, 323, NULL, NULL, 'admin_index', 565, 566),
+(329, 323, NULL, NULL, 'admin_dispatch', 567, 568),
+(330, 323, NULL, NULL, 'dispatch', 569, 570),
+(331, 319, NULL, NULL, 'admin_index', 543, 544),
+(332, 319, NULL, NULL, 'admin_view', 545, 546),
+(333, 319, NULL, NULL, 'index', 547, 548),
+(334, 319, NULL, NULL, 'countNewComplaints', 549, 550),
+(335, 319, NULL, NULL, 'view', 551, 552),
+(336, 319, NULL, NULL, 'admin_changeStatus', 553, 554),
+(337, 319, NULL, NULL, 'addReply', 555, 556),
+(338, 185, NULL, NULL, 'admin_changeInquiry', 497, 498);
 
 -- --------------------------------------------------------
 
@@ -337,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `gl_aros_acos` (
   PRIMARY KEY (`id`),
   KEY `aco_id` (`aco_id`),
   KEY `aro_id` (`aro_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=304 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=306 ;
 
 --
 -- Dumping data for table `gl_aros_acos`
@@ -633,7 +635,9 @@ INSERT INTO `gl_aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_upda
 (300, 4, 321, '1', '1', '1', '1'),
 (301, 4, 333, '1', '1', '1', '1'),
 (302, 4, 335, '1', '1', '1', '1'),
-(303, 4, 334, '1', '1', '1', '1');
+(303, 4, 334, '1', '1', '1', '1'),
+(304, 4, 337, '1', '1', '1', '1'),
+(305, 3, 338, '1', '1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -1002,7 +1006,7 @@ CREATE TABLE IF NOT EXISTS `gl_users` (
   `last_ip_logged_in` varchar(15) COLLATE utf8_persian_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQ_gl_users_username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `gl_users`
@@ -1010,9 +1014,10 @@ CREATE TABLE IF NOT EXISTS `gl_users` (
 
 INSERT INTO `gl_users` (`id`, `username`, `password`, `name`, `email`, `active`, `role_id`, `registered_date`, `last_logged_in`, `last_ip_logged_in`) VALUES
 (1, 'admin', '9ee2c9367485427679bd7a0ec1c7f3263869b387', 'جمال طوسی', 'jamal4533@yahoo.com', 1, 3, '0000-00-00 00:00:00', '1391-11-02 12:35:23', '127.0.0.1'),
-(2, 'hamid', 'ddd20c26354abe5caefbdce42621716d09dcbe3f', 'حمید ممدوحی', 'hamid.mamdoohi@gmail.com', 1, 3, '0000-00-00 00:00:00', '1391-11-02 13:08:48', '127.0.0.1'),
-(3, 'razzaghi', '6017b1c16ab39a4f14f2a579fa9aa629936c78b6', 'محمد رزاقی', '1razzaghi@gmail.com', 1, 2, '0000-00-00 00:00:00', '1391-11-02 12:47:07', '127.0.0.1'),
-(13, '0945981961', 'dec6e70a65f3641176c790ac0a5966e075932005', 'gfh fdh', NULL, 0, 3, '1391-11-01 22:25:40', '0000-00-00 00:00:00', '');
+(2, 'hamid', 'ddd20c26354abe5caefbdce42621716d09dcbe3f', 'حمید ممدوحی', 'hamid.mamdoohi@gmail.com', 1, 3, '0000-00-00 00:00:00', '1391-11-02 23:51:49', '127.0.0.1'),
+(3, 'razzaghi', '6017b1c16ab39a4f14f2a579fa9aa629936c78b6', 'محمد رزاقی', '1razzaghi@gmail.com', 1, 2, '0000-00-00 00:00:00', '1391-11-02 22:48:10', '::1'),
+(13, '0945981961', 'dec6e70a65f3641176c790ac0a5966e075932005', 'gfh fdh', NULL, 0, 3, '1391-11-01 22:25:40', '0000-00-00 00:00:00', ''),
+(14, '0946217742', 'bf7ed19de0533dbf7fdf7eb3d454b4828f64a54b', 'حمید ممدوحی', NULL, 0, 3, '1391-11-02 23:47:41', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -1053,7 +1058,7 @@ CREATE TABLE IF NOT EXISTS `gl_weblinks` (
 
 CREATE TABLE IF NOT EXISTS `yg_complaints` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `user_information_id` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `attachment_file_name` varchar(100) DEFAULT NULL,
@@ -1064,23 +1069,29 @@ CREATE TABLE IF NOT EXISTS `yg_complaints` (
   `comp_address` varchar(255) DEFAULT NULL,
   `user_defence` text,
   `commit_vote` text,
+  `commit_date` varchar(20) NOT NULL,
   `created` varchar(20) NOT NULL,
   `status` int(11) NOT NULL,
   `status_desc` text NOT NULL,
   `code_rahgiri` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `yg_complaints`
 --
 
-INSERT INTO `yg_complaints` (`id`, `user_id`, `subject`, `content`, `attachment_file_name`, `comp_name`, `comp_family`, `comp_email`, `comp_mobile`, `comp_address`, `user_defence`, `commit_vote`, `created`, `status`, `status_desc`, `code_rahgiri`) VALUES
-(1, 1, '1212', '21121221', NULL, 'dfh', 'fgh', 'sadf@fgh.fgh', '45445455445', '', NULL, NULL, '1391-10-29 16:26:58', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:26:58";}}', '1626580001'),
-(2, 2, 'dfg', 'sdfgdsfg', NULL, 'dsfg', 'dfg', 'sdfg@dfg.fgh', '12345678978', 'sdfgfdg]', NULL, NULL, '1391-10-29 16:36:13', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:36:13";}}', 'C-1636130002'),
-(3, 2, 'fgjgf', 'sdfgsdfg', NULL, 'sdfg', 'sdfg', '', '12345678978', '', NULL, NULL, '1391-10-29 16:42:32', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:42:32";}}', 'C-1642320003'),
-(4, 2, 'fgjgf', 'fgj', NULL, 'sdfg', 'dfg', '', '12345678978', '', NULL, NULL, '1391-10-29 16:43:04', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:43:04";}}', 'C-1643040004'),
-(5, 2, 'fgjgf', 'jhjmh', 'Doc1.docx', 'sdfg', 'dfg', '', '12345678978', '', NULL, NULL, '1391-10-29 16:51:34', 1, 'a:2:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:51:34";}i:1;a:2:{s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-02 12:31:42";}}', 'C-1651340005');
+INSERT INTO `yg_complaints` (`id`, `user_information_id`, `subject`, `content`, `attachment_file_name`, `comp_name`, `comp_family`, `comp_email`, `comp_mobile`, `comp_address`, `user_defence`, `commit_vote`, `commit_date`, `created`, `status`, `status_desc`, `code_rahgiri`) VALUES
+(1, 1, '1212', '21121221', NULL, 'dfh', 'fgh', 'sadf@fgh.fgh', '45445455445', '', NULL, NULL, '', '1391-10-29 16:26:58', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:26:58";}}', '1626580001'),
+(2, 2, 'dfg', 'sdfgdsfg', NULL, 'dsfg', 'dfg', 'sdfg@dfg.fgh', '12345678978', 'sdfgfdg]', NULL, NULL, '', '1391-10-29 16:36:13', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:36:13";}}', 'C-1636130002'),
+(3, 2, 'fgjgf', 'sdfgsdfg', NULL, 'sdfg', 'sdfg', '', '12345678978', '', NULL, NULL, '', '1391-10-29 16:42:32', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:42:32";}}', 'C-1642320003'),
+(4, 2, 'fgjgf', 'fgj', NULL, 'sdfg', 'dfg', '', '12345678978', '', NULL, NULL, '', '1391-10-29 16:43:04', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:43:04";}}', 'C-1643040004'),
+(5, 2, 'fgjgf', 'jhjmh', 'Doc1.docx', 'sdfg', 'dfg', '', '12345678978', '', 'sdfgsdfg', NULL, '', '1391-10-29 16:51:34', 2, 'a:3:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-10-29 16:51:34";}i:1;a:2:{s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-02 12:31:42";}i:2;a:2:{s:6:"status";i:2;s:4:"date";s:19:"1391-11-02 18:46:06";}}', 'C-1651340005'),
+(6, 0, 'sdfg', 'sdfgdsfg', NULL, 'sdfg', 'sdfg', '', '12345678978', '', NULL, NULL, '', '1391-11-02 23:26:49', 0, 'a:1:{i:0;a:2:{s:6:"status";i:0;s:4:"date";s:19:"1391-11-02 23:26:49";}}', 'C-2326490006'),
+(7, 17, 'بل', 'بل', NULL, 'سی', 'mn', '', '12345678978', '', 'هیچ دفاعی ندارم', 'طرفین با هم آشتی کردند.', '1391-11-10', '1391-11-02 23:30:38', 4, 'a:2:{i:0;a:3:{s:7:"user_id";s:1:"3";s:6:"status";s:1:"3";s:4:"date";s:19:"1391-11-03 00:21:01";}i:1;a:3:{s:7:"user_id";s:1:"3";s:6:"status";s:1:"4";s:4:"date";s:19:"1391-11-03 00:22:18";}}', 'C-2330380007'),
+(8, 17, 'شسیب', 'شسیبسشیب', NULL, 'سشیب', 'شسیب', '', '12345678978', '', NULL, NULL, '', '1391-11-03 01:04:17', 1, 'a:1:{i:0;a:3:{s:7:"user_id";s:1:"3";s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-03 01:12:37";}}', 'C-0104170008'),
+(9, 17, 'sdfg', 'sdfgsdg', NULL, 'dfg', 'sdfg', '', '12345678978', '', NULL, NULL, '', '1391-11-03 01:14:54', 1, 'a:2:{i:0;a:3:{s:7:"user_id";s:1:"2";s:6:"status";i:0;s:4:"date";s:19:"1391-11-03 01:14:54";}i:1;a:3:{s:7:"user_id";s:1:"3";s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-03 01:15:06";}}', 'C-0114540009'),
+(10, 17, 'asdf', 'asdf', NULL, 'asdf', 'asdf', '', '12345678978', '', 'asdfasdf', NULL, '', '1391-11-03 01:17:32', 2, 'a:3:{i:0;a:3:{s:7:"user_id";s:1:"2";s:6:"status";i:0;s:4:"date";s:19:"1391-11-03 01:17:32";}i:1;a:3:{s:7:"user_id";s:1:"3";s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-03 01:17:46";}i:2;a:3:{s:7:"user_id";s:1:"2";s:6:"status";i:2;s:4:"date";s:19:"1391-11-03 01:18:13";}}', 'C-0117320010');
 
 -- --------------------------------------------------------
 
@@ -1114,14 +1125,37 @@ CREATE TABLE IF NOT EXISTS `yg_docs` (
   `value` int(11) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `yg_docs`
 --
 
 INSERT INTO `yg_docs` (`id`, `option_id`, `user_information_id`, `value`, `description`) VALUES
-(1, 8, 17, 1, '');
+(1, 8, 17, 1, ''),
+(2, 15, 28, 1, '123456');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `yg_inquiries`
+--
+
+CREATE TABLE IF NOT EXISTS `yg_inquiries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_id` int(11) NOT NULL,
+  `user_information_id` int(11) NOT NULL,
+  `value` int(11) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `yg_inquiries`
+--
+
+INSERT INTO `yg_inquiries` (`id`, `option_id`, `user_information_id`, `value`, `description`) VALUES
+(1, 15, 28, 1, '1391-10-12');
 
 -- --------------------------------------------------------
 
@@ -1137,7 +1171,7 @@ CREATE TABLE IF NOT EXISTS `yg_messages` (
   `created` char(20) DEFAULT NULL,
   `files` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `yg_messages`
@@ -1149,7 +1183,11 @@ INSERT INTO `yg_messages` (`id`, `user_id`, `subject`, `message`, `created`, `fi
 (3, 3, 'sdfgdsfg', '<p>dsfgsdfgsdfgdsfg</p>', '1391-10-27 22:37:55', NULL),
 (4, 3, 'dfgh', '<p>fghdfgh</p>', '1391-10-27 22:38:25', NULL),
 (5, 2, 'dfghdfgh', '<p>dfhdfhdfh</p>', '1391-10-27 22:38:42', NULL),
-(6, 2, 'sd', '<p>dssd</p>', '1391-11-02 13:28:52', NULL);
+(6, 2, 'sd', '<p>dssd</p>', '1391-11-02 13:28:52', NULL),
+(7, 3, 'شکایت', 'شکایتی از شما شده است', '1391-11-03 01:10:06', NULL),
+(8, 3, 'شکایت', 'شکایتی از شما شده است', '1391-11-03 01:12:37', NULL),
+(9, 3, 'شکایت شماره 9', 'واحد صنفی گرامی, از شما شکایتی به دست اتحادیه رسیده است. <br /> لطفا با مشاهده شکایت مربوطه دفاعیه خود را اعلام نمیید.', '1391-11-03 01:15:06', NULL),
+(10, 3, 'شکایت شماره 10', '<p>واحد صنفی گرامی, از شما شکایتی به دست اتحادیه رسیده است. </p><p> لطفا با مشاهده شکایت مربوطه دفاعیه خود را اعلام نمائید. </p>', '1391-11-03 01:17:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -1169,7 +1207,7 @@ CREATE TABLE IF NOT EXISTS `yg_messages_users` (
   `lft` int(11) NOT NULL,
   `rght` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `yg_messages_users`
@@ -1177,17 +1215,25 @@ CREATE TABLE IF NOT EXISTS `yg_messages_users` (
 
 INSERT INTO `yg_messages_users` (`id`, `message_id`, `user_id`, `read_date`, `new`, `folder`, `is_sender`, `parent_id`, `lft`, `rght`) VALUES
 (1, 1, 3, '1391-11-02 13:40:17', 0, 2, 1, 0, 1, 12),
-(2, 1, 2, '1391-11-02 13:33:54', 0, 1, 0, 0, 13, 24),
+(2, 1, 2, '1391-11-03 01:12:40', 0, 1, 0, 0, 13, 26),
 (3, 2, 3, '1391-11-02 13:40:17', 0, 2, 1, 1, 2, 3),
-(4, 2, 2, '1391-11-02 13:33:54', 0, 1, 0, 2, 14, 15),
+(4, 2, 2, '1391-11-03 01:12:40', 0, 1, 0, 2, 14, 15),
 (5, 3, 3, '1391-11-02 13:40:17', 0, 2, 1, 1, 4, 5),
-(6, 3, 2, '1391-11-02 13:33:54', 0, 1, 0, 2, 16, 17),
+(6, 3, 2, '1391-11-03 01:12:40', 0, 1, 0, 2, 16, 17),
 (7, 4, 3, '1391-11-02 13:40:17', 0, 2, 1, 1, 6, 7),
-(8, 4, 2, '1391-11-02 13:33:54', 0, 1, 0, 2, 18, 19),
-(9, 5, 2, '1391-11-02 13:33:54', 0, 2, 1, 2, 20, 21),
+(8, 4, 2, '1391-11-03 01:12:40', 0, 1, 0, 2, 18, 19),
+(9, 5, 2, '1391-11-03 01:12:40', 0, 2, 1, 2, 20, 21),
 (10, 5, 3, '1391-11-02 13:40:17', 0, 1, 0, 1, 8, 9),
-(11, 6, 2, '1391-11-02 13:33:54', 0, 2, 1, 2, 22, 23),
-(12, 6, 3, '1391-11-02 13:40:17', 0, 1, 0, 1, 10, 11);
+(11, 6, 2, '1391-11-03 01:12:40', 0, 2, 1, 2, 22, 23),
+(12, 6, 3, '1391-11-02 13:40:17', 0, 1, 0, 1, 10, 11),
+(13, 7, 3, '1391-11-03 01:10:57', 0, 2, 1, 0, 27, 28),
+(14, 7, 2, '1391-11-03 01:12:40', 0, 1, 0, 2, 24, 25),
+(15, 8, 3, '1391-11-03 01:12:37', 0, 2, 1, 0, 29, 30),
+(16, 8, 2, '1391-11-03 01:13:01', 0, 1, 0, 0, 31, 32),
+(17, 9, 3, '1391-11-03 01:15:06', 0, 2, 1, 0, 33, 34),
+(18, 9, 2, '1391-11-03 01:15:16', 0, 1, 0, 0, 35, 36),
+(19, 10, 3, '1391-11-03 01:17:46', 0, 2, 1, 0, 37, 38),
+(20, 10, 2, '1391-11-03 01:17:55', 0, 1, 0, 0, 39, 40);
 
 -- --------------------------------------------------------
 
@@ -1200,7 +1246,7 @@ CREATE TABLE IF NOT EXISTS `yg_options` (
   `name` varchar(255) NOT NULL,
   `section` varchar(50) NOT NULL COMMENT 'نام جدولی که از این فیلد استفاده می کند در اینجا قرار میگیرد',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='این جدول شامل گزینه هایی است که در برنامه استفاده می شود' AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='این جدول شامل گزینه هایی است که در برنامه استفاده می شود' AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `yg_options`
@@ -1220,7 +1266,9 @@ INSERT INTO `yg_options` (`id`, `name`, `section`) VALUES
 (11, 'عکس 3 در 4 رنگی (20 قطعه)', 'docs'),
 (12, 'کد پستی 10 رقمی محل کار و سکونت', 'docs'),
 (13, 'تصویر اجاره خط یا سند مغازه بعد از بازدید و تائید اتحادیه (2 برگ)', 'docs'),
-(14, 'کپی تجاری مغازه (2 سری)', 'docs');
+(14, 'کپی تجاری مغازه (2 سری)', 'docs'),
+(15, 'استعلام شهرداری', 'inquiry'),
+(16, 'استعلام فرمانداری', 'inquiry');
 
 -- --------------------------------------------------------
 
@@ -1662,7 +1710,7 @@ CREATE TABLE IF NOT EXISTS `yg_user_informations` (
 --
 
 INSERT INTO `yg_user_informations` (`id`, `user_id`, `first_name`, `last_name`, `place_id`, `raste_id`, `degree_id`, `father_name`, `gender`, `code_melli`, `shenasnameh_number`, `mahale_sodoor`, `birth_day`, `din`, `mazhab`, `vazifeh_omoomi`, `madrak_tahsili`, `taahol`, `sarparast`, `afrad_tahte_takafol`, `isargari`, `gov_employment`, `reg_other_union`, `parvaneh_other_union`, `latest_employment`, `history_duration`, `postal_code`, `telephone`, `home_address`, `mobile`, `market_name`, `market_sign`, `market_address`, `market_telephone`, `market_fax`, `market_postal_code`, `mantagheh_shahrdari`, `nahiye_shahrdari`, `hozeh_kalantari`, `vazeyat_joghrafiaee`, `mahale_esteghrar`, `vazeyat_malekiat`, `market_masahat`, `avatar_file_name`, `logo_file_name`, `code_rahgiri`, `status`, `status_desc`, `created`) VALUES
-(17, 2, 'حمید', 'ممدوحی', 1, 1, 2, 'احمد', 1, '0946217742', '21572', '124', '1367-04-26', 'اسلام', 'شیعه', 3, 7, 1, 2, NULL, 0, '', '', NULL, '', NULL, '1232131231', '05116580907', 'بلوار توس - توس 65/6 - کوچه گلستان - پلاک 37', '09159922885', 'سیاحت شرق', '', 'ابوذر غفاری 13 - پلاک 98', '05118467980', '05118464994', '1231231231', 0, NULL, '', 1, 1, 2, 89, '', '', '2227310017', -1, 'a:7:{i:-1;a:2:{s:4:"date";s:19:"1391-10-27 22:19:50";s:4:"desc";s:8:"ghjgjjhg";}i:2;a:2:{s:4:"date";s:19:"1391-10-27 22:22:13";s:4:"desc";N;}i:-3;a:2:{s:4:"date";s:19:"1391-10-27 22:25:29";s:4:"desc";s:0:"";}i:3;a:2:{s:4:"date";s:19:"1391-10-27 22:26:44";s:4:"desc";N;}i:4;a:3:{s:6:"status";s:2:"-3";s:4:"date";s:19:"1391-10-29 16:57:56";s:4:"desc";s:4:"سی";}i:5;a:3:{s:6:"status";s:1:"3";s:4:"date";s:19:"1391-10-29 16:58:07";s:4:"desc";N;}i:6;a:3:{s:6:"status";s:2:"-1";s:4:"date";s:19:"1391-10-29 16:58:13";s:4:"desc";s:6:"سیب";}}', '1391-10-13 22:27:31'),
+(17, 2, 'حمید', 'ممدوحی', 1, 1, 2, 'احمد', 1, '0946217742', '21572', '124', '1367-04-26', 'اسلام', 'شیعه', 3, 7, 1, 2, NULL, 0, '', '', NULL, '', NULL, '1232131231', '05116580907', 'بلوار توس - توس 65/6 - کوچه گلستان - پلاک 37', '09159922885', 'سیاحت شرق', '', 'ابوذر غفاری 13 - پلاک 98', '05118467980', '05118464994', '1231231231', 0, NULL, '', 1, 1, 2, 89, 'Hamid_Picture.jpg', '', '2227310017', 3, 'a:3:{i:0;a:3:{s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-02 23:47:41";s:4:"desc";N;}i:1;a:4:{s:7:"user_id";s:1:"3";s:6:"status";s:1:"2";s:4:"date";s:19:"1391-11-03 01:03:29";s:4:"desc";N;}i:2;a:4:{s:7:"user_id";s:1:"3";s:6:"status";s:1:"3";s:4:"date";s:19:"1391-11-03 01:03:36";s:4:"desc";N;}}', '1391-10-13 22:27:31'),
 (21, 0, 'sg', 'sdfg', 1, 1, 2, 'sdfg', 1, '0945981961', '8977897894', '32', '1300-01-01', 'sdfg', 'sdfg', 1, 1, 1, 1, NULL, 0, '', '', '', '', NULL, '2312131231', '213213213321', '12312312', '21323112312', 'jhjh', '', 'jhjh', '213123123123', '132213132123', '1232311212', 123, NULL, '', 1, 1, 1, 127, '', '', '2023360021', 1, 'a:1:{i:0;a:3:{s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-01 22:14:47";s:4:"desc";N;}}', '1391-10-29 20:23:36'),
 (22, 0, 'gfh', 'fdh', 1, 1, 2, 'fgdh', 1, '0945981961', '123', '32', '1300-01-01', '456', 'dfgh', 1, 1, 1, 1, NULL, 0, '', '', '', '', NULL, '1232131231', '12312312312', 'jh', '12312312312', 'سیاحت شرق', '', 'ابوذر غفاری 13 - پلاک 98', '123123123123', '12312312312', '1231231231', 123, NULL, '', 1, 1, 1, 123, '', '', '2025350022', 1, 'a:1:{i:0;a:3:{s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-01 22:14:29";s:4:"desc";N;}}', '1391-10-29 20:25:35'),
 (23, 0, 'gfh', 'fdh', 1, 1, 2, 'fgdh', 1, '0945981961', '123', '32', '1300-01-01', '456', 'dfgh', 1, 1, 1, 1, NULL, 0, '', '', '', '', NULL, '1232131231', '12312312312', 'jh', '12312312312', 'سیاحت شرق', '', 'ابوذر غفاری 13 - پلاک 98', '123123123123', '12312312312', '1231231231', 123, NULL, '', 1, 1, 1, 123, '', '', '2025460023', 1, 'a:1:{i:0;a:3:{s:6:"status";s:1:"1";s:4:"date";s:19:"1391-11-01 22:12:50";s:4:"desc";N;}}', '1391-10-29 20:25:46'),

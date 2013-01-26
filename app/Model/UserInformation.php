@@ -466,21 +466,21 @@ class UserInformation extends AppModel {
         if(empty($results)){
             return $results;
         }
-        if($this->findQueryType != 'count'){
+        if($this->findQueryType != 'count' and $this->findQueryType != 'list'){
             foreach($results as &$result){
                 //TODO: Unknown error , how to get type of find (all, first, count, ...) 
                 if(!empty($result['UserInformation']) and is_array($result['UserInformation'])){
                     $this->_getCityInfo($result['UserInformation']);
-                    $result['UserInformation']['namedStatus'] = $this->namedStatus[$result['UserInformation']['status']];
-                    $result['UserInformation']['formattedStatus'] = $this->formattedStatus[$result['UserInformation']['status']];
-                    $result['UserInformation']['namedVazifehOmoomi'] = $this->namedVazifehOmoomi[$result['UserInformation']['vazifeh_omoomi']];
-                    $result['UserInformation']['namedGender'] = $this->namedGender[$result['UserInformation']['gender']];
-                    $result['UserInformation']['namedMadrakTahsili'] = $this->namedMadrakTahsili[$result['UserInformation']['madrak_tahsili']];
-                    $result['UserInformation']['namedIsargari'] = $this->namedIsargari[$result['UserInformation']['isargari']];
-                    $result['UserInformation']['namedTaahol'] = $this->namedTaahol[$result['UserInformation']['taahol']];
-                    $result['UserInformation']['namedMahaleEsteghrar'] = $this->namedMahaleEsteghrar[$result['UserInformation']['mahale_esteghrar']];
-                    $result['UserInformation']['namedVazeyatMalekiat'] = $this->namedVazeyatMalekiat[$result['UserInformation']['vazeyat_malekiat']];
-                    $result['UserInformation']['namedVazeyatJoghrafiaee'] = $this->namedVazeyatJoghrafiaee[$result['UserInformation']['vazeyat_joghrafiaee']];
+                    $result['UserInformation']['namedStatus'] =             @$this->namedStatus[$result['UserInformation']['status']];
+                    $result['UserInformation']['formattedStatus'] =         @$this->formattedStatus[$result['UserInformation']['status']];
+                    $result['UserInformation']['namedVazifehOmoomi'] =      @$this->namedVazifehOmoomi[$result['UserInformation']['vazifeh_omoomi']];
+                    $result['UserInformation']['namedGender'] =             @$this->namedGender[$result['UserInformation']['gender']];
+                    $result['UserInformation']['namedMadrakTahsili'] =      @$this->namedMadrakTahsili[$result['UserInformation']['madrak_tahsili']];
+                    $result['UserInformation']['namedIsargari'] =           @$this->namedIsargari[$result['UserInformation']['isargari']];
+                    $result['UserInformation']['namedTaahol'] =             @$this->namedTaahol[$result['UserInformation']['taahol']];
+                    $result['UserInformation']['namedMahaleEsteghrar'] =    @$this->namedMahaleEsteghrar[$result['UserInformation']['mahale_esteghrar']];
+                    $result['UserInformation']['namedVazeyatMalekiat'] =    @$this->namedVazeyatMalekiat[$result['UserInformation']['vazeyat_malekiat']];
+                    $result['UserInformation']['namedVazeyatJoghrafiaee'] = @$this->namedVazeyatJoghrafiaee[$result['UserInformation']['vazeyat_joghrafiaee']];
                     
                 }
             }

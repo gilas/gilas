@@ -35,7 +35,7 @@ class Complaint extends AppModel {
  * @var array
  */
 	public $validate = array(
-        'user_id' => array(
+        'user_information_id' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => 'تکمیل این فیلد ضروری است',
@@ -103,15 +103,17 @@ class Complaint extends AppModel {
         -1 => 'حذف شده',
         0 => 'در دست بررسی',
         1 => 'ارجاع به واحد صنفی',
-        2 => 'ارجاع به کمیسیون',
-        3 => 'خاتمه',
+        2 => 'ارجاع به مدیریت',
+        3 => 'ارجاع به کمیسیون',
+        4 => 'خاتمه',
     );
     public $formattedStatus = array(
         -1 => '<span class="label label-important">حذف شده</span>',
         0 => '<span class="label">در دست بررسی</span>',
         1 => '<span class="label label-success">ارجاع به واحد صنفی</span>',
-        2 => '<span class="label label-success">ارجاع به کمیسیون</span>',
-        3 => '<span class="label label-success">خاتمه</span>',
+        2 => '<span class="label label-success">ارجاع به مدیریت</span>',
+        3 => '<span class="label label-success">ارجاع به کمیسیون</span>',
+        4 => '<span class="label label-success">خاتمه</span>',
     );
     
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -122,9 +124,9 @@ class Complaint extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
+		'UserInformation' => array(
+			'className' => 'UserInformation',
+			'foreignKey' => 'user_information_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

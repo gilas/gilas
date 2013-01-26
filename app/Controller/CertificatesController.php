@@ -2,7 +2,7 @@
 
 class CertificatesController extends AppController{
 	
-	public $uses = array('UserInformation', 'Option', 'Warden', 'Doc');
+	public $uses = array('UserInformation', 'Option', 'Warden', 'Doc', 'Inquiry');
 	public $publicActions = array('register', 'showCode', 'view', 'index');
 	public $helpers = array('UploadPack.Upload');
 	public $paginateConditions = array(
@@ -136,6 +136,7 @@ class CertificatesController extends AppController{
         }
         
         $desc[]  = array(
+            'user_id' => $this->Auth->user('id'),
             'status' => $status,
             'date' => Jalali::dateTime(),
             'desc' => $statusDesc,
@@ -152,7 +153,9 @@ class CertificatesController extends AppController{
                 'name' => $info['UserInformation']['first_name'].' '.$info['UserInformation']['last_name'],
                 'username' => $info['UserInformation']['code_melli'],
                 'password' => $info['UserInformation']['shenasnameh_number'],
-                'role_id' => 3, 
+                'role_id' => 3,
+                // We don't get email from user 
+                //'email' => $info['UserInformation']['email'],
             ));
             $this->UserInformation->saveField('user_id', $user_id);
         }
@@ -254,6 +257,7 @@ class CertificatesController extends AppController{
         $this->set('request', $request);
         $this->set('wardenOptions', $this->_loadWarden($id));
         $this->set('docsOptions',  $this->_loadDoc($id));
+        $this->set('inquiriesOptions',  $this->_loadInquiry($id));
         $this->set('formattedStatus', $this->UserInformation->formattedStatus);
     }
     
@@ -341,7 +345,53 @@ class CertificatesController extends AppController{
         }
         return $formattedOptions;
     }
+    protected function _loadInquiry($id){
+        // load options of inquiry
+        $inquiryOptions = $this->Option->find('list', array(
+            'conditions' => array(
+                'Option.section' => 'inquiry',
+            ),
+        ));
+        // Options that submitted with inquiry
+        $inquirySubmitOptions = $this->Inquiry->find('all', array(
+            'conditions' => array(
+                'Inquiry.user_information_id' => $id,
+            ),
+            'contaion' => false,
+        ));
+        
+        // Merge options with submitted options
+        // I want for any option if has submitted fill below var
+        $formattedOptions = array();
+        if($inquiryOptions){
+            foreach($inquiryOptions as $optionID => $optionValue){
+                $formattedOptions[$optionID]['option_value'] = $optionValue;
+                $formattedOptions[$optionID]['option_id'] = $optionID;
+                $formattedOptions[$optionID]['submitted_value'] = 0;
+                $formattedOptions[$optionID]['submitted_desc'] = null;
+                $formattedOptions[$optionID]['submitted_id'] = 0;
+                if($inquirySubmitOptions){
+                    foreach($inquirySubmitOptions as &$inquirySubmitOption){
+                        if($inquirySubmitOption['Inquiry']['option_id'] == $optionID){
+                            $formattedOptions[$optionID]['submitted_id'] = $inquirySubmitOption['Inquiry']['id'];
+                            $formattedOptions[$optionID]['submitted_value'] = $inquirySubmitOption['Inquiry']['value'];
+                            $formattedOptions[$optionID]['submitted_desc'] = $inquirySubmitOption['Inquiry']['description'];
+                            //remove this , because we don't need it for later loop
+                            // this is useful for decrease time of loop
+                            unset($inquirySubmitOption);
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+        return $formattedOptions;
+    }
     public function view(){
+        if($this->Auth->user('UserInformation')){
+            $this->set('request', $this->UserInformation->read(null, $this->Auth->user('UserInformation.id')));
+            return;
+        }
         if($this->request->isPost()){
             $code = $this->request->data('UserInformation.code');
             $request = $this->_getRequestByCode($code);
@@ -365,6 +415,24 @@ class CertificatesController extends AppController{
         }
         unset($this->request->data['id']);
         if($this->Warden->save($this->request->data)){
+            $this->Session->setFlash('تغییرات انجام گردید', 'message', array('type' => 'success'));
+            $this->redirect($this->referer());
+        }
+        $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
+        $this->redirect($this->referer());
+    }
+    public function admin_changeInquiry(){
+        // the request must be sent via post
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException(SettingsController::read('Error.Code-12'));
+        }
+        if(!empty($this->request->data['id'])){
+            $this->Inquiry->id = $this->request->data['id'];
+        }else{
+            $this->Inquiry->create();
+        }
+        unset($this->request->data['id']);
+        if($this->Inquiry->save($this->request->data)){
             $this->Session->setFlash('تغییرات انجام گردید', 'message', array('type' => 'success'));
             $this->redirect($this->referer());
         }

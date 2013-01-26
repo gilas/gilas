@@ -27,7 +27,6 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
-Router::connect('/' . SettingsController::read('Site.AdminAddress'), array('controller' => 'dashboards', 'action' => 'index', 'admin' => TRUE));
 
 
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
@@ -70,4 +69,61 @@ CakePlugin::routes();
  * Load the CakePHP default routes. Remove this if you do not want to use
  * the built-in default routes.
  */
-require CAKE . 'Config' . DS . 'routes.php';
+$prefixes = Router::prefixes();
+
+// Get route from Setting
+$adminPrefix = SettingsController::read('Site.AdminAddress');
+
+// Route plugins
+if ($plugins = CakePlugin::loaded()) {
+	App::uses('PluginShortRoute', 'Routing/Route');
+	foreach ($plugins as $key => $value) {
+		$plugins[$key] = Inflector::underscore($value);
+	}
+	$pluginPattern = implode('|', $plugins);
+	$match = array('plugin' => $pluginPattern);
+	$shortParams = array('routeClass' => 'PluginShortRoute', 'plugin' => $pluginPattern);
+
+	foreach ($prefixes as $prefix) {
+	   
+       	$params = array('prefix' => $prefix, $prefix => true);
+	    $indexParams = $params + array('action' => 'index');    
+        if($prefix == 'admin'){
+            Router::connect("/{$adminPrefix}/:plugin", $indexParams, $shortParams);
+            Router::connect("/{$adminPrefix}/:plugin/:controller", $indexParams, $match);
+            Router::connect("/{$adminPrefix}/:plugin/:controller/:action/*", $params, $match);
+	   	}else{             
+    		Router::connect("/{$prefix}/:plugin", $indexParams, $shortParams);
+    		Router::connect("/{$prefix}/:plugin/:controller", $indexParams, $match);
+    		Router::connect("/{$prefix}/:plugin/:controller/:action/*", $params, $match);
+        }
+	}
+	Router::connect('/:plugin', array('action' => 'index'), $shortParams);
+	Router::connect('/:plugin/:controller', array('action' => 'index'), $match);
+	Router::connect('/:plugin/:controller/:action/*', array(), $match);
+}
+
+// Route other urls
+foreach ($prefixes as $prefix) {
+    $params = array('prefix' => $prefix, $prefix => true);
+	$indexParams = $params + array('action' => 'index');
+    if($prefix == 'admin'){
+       Router::connect("/{$adminPrefix}/:controller", $indexParams);
+	   Router::connect("/{$adminPrefix}/:controller/:action/*", $params);
+   	}else{
+        Router::connect("/{$prefix}/:controller", $indexParams);
+        Router::connect("/{$prefix}/:controller/:action/*", $params);
+   	}
+}
+Router::connect('/:controller', array('action' => 'index'));
+Router::connect('/:controller/:action/*');
+Router::connect("/{$adminPrefix}", array('controller' => 'dashboards', 'action' => 'index', 'admin' => TRUE));
+
+$namedConfig = Router::namedConfig();
+if ($namedConfig['rules'] === false) {
+	Router::connectNamed(true);
+}
+
+// remove all defined vars
+unset($namedConfig, $params, $indexParams, $prefix, $prefixes, $shortParams, $match,
+	$pluginPattern, $plugins, $key, $value, $adminPrefix);

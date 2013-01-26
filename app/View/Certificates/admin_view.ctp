@@ -65,6 +65,7 @@ $this->Html->css('modal', null, array('inline' => false));
         <li><a href="#work" data-toggle="tab">اطلاعات کسب و کار</a></li>
         <li><a href="#warden" data-toggle="tab">تائید مکان (بازرسی اولیه)</a></li>
         <li><a href="#docs" data-toggle="tab">مدارک مورد نیاز</a></li>
+        <li><a href="#inquiries" data-toggle="tab">استعلامات</a></li>
         <li><a href="#other" data-toggle="tab">اطلاعات جانبی</a></li>
     </ul>
 	<div class="tab-content">
@@ -323,6 +324,36 @@ $this->Html->css('modal', null, array('inline' => false));
                         </select>
                     </td>
                     <td><input type="text" name="description" value="<?php echo $docsOption['submitted_desc']; ?>" /></td>
+                    <td id="grid-align"><input type="submit" value="ذخیره" class="btn btn-success" /></td>
+                </tr>
+                </form>
+                <?php endforeach; ?>
+            </table>
+        </div>
+        <div id="inquiries" class="tab-pane">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th class="col-no">ردیف</th>
+                    <th>شرح</th>
+                    <th>وضعیت</th>
+                    <th>شماره نامه</th>
+                    <th>عملیات</th>
+                </tr>
+                <?php $index = 0; foreach ($inquiriesOptions as $inquiriesOption): ?>
+                <form method="post" action="<?php echo $this->Html->url(array('action' => 'changeInquiry')) ?>">
+                <input type="hidden" name="user_information_id" value="<?php echo $request['UserInformation']['id'] ?>" />
+                <input type="hidden" name="option_id" value="<?php echo $inquiriesOption['option_id'] ?>" />
+                <input type="hidden" name="id" value="<?php echo $inquiriesOption['submitted_id'] ?>" />
+                <tr>
+                    <td id="grid-align"><?php echo ++$index; ?></td>
+                    <td><?php echo $inquiriesOption['option_value']; ?></td>
+                    <td>
+                        <select name="value">
+                            <option value="0"  <?php if($inquiriesOption['submitted_value'] == 0) echo 'selected=""' ?> ></option>
+                            <option value="1"  <?php if($inquiriesOption['submitted_value'] == 1) echo 'selected=""' ?> >دریافت شده</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="description" value="<?php echo $inquiriesOption['submitted_desc']; ?>" /></td>
                     <td id="grid-align"><input type="submit" value="ذخیره" class="btn btn-success" /></td>
                 </tr>
                 </form>

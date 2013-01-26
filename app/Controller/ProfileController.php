@@ -35,7 +35,7 @@ class ProfileController extends AppController{
         $categories = $contentCategoryController->getList($info['User']['id']);
         $this->set('categories', $categories);
         
-        $this->set('content',$this->_parseURL($info['User']['id']));
+        $this->set('content',$this->_parseURL($info));
         
         $this->set('title_for_layout', 'صفحه شخصی '. $info['User']['name']);
     }
@@ -46,7 +46,8 @@ class ProfileController extends AppController{
      * @param mixed $user_id
      * @return
      */
-    protected function _parseURL($user_id = null){
+    protected function _parseURL($info = null){
+        $user_id = $info['User']['id'];
         $passes = $this->request['pass'];
         unset($passes[0]);
         $url = array();
@@ -100,7 +101,12 @@ class ProfileController extends AppController{
                 $url[$namedIndex] = $namedValue;
             }
         }
-        $extra = array('return', 'forProfile' => true, 'ProfileUserID' => $user_id);
+        $extra = array(
+            'return', 
+            'forProfile' => true, 
+            'ProfileUserID' => $user_id,
+            'Profile.UserInformation.id' => $info['UserInformation']['id'],
+        );
         if($this->request->data){
             $extra['data'] = $this->request->data;
         }
@@ -119,5 +125,9 @@ class ProfileController extends AppController{
         $pastLink = 'action="'.Router::url('/');
         $content = str_replace($pastLink, $newLink, $content);
         return $content;
+    }
+    
+    public function admin_view($user_id = null){
+        
     }
 }

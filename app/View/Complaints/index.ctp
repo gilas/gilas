@@ -5,7 +5,6 @@ if (!empty($requests)) {
     ?>
     <table class="table table-bordered table-striped">
         <tr>
-            <th class="col-checkbox"><?php echo $this->AdminForm->selectAll(); ?></th>
             <th class="col-no">ردیف</th>
             <th>شاکی</th>
             <th>موضوع</th>
@@ -14,7 +13,6 @@ if (!empty($requests)) {
         </tr>
         <?php foreach ($requests as $request): ?>
             <tr>
-                <td id="grid-align"><?php echo $this->AdminForm->checkbox($request['Complaint']['id']); ?></td>
                 <td id="grid-align"><?php echo ++$index; ?></td>
                 <td><?php echo $request['Complaint']['comp_name'].' '.$request['Complaint']['comp_family']; ?></td>
                 <td><?php echo $this->Html->link($request['Complaint']['subject'], array('action' => 'view', $request['Complaint']['id'])); ?></td>

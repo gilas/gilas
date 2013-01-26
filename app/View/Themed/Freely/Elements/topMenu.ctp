@@ -17,7 +17,7 @@
 </div>
 <?php endif; ?>
 <?php echo $this->Html->link('پروانه کسب الکترونیک',array('controller' => 'pages', 'action' => 'certificate'),array('class' => 'btn btn-success')); ?>
-<?php echo $this->Html->link('شکایت',array('controller' => 'Complaints', 'action' => 'register'),array('class' => 'btn btn-success')); ?>
+<?php echo $this->Html->link('شکایت',array('controller' => 'pages', 'action' => 'complaint'),array('class' => 'btn btn-success')); ?>
 <script>
     $(function(){
         $('#loginButton').click(function(){

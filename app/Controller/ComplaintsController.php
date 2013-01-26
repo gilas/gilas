@@ -2,8 +2,8 @@
 
 class ComplaintsController extends AppController{
     
-    public $uses = array('Complaint','User');
-    public $publicActions = array('register', 'showCode');
+    public $uses = array('Complaint','UserInformation');
+    public $publicActions = array('register', 'showCode', 'viewComplaint');
     public $helpers = array('UploadPack.Upload');
     
     public $paginateConditions = array(
@@ -23,18 +23,19 @@ class ComplaintsController extends AppController{
     );
     
     public function register(){
-        $conditions = array('User.role_id' => 3);
+        $conditions = array('UserInformation.status' => 3);
         if($this->request['forProfile']){
-            $conditions['User.id'] = $this->request['ProfileUserID'];
+            $conditions['UserInformation.id'] = $this->request['Profile.UserInformation.id'];
         }
-        $users = $this->User->find('list', array(
+        $users = $this->UserInformation->find('all', array(
             'conditions' => $conditions,
+            'contain' => false,
         )); 
         
         $this->set(compact('users'));
         
         if($this->request->isPost()){
-            if(! in_array($this->request->data['Complaint']['user_id'], array_keys($users))){
+            if(! in_array($this->request->data['Complaint']['user_information_id'], Set::combine($users, '{n}.UserInformation.id','{n}.UserInformation.id'))){
                 $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
                 return false;
             }
@@ -45,6 +46,7 @@ class ComplaintsController extends AppController{
 				// Redirect user, because with this he can't resend information again by refreshing page
 				$this->redirect(array('action' => 'showCode', $code));
 			}else{
+			
 			     $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
 			}
         }
@@ -71,19 +73,37 @@ class ComplaintsController extends AppController{
         if(is_null($status)){
             return false;
         }
-        $this->Complaint->recursive = -1;
+        
         $info = $this->Complaint->read(null, $id);
         if(! $info){
             return false;
         }
+        $this->Complaint->id = $id;
+        
+        // Send PM
+        if($status == 1){
+            $this->_sendPM($info['UserInformation']['user_id'], 'شکایت شماره '.$info['Complaint']['id'], '<p>واحد صنفی گرامی, از شما شکایتی به دست اتحادیه رسیده است. </p><p> لطفا با مشاهده شکایت مربوطه دفاعیه خود را اعلام نمائید. </p>');
+            $this->Complaint->save(array('commit_date' => $this->request->data['commiteDate']));
+        }
+        
+        // Save Comite date
+        if($status == 3){
+            $this->Complaint->save(array('commit_date' => $this->request->data['commiteDate']));
+        }
+        
+        // Save Final vote
+        if($status == 4){
+            $this->Complaint->save(array('commit_vote' => $this->request->data['desc']));
+        }
         
         $desc = unserialize($info['Complaint']['status_desc']);
         $desc[]  = array(
+            'user_id' => $this->Auth->user('id'),
             'status' => $status,
             'date' => Jalali::dateTime(),
         );
         $desc = serialize($desc);
-        $this->Complaint->id = $id;
+        
 
         return $this->Complaint->save(array('status' => $status, 'status_desc' => $desc));
     }
@@ -118,7 +138,7 @@ class ComplaintsController extends AppController{
             $this->paginate['conditions']['Complaint.status >='] = 1;
         }
         $this->paginate['order'] = 'Complaint.id DESC';
-        $this->paginate['conditions']['Complaint.user_id'] = $this->Auth->user('id');
+        $this->paginate['conditions']['Complaint.user_information_id'] = $this->Auth->user('UserInformation.id');
         // must get data with paginate() for pagination
         $requests = $this->paginate();
         $this->set('requests', $requests);
@@ -126,9 +146,10 @@ class ComplaintsController extends AppController{
     }
     public function countNewComplaints(){
       $conditions = array();
+      
       if($this->Auth->user('role_id') == 3){
         $conditions = array(
-              'Complaint.user_id' => $this->Auth->user('id'),
+              'Complaint.user_information_id' => $this->Auth->user('UserInformation.id'),
               'Complaint.status' => 1,
           );
       }else{
@@ -140,18 +161,11 @@ class ComplaintsController extends AppController{
     }
     public function view($id = null){
         $this->set('title_for_layout', 'مشاهده شکایت');
-        $complaint = $this->Complaint->find('first', array(
-            'conditions' => array(
-                'Complaint.user_id' => $this->Auth->user('id'),
-                'Complaint.status >=' => 1,
-            ),
-        ));
+        $complaint = $this->_readComplaint($id);
         if(! $complaint){
             $this->redirect($this->referer());
         }
         $this->set('complaint', $complaint);
-        $this->set('formattedStatus', $this->Complaint->formattedStatus);
-        $this->render('admin_view');
     }
     
     public function admin_changeStatus($id){
@@ -169,5 +183,44 @@ class ComplaintsController extends AppController{
         }
         $this->Session->setFlash(SettingsController::read('Error.Code-13'), 'message', array('type' => 'error'));
         $this->redirect($this->referer());
+    }
+    
+    public function viewComplaint(){
+        if($this->request->isPost()){
+            $code = $this->request->data('Complaint.code');
+            $complaint = $this->Complaint->find('first', array(
+                'conditions' => array(
+                    'Complaint.code_rahgiri' => $code,
+                ),
+            ));
+            if($complaint){
+                $this->set(compact('complaint'));
+            }else{
+                $this->Session->setFlash('چنین شکایتی یافت نشد', 'message', array('type' => 'error'));
+            }
+        }
+    }
+    
+    public function addReply($id = null){
+        $complaint = $this->_readComplaint($id);
+        if(! $complaint){
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Complaint->id = $complaint['Complaint']['id'];
+        if($this->Complaint->saveField('user_defence', $this->request->data['defence'])){
+            $this->_changeStatus($id, 2);
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->redirect(array('action' => 'index'));
+    }
+    
+    protected function _readComplaint($id = null){
+        return $this->Complaint->find('first', array(
+            'conditions' => array(
+                'Complaint.user_information_id' => $this->Auth->user('UserInformation.id'),
+                'Complaint.status >=' => 1,
+                'Complaint.id' => $id,
+            ),
+        ));
     }
 }

@@ -39,12 +39,12 @@ class User extends AppModel {
 				'rule' => array('notempty'),
 				'message' => 'تکمیل این فیلد ضروری است',
                 'on' => 'create',
-			),
-            'minLength' => array(
-                'rule'    => array('minLength', '6'),
-                'message' => 'حداقل 6 کاراکتر باید وارد شود',
-                'allowEmpty' => true,
-            ),
+			),//TODO: I comment it beacause we use shenasname for password and it can below 5 digit
+//            'minLength' => array(
+//                'rule'    => array('minLength', '6'),
+//                'message' => 'حداقل 6 کاراکتر باید وارد شود',
+//                'allowEmpty' => true,
+//            ),
 		),
         'email' => array(
 			'notempty' => array(
