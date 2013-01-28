@@ -30,25 +30,25 @@ $this->Html->css('modal', null, array('inline' => false));
         <?php endif; ?>
         <?php if($request['UserInformation']['status'] == 1): ?>
         <li>
-        <span style="margin-right:5px;">|</span>
-        <?php 
-        // Doc OK
-        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-file icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 2), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید مدارک', 'tooltip-place' => 'bottom'));
-        ?>
-        </li>
-        <?php endif; ?>
-        <?php if($request['UserInformation']['status'] == 2): ?>
-        <li>
         <?php 
         // Warden OK
-        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-user icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 3), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید بازرس', 'tooltip-place' => 'bottom')); 
+        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-user icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 2), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید بازرس', 'tooltip-place' => 'bottom')); 
         ?>
         </li>
         <li>
             <span style="margin-right:5px;">|</span>
-            <a onclick="$('#statusInput').val(-3);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="عدم تائید بازرس" rel="tooltip" class="btn btn-danger" href="#">
+            <a onclick="$('#statusInput').val(-2);$('#statusForm').modal({overlayClose:true});" tooltip-place="bottom" data-original-title="عدم تائید بازرس" rel="tooltip" class="btn btn-danger" href="#">
                 <i class="icon-user icon-white"></i>
             </a>
+        </li>
+        <?php endif; ?>
+        <?php if($request['UserInformation']['status'] == 2): ?>
+        <li>
+        <span style="margin-right:5px;">|</span>
+        <?php 
+        // Doc OK
+        echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'icon-file icon-white')),array('action' => 'changeStatus', $request['UserInformation']['id']), array('data' => array('status' => 3), 'class' => 'btn btn-success', 'escape' => false, 'rel' => 'tooltip', 'data-original-title' => 'تائید مدارک', 'tooltip-place' => 'bottom'));
+        ?>
         </li>
         <?php endif; ?>
         <li>

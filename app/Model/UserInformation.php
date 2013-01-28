@@ -352,17 +352,17 @@ class UserInformation extends AppModel {
         -1 => 'حذف شده',
         0 => 'جدید',
         1 => 'تائید اولیه',
-        2 => 'تائید مدارک',
-        3 => 'تائید بازرس',
-        -3 => 'عدم تائید بازرس',
+        2 => 'تائید بازرس',
+        -2 => 'عدم تائید بازرس',
+        3 => 'تائید مدارک',
     );
     public $formattedStatus = array(
         -1 => '<span class="label label-important">حذف شده</span>',
         0 => '<span class="label">جدید</span>',
         1 => '<span class="label label-success">تائید اولیه</span>',
-        2 => '<span class="label label-success">تائید مدارک</span>',
-        3 => '<span class="label label-success">تائید بازرس</span>',
-        -3 => '<span class="label label-important">عدم تائید بازرس</span>',
+        2 => '<span class="label label-success">تائید بازرس</span>',
+        -2 => '<span class="label label-important">عدم تائید بازرس</span>',
+        3 => '<span class="label label-success">تائید مدارک</span>',
     );
     public $namedVazifehOmoomi = array(
         1 => 'پایان خدمت',
