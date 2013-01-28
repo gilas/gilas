@@ -73,6 +73,7 @@ $prefixes = Router::prefixes();
 
 // Get route from Setting
 $adminPrefix = SettingsController::read('Site.AdminAddress');
+Router::connect("/{$adminPrefix}", array('controller' => 'Dashboards', 'action' => 'index', 'admin' => true));
 
 // Route plugins
 if ($plugins = CakePlugin::loaded()) {
@@ -117,7 +118,8 @@ foreach ($prefixes as $prefix) {
 }
 Router::connect('/:controller', array('action' => 'index'));
 Router::connect('/:controller/:action/*');
-Router::connect("/{$adminPrefix}", array('controller' => 'dashboards', 'action' => 'index', 'admin' => TRUE));
+
+
 
 $namedConfig = Router::namedConfig();
 if ($namedConfig['rules'] === false) {
