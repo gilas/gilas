@@ -259,6 +259,18 @@ class CertificatesController extends AppController{
         $this->set('docsOptions',  $this->_loadDoc($id));
         $this->set('inquiriesOptions',  $this->_loadInquiry($id));
         $this->set('formattedStatus', $this->UserInformation->formattedStatus);
+        $this->set('cities',$this->UserInformation->State->find('threaded'));
+        $this->set('places',$this->UserInformation->Place->find('list'));
+        $this->set('rastes',$this->UserInformation->Raste->find('list'));
+        $this->set('degrees',$this->UserInformation->Degree->find('list'));
+        $this->set('vazeyatJoghrafiaeeOptions', $this->UserInformation->namedVazeyatJoghrafiaee);
+        $this->set('mahaleEsteghrarOptions', $this->UserInformation->namedMahaleEsteghrar);
+        $this->set('vazeyatMalekiatOptions', $this->UserInformation->namedVazeyatMalekiat);
+        $this->set('isargariOptions', $this->UserInformation->namedIsargari);
+        $this->set('vazifehOmoomiOptions', $this->UserInformation->namedVazifehOmoomi);
+        $this->set('madrakTahsiliOptions', $this->UserInformation->namedMadrakTahsili);
+        $this->set('genderOptions', $this->UserInformation->namedGender);
+        $this->set('taaholOptions', $this->UserInformation->namedTaahol);
     }
     
     protected function _loadDoc($id){

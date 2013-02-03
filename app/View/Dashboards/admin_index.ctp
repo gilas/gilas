@@ -55,15 +55,27 @@
     </div>
     <div class="span2 well" style="padding: 4px;">
         <?php echo $this->Html->image('icon-pack/48x48/Link.png'); ?>
-        <?php echo $this->Html->link('مدیریت وب لینک ها', array('controller' => 'weblinks', 'action' => 'index', 'admin' => TRUE)); ?>
+        <?php echo $this->Html->link('مدیریت لینک ها', array('controller' => 'weblinks', 'action' => 'index', 'admin' => TRUE)); ?>
+    </div>
+    <div class="span2 well" style="padding: 4px;">
+        <?php echo $this->Html->image('icon-pack/48x48/Link.png'); ?>
+        <?php echo $this->Html->link('مدیریت مجموعه لینک', array('controller' => 'WeblinkCategories', 'action' => 'index', 'admin' => TRUE)); ?>
     </div>
     <div class="span2 well" style="padding: 4px;">
         <?php echo $this->Html->image('icon-pack/48x48/Image.png'); ?>
-        <?php echo $this->Html->link('مدیریت تصاویر', array('controller' => 'gallery_items', 'action' => 'index', 'admin' => TRUE)); ?>
+        <?php echo $this->Html->link('مدیریت تصاویر', array('controller' => 'GalleryItems', 'action' => 'index', 'admin' => TRUE)); ?>
+    </div>
+    <div class="span2 well" style="padding: 4px;">
+        <?php echo $this->Html->image('icon-pack/48x48/Image.png'); ?>
+        <?php echo $this->Html->link('مدیریت مجموعه تصاویر', array('controller' => 'GalleryCategories', 'action' => 'index', 'admin' => TRUE)); ?>
     </div>
     <div class="span2 well" style="padding: 4px;">
         <?php echo $this->Html->image('icon-pack/48x48/Address Book.png'); ?>
         <?php echo $this->Html->link('تماس ها', array('controller' => 'contact_details', 'action' => 'index', 'admin' => TRUE)); ?>
+    </div>
+    <div class="span2 well" style="padding: 4px;">
+        <?php echo $this->Html->image('icon-pack/48x48/Database.png'); ?>
+        <?php echo $this->Html->link('مدیریت نوع منو', array('controller' => 'menuTypes', 'action' => 'index', 'admin' => TRUE)); ?>
     </div>
     <div class="span2 well" style="padding: 4px;">
         <?php echo $this->Html->image('icon-pack/48x48/Database.png'); ?>

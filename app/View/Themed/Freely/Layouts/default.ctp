@@ -4,6 +4,7 @@
         <head>
             <meta charset="UTF-8" />
             <?php
+            echo $this->Html->meta('icon');
             echo $this->fetch('meta');
             echo $this->Html->css('bootstrap.min');
             echo $this->Html->css('bootstrap-responsive.min');

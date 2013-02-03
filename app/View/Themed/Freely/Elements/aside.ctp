@@ -1,6 +1,6 @@
 <?php if(AuthComponent::user('id')): ?>
     <div class="categories_widget widget">
-    	<h3 class="widget-title">منوی اصلی</h3>
+    	<h3 class="widget-title">منوی کاربری</h3>
         <?php if(AuthComponent::user('Role.name') == 'Register'): ?>
     	<ul class="menu">
             <li class="current-menu-item">
@@ -56,3 +56,9 @@
         <?php endif; ?>
     </div>
 <?php endif; ?>
+<div class="categories_widget widget">
+	<h3 class="widget-title">دسترسی سریع</h3>
+	<?php
+    echo $this->Menu->getMenu('2', 'categories', 'current-menu-item');
+    ?>
+</div>
