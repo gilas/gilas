@@ -486,9 +486,25 @@ class CertificatesController extends AppController{
     public function index() {
         $this->set('title_for_layout', 'لیست اعضا');
         $this->helpers[] = 'AdminForm';
-        $this->paginate['conditions'][] = 'UserInformation.user_id IS NOT NULL';
+        $this->paginate['conditions'] = array(
+            'UserInformation.user_id IS NOT NULL',
+            'UserInformation.status >= ' => 3,
+        );
         $this->paginate['contain'] = 'User';
         $requests = $this->paginate();
         $this->set('requests', $requests);
+    }
+    
+    public function admin_editField(){
+        $this->autoRender = false;
+        $this->UserInformation->id = $this->request->data['id'];
+        if(! $this->UserInformation->exists()){
+            return 'درخواست ارسالی معتبر نمی باشد';
+        }
+        $return = $this->UserInformation->saveField($this->request->data['field'], $this->request->data['value'], true);
+        if($return === false){
+            return 'اشکال در ذخیره تغییرات';
+        }
+        return true;
     }
 }

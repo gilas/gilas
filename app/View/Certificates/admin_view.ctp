@@ -74,93 +74,151 @@ $this->Html->css('modal', null, array('inline' => false));
                 <?php echo $this->Upload->image($request, 'UserInformation.avatar',array('style' => 'thumb')); ?>
             </div>
 			<div class="row row-margin">
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">نام</label>
-                    <span class="information"><?php echo $request['UserInformation']['first_name']; ?></span>
+                    <span class="information"><input type="text" field="first_name" val="<?php echo $request['UserInformation']['first_name']; ?>" class="information" value="<?php echo $request['UserInformation']['first_name']; ?>"/></span>
                 </div>
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">نام خانوادگی</label>
-                    <span class="information"><?php echo $request['UserInformation']['last_name']; ?></span>
+                    <span class="information"><input type="text" field="last_name" val="<?php echo $request['UserInformation']['last_name']; ?>" class="information" value="<?php echo $request['UserInformation']['last_name']; ?>"/></span>
                 </div>
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">نام پدر</label>
-                    <span class="information"><?php echo $request['UserInformation']['father_name']; ?></span>
+                    <span class="information"><input type="text" field="father_name" val="<?php echo $request['UserInformation']['father_name']; ?>" class="information" value="<?php echo $request['UserInformation']['father_name']; ?>"/></span>
                 </div>
-                <div class="span3">
+			</div>
+            <div class="row row-margin">
+                <div class="span4">
                     <label class="label-information">جنسیت</label>
-                    <span class="information"><?php echo $request['UserInformation']['namedGender']; ?></span>
+                    <span class="information"><?php echo $this->Form->input('gender', array('label' => 'جنسیت' ,'div' => false,'label'  => false,'class' => 'information','options' => $genderOptions, 'value' => $request['UserInformation']['gender'], 'val' => $request['UserInformation']['gender'], 'field' => 'gender')); ?></span>
                 </div>
-			</div>
-            <div class="row row-margin">
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">کد ملی</label>
-                    <span class="information"><?php echo $request['UserInformation']['code_melli']; ?></span>
+                    <span class="information"><input type="text" field="code_melli" val="<?php echo $request['UserInformation']['code_melli']; ?>" class="information" value="<?php echo $request['UserInformation']['code_melli']; ?>"/></span>
                 </div>
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">شماره شناسنامه</label>
-                    <span class="information"><?php echo $request['UserInformation']['shenasnameh_number']; ?></span>
+                    <span class="information"><input type="text" field="shenasnameh_number" val="<?php echo $request['UserInformation']['shenasnameh_number']; ?>" class="information" value="<?php echo $request['UserInformation']['shenasnameh_number']; ?>"/></span>
                 </div>
-                <div class="span3">
+			</div>
+            <div class="row row-margin">
+                <div class="span4">
                     <label class="label-information">محل صدور</label>
-                    <span class="information"><?php echo $request['State']['name']; ?></span>
+                    <span class="information">
+                    <?php 
+                    echo $this->Form->input('mahale_sodoor', array(
+                        'options' => $this->Html->getCityList($cities),
+                        'value' => $request['UserInformation']['mahale_sodoor'],
+                        'showParents' => true,
+                        'val' => $request['UserInformation']['mahale_sodoor'],
+                        'field' => 'mahale_sodoor',
+                        'class' => 'information',
+                        'label' => false,
+                        'div' => false,
+                    )); ?></span>
                 </div>
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">تاریخ تولد</label>
-                    <span class="information"><?php echo $request['UserInformation']['birth_day']; ?></span>
+                    <span class="information"><input type="text" field="birth_day" val="<?php echo $request['UserInformation']['birth_day']; ?>" class="information" value="<?php echo $request['UserInformation']['birth_day']; ?>"/></span>
                 </div>
-			</div>
-            <div class="row row-margin">
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">دین</label>
-                    <span class="information"><?php echo $request['UserInformation']['din']; ?></span>
-                </div>
-                <div class="span3">
-                    <label class="label-information">مذهب</label>
-                    <span class="information"><?php echo $request['UserInformation']['mazhab']; ?></span>
-                </div>
-                <div class="span3">
-                    <label class="label-information">وضعیت نظام وظیفه</label>
-                    <span class="information"><?php echo $request['UserInformation']['namedVazifehOmoomi']; ?></span>
-                </div>
-                <div class="span3">
-                    <label class="label-information">مدرک تحصیلی</label>
-                    <span class="information"><?php echo $request['UserInformation']['namedMadrakTahsili']; ?></span>
+                    <span class="information"><input type="text" field="din" val="<?php echo $request['UserInformation']['din']; ?>" class="information" value="<?php echo $request['UserInformation']['din']; ?>"/></span>
                 </div>
 			</div>
             <div class="row row-margin">
-                <div class="span3">
+                <div class="span4">
+                    <label class="label-information">مذهب</label>
+                    <span class="information"><input type="text" field="mazhab" val="<?php echo $request['UserInformation']['mazhab']; ?>" class="information" value="<?php echo $request['UserInformation']['mazhab']; ?>"/></span>
+                </div>
+                <div class="span4">
+                    <label class="label-information">وضعیت نظام وظیفه</label>
+                    <span class="information">
+                    <?php 
+                    echo $this->Form->input('vazifeh_omoomi', array(
+                        'options' => $vazifehOmoomiOptions,
+                        'value' => $request['UserInformation']['vazifeh_omoomi'],
+                        'showParents' => true,
+                        'val' => $request['UserInformation']['vazifeh_omoomi'],
+                        'field' => 'vazifeh_omoomi',
+                        'class' => 'information',
+                        'label' => false,
+                        'div' => false,
+                    )); ?></span>
+                </div>
+                <div class="span4">
+                    <label class="label-information">مدرک تحصیلی</label>
+                    <span class="information">
+                    <?php 
+                    echo $this->Form->input('madrak_tahsili', array(
+                        'options' => $madrakTahsiliOptions,
+                        'value' => $request['UserInformation']['madrak_tahsili'],
+                        'showParents' => true,
+                        'val' => $request['UserInformation']['madrak_tahsili'],
+                        'field' => 'madrak_tahsili',
+                        'class' => 'information',
+                        'label' => false,
+                        'div' => false,
+                    )); ?></span>
+                </div>
+            </div>
+            <div class="row row-margin">
+                <div class="span4">
                     <label class="label-information">وضعیت تاهل</label>
-                    <span class="information"><?php echo $request['UserInformation']['namedTaahol']; ?></span>
+                    <?php 
+                    echo $this->Form->input('taahol', array(
+                        'options' => $taaholOptions,
+                        'value' => $request['UserInformation']['taahol'],
+                        'showParents' => true,
+                        'val' => $request['UserInformation']['taahol'],
+                        'field' => 'taahol',
+                        'class' => 'information',
+                        'label' => false,
+                        'div' => false,
+                    )); ?></span>
                 </div>
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">سرپرست خانوار</label>
-                    <span class="information"><?php echo ($request['UserInformation']['sarparast'] == 1)?'می باشد':'نمی باشد'; ?></span>
+                    <label class="label-information">وضعیت تاهل</label>
+                    <?php 
+                    echo $this->Form->input('sarparast', array(
+                        'options' => array('0' => 'نمی باشد', '1' => 'می باشد'),
+                        'value' => $request['UserInformation']['sarparast'],
+                        'showParents' => true,
+                        'val' => $request['UserInformation']['sarparast'],
+                        'field' => 'sarparast',
+                        'class' => 'information',
+                        'label' => false,
+                        'div' => false,
+                    )); ?></span>
                 </div>
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">تعداد افراد تحت تکفل</label>
-                    <span class="information"><?php echo $request['UserInformation']['afrad_tahte_takafol']; ?></span>
+                    <span class="information"><input type="text" field="afrad_tahte_takafol" val="<?php echo $request['UserInformation']['afrad_tahte_takafol']; ?>" class="information" value="<?php echo $request['UserInformation']['afrad_tahte_takafol']; ?>"/></span>
                 </div>
-                <div class="span3">
+                
+			</div>
+			<div class="row row-margin">
+                <div class="span4">
                     <label class="label-information">وضعیت ایثارگری</label>
                     <span class="information"><?php echo $request['UserInformation']['namedIsargari']; ?></span>
                 </div>
-			</div>
-			<div class="row row-margin">
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">کد پستی منزل</label>
                     <span class="information"><?php echo $request['UserInformation']['postal_code']; ?></span>
                 </div>
-                <div class="span3">
+                <div class="span4">
                     <label class="label-information">تلفن ثابت</label>
                     <span class="information"><?php echo $request['UserInformation']['telephone']; ?></span>
                 </div>
-                <div class="span3">
+                
+			</div>
+            <div class="row row-margin">
+                <div class="span4">
                     <label class="label-information">تلفن همراه</label>
                     <span class="information"><?php echo $request['UserInformation']['mobile']; ?></span>
                 </div>
-			</div>
-            <div class="row row-margin">
-                <div class="span12">
+                <div class="span8">
                     <label class="label-information">نشانی منزل</label>
                     <span class="information"><?php echo $request['UserInformation']['home_address']; ?></span>
                 </div>
@@ -398,3 +456,23 @@ $this->Html->css('modal', null, array('inline' => false));
         </div>
 	</div>
 </div>
+<script>
+    $(function(){
+        $('input.information, select.information').change(function(){
+            $input = $(this);
+            name = $input.attr('field')
+            value = $input.val()
+            id = '<?php echo $request['UserInformation']['id']; ?>'
+            $.post('<?php echo $this->Html->url(array('action' => 'editField')) ?>',{'field':name, 'value':value, 'id': id},function(data){
+                if(data != true){
+                    alert(data);
+                    $input.val($input.attr('val'))
+                    
+                }else{
+                    $input.blur()
+                    $input.attr('val', $input.val())
+                }
+            });
+        })
+    })
+</script>
